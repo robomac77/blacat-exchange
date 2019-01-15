@@ -11,9 +11,6 @@ namespace BlackCat {
         private inputwithdrawCount:HTMLInputElement;
         
 
-        private selectGas: HTMLSelectElement;
-        private selectToken:HTMLSelectElement;
-
         private s_getWalletLists = {};
 
 
@@ -37,6 +34,15 @@ namespace BlackCat {
         private depositSpan;
         private withdrawSpan;
 
+        private exchangeAmount;
+        private walletAmount;
+
+        private exchangeCount;
+        private walletCount;
+
+        private net_fee: string // 网络交易费
+        
+
 
         start() {
             super.start()
@@ -55,15 +61,19 @@ namespace BlackCat {
             headerTitle.classList.add("pc_header")
             this.ObjAppend(this.div, headerTitle)
 
-            // 我的信息
-            var myinfo_a = this.objCreate("a")
-            myinfo_a.classList.add("iconfont", "icon-bc-touxiang")
-            myinfo_a.onclick = () => {
-                this.hidden()
-                PersonalCenterView.refer = "PayView"
-                Main.viewMgr.change("PersonalCenterView")
+            // 返回
+
+            var returnA = this.objCreate("a")
+            returnA.classList.add("iconfont", "icon-bc-fanhui")
+             
+            returnA.onclick = () => {
+                this.return()
             }
-            this.ObjAppend(headerTitle, myinfo_a)
+            this.ObjAppend(headerTitle, returnA)
+
+            
+
+            
 
             // nodes高度
             this.divHeight_nodes = this.objCreate("div")
@@ -188,19 +198,20 @@ namespace BlackCat {
             this.ObjAppend(this.depositDiv,divExBalanceBar)
 
             var divExBalanceLabel = this.objCreate("span")
+            divExBalanceLabel.classList.add("exspan")
             divExBalanceLabel.textContent = Main.langMgr.get("buy_exchange_purchase_exchangebalance") 
             this.ObjAppend(divExBalanceBar,divExBalanceLabel)
             
 
-            var exchangeAmount = this.objCreate("span")
-            exchangeAmount.classList.add("centerlabel")
-            exchangeAmount.textContent = "0"
-            this.ObjAppend(divExBalanceBar, exchangeAmount)
+            this.exchangeAmount = this.objCreate("span")
+            this.exchangeAmount.classList.add("centerlabel")
+            this.exchangeAmount.textContent = "0"
+            this.ObjAppend(divExBalanceBar, this.exchangeAmount)
 
-            var exchangeCount = this.objCreate("span")
-            exchangeCount.classList.add("exrightlabel")
-            exchangeCount.textContent = "0"
-            this.ObjAppend(divExBalanceBar,exchangeCount)
+            this.exchangeCount = this.objCreate("span")
+            this.exchangeCount.classList.add("exrightlabel")
+            
+            this.ObjAppend(divExBalanceBar,this.exchangeCount)
 
            
 
@@ -213,15 +224,14 @@ namespace BlackCat {
             this.ObjAppend(divwalletBalanceBar,divwalletBalanceLabel)
             
 
-            var walletAmount = this.objCreate("span")
-            walletAmount.classList.add("withcenterlabel")
-            walletAmount.textContent = "0"
-            this.ObjAppend(divwalletBalanceBar, walletAmount)
+            this.walletAmount = this.objCreate("span")
+            this.walletAmount.classList.add("excenterlabel")
+            this.walletAmount.textContent = "0"
+            this.ObjAppend(divwalletBalanceBar, this.walletAmount)
 
-            var walletCount = this.objCreate("span")
-            walletCount.classList.add("rightlabel")
-            walletCount.textContent = "0"
-            this.ObjAppend(divwalletBalanceBar,walletCount)
+            this.walletCount = this.objCreate("span")
+            this.walletCount.classList.add("rightlabel")
+            this.ObjAppend(divwalletBalanceBar,this.walletCount)
 
 
 
@@ -235,10 +245,17 @@ namespace BlackCat {
             this.ObjAppend(divCountBar,divExDepLabel)
 
             this.inputCount = this.objCreate("input")as HTMLInputElement
-            this.inputCount.classList.add("inputlabel")
+            //this.inputCount.classList.add("inputlabel")
             this.inputCount.placeholder = Main.langMgr.get("buy_exchange_purchase_depositamount") 
             this.inputCount.onkeyup = () => {
-                //this.searchAddressbook()
+
+                this.exchangeAmount.textContent = this.inputCount.value 
+                this.walletAmount.textContent = this.inputCount.value
+
+                this.exchangeCount.textContent = "+" + this.inputCount.value
+                this.walletCount.textContent = "-" + this.inputCount.value
+
+                   
             }
             this.ObjAppend(divCountBar, this.inputCount)
 
@@ -253,14 +270,12 @@ namespace BlackCat {
             butConfirmDeposit.classList.add("depositbutton")
             butConfirmDeposit.textContent = Main.langMgr.get("buy_exchange_purchase_confirmdeposit") 
             butConfirmDeposit.onclick = () => {
-               // this.doMakeReceivables()
+               // this.makeDeposit()
             }
             this.ObjAppend(this.depositDiv, butConfirmDeposit)
 
 
             //取出
-
-         
 
              this.withdrawDiv = this.objCreate("div")  
              this.withdrawDiv.classList.add("pc_exchangewithdraw")
@@ -282,7 +297,7 @@ namespace BlackCat {
             this.ObjAppend(divExWithdrawBar, withdrawAmount)
 
             var withdrawCount = this.objCreate("span")
-            withdrawCount.classList.add("withcenterlabel")
+            withdrawCount.classList.add("withrightlabel")
             withdrawCount.textContent = "0"
             this.ObjAppend(divExWithdrawBar,withdrawCount)
 
@@ -314,6 +329,10 @@ namespace BlackCat {
             divwithdrawCountBar.classList.add("pc_exchangebalance") 
             this.ObjAppend(this.withdrawDiv,divwithdrawCountBar)
 
+            var divExWithLabel = this.objCreate("span")
+            divExWithLabel.textContent = Main.langMgr.get("buy_exchange_purchase_withdrawlabel") 
+            this.ObjAppend(divwithdrawCountBar,divExWithLabel)
+
 
             this.inputwithdrawCount = this.objCreate("input")as HTMLInputElement
             this.inputwithdrawCount.placeholder = Main.langMgr.get("buy_exchange_purchase_depositamount") 
@@ -330,10 +349,10 @@ namespace BlackCat {
             
 
             var butConfirmWithdraw= this.objCreate("button")
-            butConfirmWithdraw.classList.add("depositbutton")
+            butConfirmWithdraw.classList.add("withdrawbutton")
             butConfirmWithdraw.textContent = Main.langMgr.get("buy_exchange_purchase_confirmwithdraw") 
             butConfirmWithdraw.onclick = () => {
-               // this.doMakeReceivables()
+                //this.makeWithdraw()
             }
             this.ObjAppend(this.withdrawDiv, butConfirmWithdraw) 
 
@@ -381,7 +400,95 @@ namespace BlackCat {
                 }
             }
         }
-    
+        
+
+        private makeDeposit(){
+
+            /*
+
+             // 检查金额格式
+            if (!Main.viewMgr.payView.checkTransCount(this.inputCount.value)) {
+                Main.showErrMsg("buy_exchange_purchase_amount_error", () => {
+                    this.inputCount.focus()
+                })
+                return;
+            }
+
+            // 手续费
+            var net_fee = this.net_fee
+                        
+            // 手续费判断
+            if (Number(net_fee) > Main.viewMgr.payView.gas) {
+                Main.showErrMsg("buy_exchange_purchase_gas_fee_error", () => {
+                    this.inputCount.focus()
+                })
+                return
+            }
+
+            function brokerDeposit() {
+            var asset = document.getElementById('broker_deposit_asset').value;
+            var count = document.getElementById('broker_deposit_count').value;
+
+            var ext = document.getElementById('broker_deposit_ext').value;
+
+            var data = {
+                asset: asset,
+                count: count,
+                extString: ext,
+            }
+
+            BlackCat.SDK.brokerDeposit(data, function (res) {
+                console.log("[BlaCat]", 'brokerDeposit.callback.function.res => ', res)
+                showFuncRes(res)
+            })
+        }
+
+            */
+
+        }
+
+
+        private makeWithdraw(){
+            /*
+
+             // 检查金额格式
+            if (!Main.viewMgr.payView.checkTransCount(this.inputwithdrawCount.value)) {
+                Main.showErrMsg("buy_exchange_purchase_amount_error", () => {
+                    this.inputwithdrawCount.focus()
+                })
+                return;
+            }
+
+            // 手续费
+            var net_fee = this.net_fee
+                        
+            // 手续费判断
+            if (Number(net_fee) > Main.viewMgr.payView.gas) {
+                Main.showErrMsg("buy_exchange_purchase_gas_fee_error", () => {
+                    this.inputwithdrawCount.focus()
+                })
+                return
+            }
+          
+             function brokerWithdraw() {
+            var asset = document.getElementById('broker_withdraw_asset').value;
+            var count = document.getElementById('broker_withdraw_count').value;
+            var ext = document.getElementById('broker_withdraw_ext').value;
+
+            var data = {
+                asset: asset,
+                count: count,
+                extString: ext,
+            }
+
+            BlackCat.SDK.brokerWithdraw(data, function (res) {
+                console.log("[BlaCat]", 'brokerWithdraw.callback.function.res => ', res)
+                showFuncRes(res)
+            })
+        }
+
+            */
+        }
        
     
         private getDivNetSelectType(type: number) {

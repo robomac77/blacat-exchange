@@ -612,9 +612,11 @@ namespace BlackCat {
             buy_exchange_purchase_exchangebalance:"Exchange Balance",
             buy_exchange_purchase_walletbalance:"Wallet Balance",
             buy_exchange_purchase_depositlabel:"Deposit Amount",
+            buy_exchange_purchase_withdrawlabel:"Withdraw Amount",
             buy_exchange_purchase_depositamount:"Please Input Deposit Amount",
             buy_exchange_purchase_gas:"Gas Fee 5.5GAS",
             buy_exchange_purchase_confirmdeposit:"Confirm Deposit",
+            buy_exchange_purchase_confirmwithdraw:"Confirm Withdraw",
             buy_exchange_purchase_assetsearch:"Search Token",
             buy_exchange_purchase_tokentype:"Token Type",
             buy_exchange_purchase_exchangetitle:"Exchange Balance",
@@ -622,7 +624,11 @@ namespace BlackCat {
             buy_exchange_purchase_buyunconfirmed:"In Process",
             buy_exchange_purchase_deposit:"Deposit",
             buy_exchange_purchase_withdraw:"Withdraw",
-           
+            buy_exchange_purchase_amount_error: "Balance withdrawal error!",
+            buy_exchange_purchase_not_enough: "Balance not enough!",
+            buy_exchange_purchase_gas_fee_error: "Gas not enough,can't pay fee!",
+            buy_exchange_purchase_do_succ: "Withdrawal application successful!",
+            buy_exchange_purchase_do_fail: "Withdrawal application failed!",
             
 
 

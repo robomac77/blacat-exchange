@@ -728,9 +728,11 @@ declare namespace BlackCat {
             buy_exchange_purchase_exchangebalance: string;
             buy_exchange_purchase_walletbalance: string;
             buy_exchange_purchase_depositlabel: string;
+            buy_exchange_purchase_withdrawlabel: string;
             buy_exchange_purchase_depositamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
+            buy_exchange_purchase_confirmwithdraw: string;
             buy_exchange_purchase_assetsearch: string;
             buy_exchange_purchase_tokentype: string;
             buy_exchange_purchase_exchangetitle: string;
@@ -738,6 +740,11 @@ declare namespace BlackCat {
             buy_exchange_purchase_buyunconfirmed: string;
             buy_exchange_purchase_deposit: string;
             buy_exchange_purchase_withdraw: string;
+            buy_exchange_purchase_amount_error: string;
+            buy_exchange_purchase_not_enough: string;
+            buy_exchange_purchase_gas_fee_error: string;
+            buy_exchange_purchase_do_succ: string;
+            buy_exchange_purchase_do_fail: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -1377,9 +1384,11 @@ declare namespace BlackCat {
             buy_exchange_purchase_exchangebalance: string;
             buy_exchange_purchase_walletbalance: string;
             buy_exchange_purchase_depositlabel: string;
+            buy_exchange_purchase_withdrawlabel: string;
             buy_exchange_purchase_depositamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
+            buy_exchange_purchase_confirmwithdraw: string;
             buy_exchange_purchase_assetsearch: string;
             buy_exchange_purchase_tokentype: string;
             buy_exchange_purchase_exchangetitle: string;
@@ -1387,6 +1396,11 @@ declare namespace BlackCat {
             buy_exchange_purchase_buyunconfirmed: string;
             buy_exchange_purchase_deposit: string;
             buy_exchange_purchase_withdraw: string;
+            buy_exchange_purchase_amount_error: string;
+            buy_exchange_purchase_not_enough: string;
+            buy_exchange_purchase_gas_fee_error: string;
+            buy_exchange_purchase_do_succ: string;
+            buy_exchange_purchase_do_fail: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -2026,9 +2040,11 @@ declare namespace BlackCat {
             buy_exchange_purchase_exchangebalance: string;
             buy_exchange_purchase_walletbalance: string;
             buy_exchange_purchase_depositlabel: string;
+            buy_exchange_purchase_withdrawlabel: string;
             buy_exchange_purchase_depositamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
+            buy_exchange_purchase_confirmwithdraw: string;
             buy_exchange_purchase_assetsearch: string;
             buy_exchange_purchase_tokentype: string;
             buy_exchange_purchase_exchangetitle: string;
@@ -2036,6 +2052,11 @@ declare namespace BlackCat {
             buy_exchange_purchase_buyunconfirmed: string;
             buy_exchange_purchase_deposit: string;
             buy_exchange_purchase_withdraw: string;
+            buy_exchange_purchase_amount_error: string;
+            buy_exchange_purchase_not_enough: string;
+            buy_exchange_purchase_gas_fee_error: string;
+            buy_exchange_purchase_do_succ: string;
+            buy_exchange_purchase_do_fail: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -2289,8 +2310,6 @@ declare namespace BlackCat {
         static balance: number;
         private inputCount;
         private inputwithdrawCount;
-        private selectGas;
-        private selectToken;
         private s_getWalletLists;
         wallet_addr: string;
         wallet_addr_other: any;
@@ -2304,6 +2323,11 @@ declare namespace BlackCat {
         private withdrawDiv;
         private depositSpan;
         private withdrawSpan;
+        private exchangeAmount;
+        private walletAmount;
+        private exchangeCount;
+        private walletCount;
+        private net_fee;
         start(): void;
         create(): void;
         toRefer(): void;
@@ -2311,6 +2335,8 @@ declare namespace BlackCat {
         private doCancel;
         private getNetTypeName;
         private showChangeNetType;
+        private makeDeposit;
+        private makeWithdraw;
         private getDivNetSelectType;
         private addGetWalletLists;
     }
