@@ -727,6 +727,7 @@ declare namespace BlackCat {
             buy_exchange_purchase_amount: string;
             buy_exchange_purchase_exchangebalance: string;
             buy_exchange_purchase_walletbalance: string;
+            buy_exchange_purchase_depositlabel: string;
             buy_exchange_purchase_depositamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
@@ -1375,6 +1376,7 @@ declare namespace BlackCat {
             buy_exchange_purchase_amount: string;
             buy_exchange_purchase_exchangebalance: string;
             buy_exchange_purchase_walletbalance: string;
+            buy_exchange_purchase_depositlabel: string;
             buy_exchange_purchase_depositamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
@@ -2023,6 +2025,7 @@ declare namespace BlackCat {
             buy_exchange_purchase_amount: string;
             buy_exchange_purchase_exchangebalance: string;
             buy_exchange_purchase_walletbalance: string;
+            buy_exchange_purchase_depositlabel: string;
             buy_exchange_purchase_depositamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;

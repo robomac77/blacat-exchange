@@ -611,6 +611,7 @@ namespace BlackCat {
             buy_exchange_purchase_amount:"amount",
             buy_exchange_purchase_exchangebalance:"Exchange Balance",
             buy_exchange_purchase_walletbalance:"Wallet Balance",
+            buy_exchange_purchase_depositlabel:"Deposit Amount",
             buy_exchange_purchase_depositamount:"Please Input Deposit Amount",
             buy_exchange_purchase_gas:"Gas Fee 5.5GAS",
             buy_exchange_purchase_confirmdeposit:"Confirm Deposit",

@@ -611,6 +611,7 @@ namespace BlackCat {
             buy_exchange_purchase_amount:"数量",
             buy_exchange_purchase_exchangebalance:"交易所余额",
             buy_exchange_purchase_walletbalance:"钱包余额",
+            buy_exchange_purchase_depositlabel:"存入金额",
             buy_exchange_purchase_depositamount:"请输入存入金额",
             buy_exchange_purchase_gas:"手续费 5.5GAS",
             buy_exchange_purchase_confirmdeposit:"确定存入",

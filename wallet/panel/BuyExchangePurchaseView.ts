@@ -180,8 +180,6 @@ namespace BlackCat {
 
                 this.assettabDiv.style.display = "block"  
              
-               
-
              }
             this.ObjAppend(divexTab,myAssetspan)
 
