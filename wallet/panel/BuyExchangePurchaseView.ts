@@ -504,10 +504,8 @@ namespace BlackCat {
                 moreElement.classList.add("iconfont", "icon-bc-gengduo")
                 this.ObjAppend(assetElement, moreElement)
 
-
-                // 余额
                
-                // 点击事件
+               
                 assetElement.onclick = () => {
                 BuyExchangeDepositView.refer = ""
                 BuyExchangeDepositView.callback_params = BuyExchangePurchaseView.callback_params

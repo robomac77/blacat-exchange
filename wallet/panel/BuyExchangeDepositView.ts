@@ -6,16 +6,10 @@ namespace BlackCat {
     export class BuyExchangeDepositView extends ViewBase {
 
         static balance: number;
-
-       
-
         
         private inputCount:HTMLInputElement;
         private inputwithdrawCount:HTMLInputElement;
         
-
-        private buyPriceTable:HTMLTableElement;
-        private sellPriceTable:HTMLTableElement;
 
         private selectGas: HTMLSelectElement;
         private selectToken:HTMLSelectElement;
@@ -35,24 +29,21 @@ namespace BlackCat {
         // 记录每页显示数量
         listPageNum: number;
 
-        // 钱包记录
-        private walletListsHash: string;
-
-
-        private divLists: HTMLDivElement;
-        private divRecLists: HTMLDivElement
-        private divListsMore: HTMLElement;
-        private divRecListsMore: HTMLElement;
         private divNetSelect: HTMLElement;
 
         private depositDiv;
         private withdrawDiv;
 
+        private depositSpan;
+        private withdrawSpan;
+
 
         start() {
             super.start()
              
-             this.depositDiv.classList("active")
+             
+             this.withdrawDiv.style.display = "none"
+             //this.withdrawSpan.classList.add("active")
         }
 
         create() {
@@ -151,19 +142,18 @@ namespace BlackCat {
             divexTab.classList.add("pc_excurrencynumber")
             this.ObjAppend(divexPages, divexTab)
 
-            var depositSpan = this.objCreate("div")
-            depositSpan.classList.add("active")
+            this.depositSpan = this.objCreate("div")
+            this.depositSpan.classList.add("active")
 
-            depositSpan.innerText = Main.langMgr.get("buy_exchange_purchase_deposit")
-            this.ObjAppend(divexTab,depositSpan)
+            this.depositSpan.innerText = Main.langMgr.get("buy_exchange_purchase_deposit")
+            this.ObjAppend(divexTab,this.depositSpan)
 
-            var withdrawSpan = this.objCreate("div")
-            withdrawSpan.textContent = "取出"                     // buy_exchange_purchase_withdraw
-            withdrawSpan.innerText = Main.langMgr.get("buy_exchange_purchase_withdraw")
-            depositSpan.classList.remove("active")
+           this.withdrawSpan = this.objCreate("div")
+            this.withdrawSpan.innerText = Main.langMgr.get("buy_exchange_purchase_withdraw")
             
-            withdrawSpan.classList.add("active")
-            this.ObjAppend(divexTab,withdrawSpan)
+            
+            
+            this.ObjAppend(divexTab,this.withdrawSpan)
 
             
              //存入
@@ -232,7 +222,7 @@ namespace BlackCat {
             
 
             var butConfirmDeposit = this.objCreate("button")
-             //butConfirmDeposit.classList.add("depositbutton")
+            butConfirmDeposit.classList.add("depositbutton")
             butConfirmDeposit.textContent = Main.langMgr.get("buy_exchange_purchase_confirmdeposit") 
             butConfirmDeposit.onclick = () => {
                // this.doMakeReceivables()
@@ -242,9 +232,9 @@ namespace BlackCat {
 
             //取出
 
-          
+         
 
-            this.withdrawDiv = this.objCreate("div")  
+             this.withdrawDiv = this.objCreate("div")  
              this.withdrawDiv.classList.add("pc_exchangewithdraw")
              this.ObjAppend(this.div,this.withdrawDiv) 
          
@@ -259,7 +249,7 @@ namespace BlackCat {
 
             var withdrawAmount = this.objCreate("centerlabel")
             withdrawAmount.textContent = "0"
-            this.ObjAppend(divExWithdrawBar, exchangeAmount)
+            this.ObjAppend(divExWithdrawBar, withdrawAmount)
 
             var withdrawCount = this.objCreate("rightlabel")
             withdrawCount.textContent = "0"
@@ -273,7 +263,7 @@ namespace BlackCat {
 
             var divwalletBalance = this.objCreate("span")
             divwalletBalance.textContent = Main.langMgr.get("buy_exchange_purchase_walletbalance") 
-            this.ObjAppend(divwalletBalance,divwalletBalance)
+            this.ObjAppend(divwithdrawwalletBalance,divwalletBalance)
             
 
             var withdrawwalletAmount = this.objCreate("centerlabel")
@@ -312,7 +302,7 @@ namespace BlackCat {
             butConfirmWithdraw.onclick = () => {
                // this.doMakeReceivables()
             }
-            this.ObjAppend(this.withdrawDiv, butConfirmDeposit)
+            this.ObjAppend(this.withdrawDiv, butConfirmWithdraw) 
 
 
           

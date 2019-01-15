@@ -2286,8 +2286,6 @@ declare namespace BlackCat {
         static balance: number;
         private inputCount;
         private inputwithdrawCount;
-        private buyPriceTable;
-        private sellPriceTable;
         private selectGas;
         private selectToken;
         private s_getWalletLists;
@@ -2298,14 +2296,11 @@ declare namespace BlackCat {
         height_nodes: number;
         private divHeight_nodes;
         listPageNum: number;
-        private walletListsHash;
-        private divLists;
-        private divRecLists;
-        private divListsMore;
-        private divRecListsMore;
         private divNetSelect;
         private depositDiv;
         private withdrawDiv;
+        private depositSpan;
+        private withdrawSpan;
         start(): void;
         create(): void;
         toRefer(): void;
