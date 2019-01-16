@@ -2327,6 +2327,10 @@ declare namespace BlackCat {
         private walletAmount;
         private exchangeCount;
         private walletCount;
+        private withdrawAmount;
+        private withdrawCount;
+        private withdrawwalletAmount;
+        private withdrawwalletCount;
         private net_fee;
         start(): void;
         create(): void;

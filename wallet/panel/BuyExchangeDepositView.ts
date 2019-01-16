@@ -40,6 +40,12 @@ namespace BlackCat {
         private exchangeCount;
         private walletCount;
 
+        private withdrawAmount;
+        private withdrawCount;
+
+        private withdrawwalletAmount;
+        private withdrawwalletCount;
+
         private net_fee: string // 网络交易费
         
 
@@ -140,17 +146,17 @@ namespace BlackCat {
            
 
             var divpageSelect = this.objCreate("div")
-            divpageSelect.classList.add("pc_pageselect")
+            divpageSelect.classList.add("pc_deposittabselect") // pc_pageselect
             this.ObjAppend(this.div , divpageSelect)
 
 
             var divexPages = this.objCreate("div")
-            divexPages.classList.add("pc_excurrency")
+            divexPages.classList.add("pc_depwith")  // pc_excurrency
             this.ObjAppend(divpageSelect, divexPages)
 
             
             var divexTab = this.objCreate("div")
-            divexTab.classList.add("pc_excurrencynumber")
+            divexTab.classList.add("pc_depositwithdraw") //pc_excurrencynumber
             this.ObjAppend(divexPages, divexTab)
 
             this.depositSpan = this.objCreate("div")
@@ -220,6 +226,7 @@ namespace BlackCat {
             this.ObjAppend(this.depositDiv,divwalletBalanceBar)
 
             var divwalletBalanceLabel = this.objCreate("span")
+            divwalletBalanceLabel.classList.add("exspan")
             divwalletBalanceLabel.textContent = Main.langMgr.get("buy_exchange_purchase_walletbalance") 
             this.ObjAppend(divwalletBalanceBar,divwalletBalanceLabel)
             
@@ -241,6 +248,7 @@ namespace BlackCat {
             this.ObjAppend(this.depositDiv,divCountBar)
             
             var divExDepLabel = this.objCreate("span")
+            divExDepLabel.classList.add("exspan")
             divExDepLabel.textContent = Main.langMgr.get("buy_exchange_purchase_depositlabel") 
             this.ObjAppend(divCountBar,divExDepLabel)
 
@@ -291,45 +299,45 @@ namespace BlackCat {
             this.ObjAppend(divExWithdrawBar,divExWithdrawLabel)
             
 
-            var withdrawAmount = this.objCreate("span")
-            withdrawAmount.classList.add("withcenterlabel")
-            withdrawAmount.textContent = "0"
-            this.ObjAppend(divExWithdrawBar, withdrawAmount)
+            this.withdrawAmount = this.objCreate("span")
+            this.withdrawAmount.classList.add("withcnlabel")
+            this.withdrawAmount.textContent = "0"
+            this.ObjAppend(divExWithdrawBar, this.withdrawAmount)
 
-            var withdrawCount = this.objCreate("span")
-            withdrawCount.classList.add("withrightlabel")
-            withdrawCount.textContent = "0"
-            this.ObjAppend(divExWithdrawBar,withdrawCount)
+            this.withdrawCount = this.objCreate("span")
+            this.withdrawCount.classList.add("withrightlabel")
+            this.withdrawCount.textContent = "0"
+            this.ObjAppend(divExWithdrawBar,this.withdrawCount)
 
            
 
             var divwithdrawwalletBalance= this.objCreate("div")
-            divwithdrawwalletBalance.classList.add("pc_exchangebalance")
+            divwithdrawwalletBalance.classList.add("pc_withdrawbalance")
             this.ObjAppend(this.withdrawDiv,divwithdrawwalletBalance)
 
             var divwalletBalance = this.objCreate("span")
+            divwalletBalance.classList.add("withspan")
             divwalletBalance.textContent = Main.langMgr.get("buy_exchange_purchase_walletbalance") 
             this.ObjAppend(divwithdrawwalletBalance,divwalletBalance)
             
 
-            var withdrawwalletAmount = this.objCreate("span")
-            withdrawwalletAmount.classList.add("withcenterlabel")
-            withdrawwalletAmount.textContent = "0"
-            this.ObjAppend(divwalletBalance, withdrawwalletAmount)
+            this.withdrawwalletAmount = this.objCreate("span")
+            this.withdrawwalletAmount.classList.add("withcenterlabel")
+            
+            this.ObjAppend(divwalletBalance, this.withdrawwalletAmount)
 
-            var withdrawwalletCount = this.objCreate("span")
-            withdrawwalletCount.classList.add("withrightlabel")
-            withdrawwalletCount.textContent = "0"
-            this.ObjAppend(divwalletBalance,withdrawwalletCount)
-
-
+            this.withdrawwalletCount = this.objCreate("span")
+            this.withdrawwalletCount.classList.add("withrtlabel")
+            
+            this.ObjAppend(divwalletBalance,this.withdrawwalletCount)
 
 
             var divwithdrawCountBar = this.objCreate("div")
-            divwithdrawCountBar.classList.add("pc_exchangebalance") 
+            divwithdrawCountBar.classList.add("pc_withdrawbalance") 
             this.ObjAppend(this.withdrawDiv,divwithdrawCountBar)
 
             var divExWithLabel = this.objCreate("span")
+            divExWithLabel.classList.add("withspan")
             divExWithLabel.textContent = Main.langMgr.get("buy_exchange_purchase_withdrawlabel") 
             this.ObjAppend(divwithdrawCountBar,divExWithLabel)
 
@@ -337,7 +345,17 @@ namespace BlackCat {
             this.inputwithdrawCount = this.objCreate("input")as HTMLInputElement
             this.inputwithdrawCount.placeholder = Main.langMgr.get("buy_exchange_purchase_depositamount") 
             this.inputwithdrawCount.onkeyup = () => {
-                //this.searchAddressbook()
+                
+                
+
+                this.withdrawAmount.textContent = this.inputwithdrawCount.value 
+                this.withdrawwalletAmount.textContent = this.inputwithdrawCount.value
+
+                this.withdrawCount.textContent = "+" + this.inputwithdrawCount.value
+                this.withdrawwalletCount.textContent = "-" + this.inputwithdrawCount.value
+
+
+                
             }
             this.ObjAppend(divwithdrawCountBar, this.inputwithdrawCount)
 

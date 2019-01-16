@@ -226,13 +226,17 @@ namespace BlackCat {
             }
             this.ObjAppend(divexTab,tradeLogspan)
 
+            var iRefresh = this.objCreate("i")
+            iRefresh.classList.add("iconfont", "icon-bc-shuaxin")
+            
+            this.ObjAppend(divexTab,iRefresh)
+
             this.buyintabDiv = this.objCreate("div") 
             this.buyintabDiv.classList.add("pc_exchangetab")
             this.ObjAppend(this.div,this.buyintabDiv)
-           
 
             
-
+        
              var divSelectBox = this.objCreate("div")
             divSelectBox.classList.add("pc_exleftpane")
             this.ObjAppend(this.buyintabDiv,divSelectBox)
@@ -498,7 +502,7 @@ namespace BlackCat {
               
                 // 字体图标">"
                 let moreElement = this.objCreate("i")
-                moreElement.classList.add("morelement")
+                moreElement.classList.add("assetmorelement")
                 moreElement.classList.add("iconfont", "icon-bc-gengduo")
                 this.ObjAppend(assetElement, moreElement)
 
