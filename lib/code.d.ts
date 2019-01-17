@@ -2397,8 +2397,6 @@ declare namespace BlackCat {
         height_nodes: number;
         private divHeight_nodes;
         listPageNum: number;
-        private walletListsHash;
-        private divLists;
         private divRecLists;
         private divRecListsMore;
         private divNetSelect;

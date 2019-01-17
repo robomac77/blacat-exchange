@@ -59,8 +59,8 @@ namespace BlackCat {
         start() {
             super.start()
              
-             this.assettabDiv.style.display = "none"
-             this.tradelogDiv.style.display = "none"
+           //  this.assettabDiv.style.display = "none"
+            // this.tradelogDiv.style.display = "none"
         }
 
 
@@ -323,7 +323,15 @@ namespace BlackCat {
             divPriceBar.classList.add("pricebar")
             this.ObjAppend(divSelectBox,divPriceBar)
 
+            var divPriceBarPlus = this.objCreate("div")
+            divPriceBarPlus.classList.add("pricebarplus")
+            divPriceBarPlus.classList.add("iconfont", "icon-bc-shuaxin")
+            this.ObjAppend(divPriceBar,divPriceBarPlus)
+
+
+
             this.inputPrice = this.objCreate("input") as HTMLInputElement
+            
             this.inputPrice.placeholder = Main.langMgr.get("buy_exchange_purchase_inputpriceplaceholder") 
             this.inputPrice.onkeyup = () => {
                 //this.searchAddressbook()

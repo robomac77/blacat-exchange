@@ -19,10 +19,10 @@ namespace BlackCat {
         listPageNum: number;
 
         // 钱包记录
-        private walletListsHash: string;
+        
 
 
-        private divLists: HTMLDivElement;
+        
         private divRecLists: HTMLDivElement
         private divRecListsMore: HTMLElement;
         private divNetSelect: HTMLElement;
@@ -138,7 +138,7 @@ namespace BlackCat {
 
 
 
-          this.doGetWalletLists()
+             this.doGetWalletLists()
 
             }
 
