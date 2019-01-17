@@ -126,6 +126,8 @@ namespace BlackCat {
             headerTitle.classList.add("pc_header")
             this.ObjAppend(this.div, headerTitle)
 
+
+
             // 我的信息
             var myinfo_a = this.objCreate("a")
             myinfo_a.classList.add("iconfont", "icon-bc-touxiang")

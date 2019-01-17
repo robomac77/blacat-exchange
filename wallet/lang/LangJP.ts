@@ -595,7 +595,7 @@ namespace BlackCat {
             buy_exchange_pay_received:"收款",
             buy_exchange_pay_sent:"转账",
             buy_exchange_pay_balance:"ABC余额",
-            buy_exchange_pay_recent:"近期记录",
+            buy_exchange_pay_unconfirmed:"你有笔交易进行中",
             buy_exchange_pay_more:"更多",
 
            

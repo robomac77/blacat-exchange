@@ -11,10 +11,7 @@ namespace BlackCat {
 
         private abcbalanceElement : HTMLElement
 
-        private recentElement: HTMLElement
-
-        private reclistsDiv: HTMLElement;
-        private recgetMoreDiv: HTMLDivElement;
+        
 
         private s_getWalletLists = {};
         
@@ -23,7 +20,7 @@ namespace BlackCat {
 
         private isLast: boolean;
 
-        static exTabs: Array<string> = ["myasset", "buyin", "sellout", "tradelog"]
+        
 
         wallet_addr: string
         wallet_addr_other: any
@@ -61,11 +58,12 @@ namespace BlackCat {
         private divNetSelect: HTMLElement;
 
 
+      
+
         
             create() {
 
-                
-               
+                              
             this.div = this.objCreate("div") as HTMLDivElement
             this.div.classList.add("pc_bj", "pc_pay")
 
@@ -322,10 +320,10 @@ namespace BlackCat {
                     coinElement.innerHTML = Main.langMgr.get(coin)
                     this.ObjAppend(this["token_list_" + token], coinElement)
                     // LOGO
-                    let logoElement = this.objCreate("img") as HTMLImageElement
-                    logoElement.src = Main.resHost + "res/img/" + coin + ".png"
-                    logoElement.classList.add("coinlogo")
-                    this.ObjAppend(coinElement, logoElement)
+                    //let logoElement = this.objCreate("img") as HTMLImageElement
+                    //logoElement.src = Main.resHost + "res/img/" + coin + ".png"
+                    //logoElement.classList.add("coinlogo")
+                    //this.ObjAppend(coinElement, logoElement)
                     // ?号
                     let labelElement = this.objCreate("label")
                     labelElement.classList.add("iconfont", "icon-bc-help")
@@ -417,7 +415,7 @@ namespace BlackCat {
 
            
             this.divListsMore = this.objCreate("button")
-            this.divListsMore.classList.add("pc_paymore")
+            this.divListsMore.classList.add("pc_abcbalance")
             this.divListsMore.textContent = BuyExchangeView.balance.toString() // "更多"
 
             this.divListsMore.onclick = () => {
@@ -434,66 +432,34 @@ namespace BlackCat {
             iListsMore.classList.add("iconfont", "icon-bc-sanjiaoxing")
             this.ObjAppend(this.divListsMore, iListsMore)
 
-            // 正在处理的
+            
             this.abcbalanceElement = this.objCreate("div")
             this.ObjAppend(this.divLists, this.abcbalanceElement)
 
-
-
-
-           //近期记录
-            this.divRecLists = this.objCreate("ul") as HTMLDivElement
-            this.divRecLists.classList.add("pc_payRec")
-            this.ObjAppend(this.div, this.divRecLists)
-
-
-            var liRecentRecord = this.objCreate("li")
-            liRecentRecord.classList.add("pc_payRecentrecord")
-            // liRecentRecord.innerText = Main.langMgr.get("pay_recentLists") //"近期记录"
-            this.ObjAppend(this.divLists, liRecentRecord)
-
-            var spanRecentRecord = this.objCreate("div")
-            spanRecentRecord.innerText = Main.langMgr.get("buy_exchange_pay_recent") //"近期记录"
-            this.ObjAppend(liRecentRecord, spanRecentRecord)
-
-           
-            this.divRecListsMore = this.objCreate("button")
-            this.divRecListsMore.classList.add("pc_paymore")
-            this.divRecListsMore.textContent = Main.langMgr.get("buy_exchange_pay_more") 
-            this.divRecListsMore.onclick = () => {
-                this.hidden()
-
-                this.doGetWalletLists()
-            }
-            // this.divRecListsMore.style.display = "none"
-            this.ObjAppend(liRecentRecord, this.divRecListsMore)
-
-            var iRecListsMore = this.objCreate("i")
-            iRecListsMore.classList.add("iconfont", "icon-bc-sanjiaoxing")
-            this.ObjAppend(this.divRecListsMore, iRecListsMore)
-
             
-            this.recentElement = this.objCreate("div")
-            this.ObjAppend(this.divRecListsMore, this.recentElement)
-            
-            this.reclistsDiv = this.objCreate("ul")
-            this.ObjAppend(liRecentRecord, this.reclistsDiv)
+           var txunConfirmedDiv  = this.objCreate("div")
+           txunConfirmedDiv.classList.add("pc_txprogress")
+           txunConfirmedDiv.innerText = Main.langMgr.get("buy_exchange_pay_unconfirmed") 
+            txunConfirmedDiv.onclick = () => {
+         
+                              
+                BuyExchangeUnconfirmedTxView.refer = ""
+                BuyExchangeUnconfirmedTxView.callback_params = BuyExchangeView.callback_params
+                
 
-            this.recgetMoreDiv = this.objCreate("div") as HTMLDivElement
-            this.recgetMoreDiv.classList.add("pc_gamemore")
-            this.recgetMoreDiv.onclick = () => {
-                Main.viewMgr.payView.doGetWalletLists() // call from pay page
-            }
-            this.ObjAppend(this.div, this.recgetMoreDiv)
-
-            Main.viewMgr.payView.doGetWalletLists() 
-            
-                                     
-           
-           
-           
-             
+                Main.viewMgr.change("BuyExchangeUnconfirmedTxView")
+               
         }
+           
+           this.ObjAppend(this.div, txunConfirmedDiv)
+
+           var unconfirmedtxMore = this.objCreate("i")
+           unconfirmedtxMore.classList.add("iconfont", "icon-bc-sanjiaoxing")
+           this.ObjAppend(txunConfirmedDiv, unconfirmedtxMore)
+
+              
+
+    }
 
         toRefer() {
             if (PayExchangeShowWalletView.refer) {
@@ -556,6 +522,8 @@ namespace BlackCat {
                 // this.hidden()
             }
         }
+            
+
 
         private async doMakeReceivables() {
             this.hidden()
@@ -979,15 +947,6 @@ namespace BlackCat {
                                 Main.viewMgr.change("PayListDetailView")
                             }
 
-
-                            
-
-
-                            
-                           
-
-                            
-
                             // img
                             var gameimg_div = this.objCreate("div")
                             gameimg_div.classList.add("pc_liststate")
@@ -997,9 +956,6 @@ namespace BlackCat {
                             this.ObjAppend(txlistObj, gameimg_div)
 
                             
-                            
-                          
-
                              // Tokenname & amount
                             var txcontent_div = this.objCreate("div")
                             txcontent_div.classList.add("pc_txinfo")
@@ -1027,8 +983,6 @@ namespace BlackCat {
                             txamount_span.classList.add("pc_listdate")
                             txamount_span.textContent = Main.viewMgr.payView.getListCtmMsg(txlist)
                             this.ObjAppend(cnts_div, txamount_span)
-
-                    
 
                             this.ObjAppend(txlistObj, cnts_div)
 
@@ -1061,10 +1015,7 @@ namespace BlackCat {
             else {
                 Main.showErrCode(res.errCode)
             }
-
-        
-
-    
+   
 }
 
         updateBalance() {

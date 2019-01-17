@@ -146,17 +146,17 @@ namespace BlackCat {
            
 
             var divpageSelect = this.objCreate("div")
-            divpageSelect.classList.add("pc_deposittabselect") // pc_pageselect
+            divpageSelect.classList.add("pc_pageselect") // pc_pageselect //pc_deposittabselect
             this.ObjAppend(this.div , divpageSelect)
 
 
             var divexPages = this.objCreate("div")
-            divexPages.classList.add("pc_depwith")  // pc_excurrency
+            divexPages.classList.add("pc_excurrency")  // pc_excurrency  // pc_depwith
             this.ObjAppend(divpageSelect, divexPages)
 
             
             var divexTab = this.objCreate("div")
-            divexTab.classList.add("pc_depositwithdraw") //pc_excurrencynumber
+            divexTab.classList.add("pc_excurrencynumber") //  // pc_depositwithdraw
             this.ObjAppend(divexPages, divexTab)
 
             this.depositSpan = this.objCreate("div")
@@ -422,8 +422,6 @@ namespace BlackCat {
 
         private makeDeposit(){
 
-            /*
-
              // 检查金额格式
             if (!Main.viewMgr.payView.checkTransCount(this.inputCount.value)) {
                 Main.showErrMsg("buy_exchange_purchase_amount_error", () => {
@@ -443,9 +441,11 @@ namespace BlackCat {
                 return
             }
 
+
+          /*
             function brokerDeposit() {
-            var asset = document.getElementById('broker_deposit_asset').value;
-            var count = document.getElementById('broker_deposit_count').value;
+            var asset = document.getElementById('broker_deposit_asset').value;    // var asset = BuyExchangePurchaseView.assetElement.innerHTML
+            var count = document.getElementById('broker_withdraw_count').value;  // var count = this.inputCount.value;
 
             var ext = document.getElementById('broker_deposit_ext').value;
 
@@ -467,7 +467,7 @@ namespace BlackCat {
 
 
         private makeWithdraw(){
-            /*
+            
 
              // 检查金额格式
             if (!Main.viewMgr.payView.checkTransCount(this.inputwithdrawCount.value)) {
@@ -487,10 +487,10 @@ namespace BlackCat {
                 })
                 return
             }
-          
+          /*
              function brokerWithdraw() {
-            var asset = document.getElementById('broker_withdraw_asset').value;
-            var count = document.getElementById('broker_withdraw_count').value;
+            var asset = document.getElementById('broker_withdraw_asset').value;    // var asset = BuyExchangePurchaseView.assetElement.innerHTML
+            var count = document.getElementById('broker_withdraw_count').value;    // var count = this.inputwithdrawCount.value;
             var ext = document.getElementById('broker_withdraw_ext').value;
 
             var data = {

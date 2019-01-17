@@ -52,6 +52,7 @@ namespace BlackCat {
         buyExchangeView: BuyExchangeView; // 交易所
         buyExchangePurchaseView: BuyExchangePurchaseView; //交易所买入
         buyExchangeDepositView: BuyExchangeDepositView; // 交易所存入取出
+        buyExchangeUnconfirmedTxView: BuyExchangeUnconfirmedTxView // 交易所近期纪录
 
         addressbookView: AddressbookView; //通讯录
         addressbookDetailsView: AddressbookDetailsView; //通讯录详情
@@ -441,7 +442,15 @@ namespace BlackCat {
                         this.views[type] = this.buyExchangeDepositView
                     }
                     this.buyExchangeDepositView.start()
-                    break;          
+                    break;
+                case "BuyExchangeUnconfirmedTxView" :
+                    console.log("[BlaCat]", '[ViewMgr]', '显示交易近期纪录(' + type + ') ...')
+                    if(!this.buyExchangeUnconfirmedTxView) {
+                        this.buyExchangeUnconfirmedTxView = new BuyExchangeUnconfirmedTxView();
+                        this.views[type] = this.buyExchangeUnconfirmedTxView
+                    }
+                    this.buyExchangeUnconfirmedTxView.start()
+                    break;                      
             }
         }
 

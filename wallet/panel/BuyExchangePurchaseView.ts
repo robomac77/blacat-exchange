@@ -397,6 +397,11 @@ namespace BlackCat {
              divTitleBar.classList.add("titlebar")
             this.ObjAppend(divRightPane,divTitleBar)
 
+            var divPriceTitle = this.objCreate("span")
+            divPriceTitle.classList.add("price")
+            divPriceTitle.textContent = Main.langMgr.get("buy_exchange_purchase_price") 
+           this.ObjAppend(divTitleBar,divPriceTitle)
+
 
             var divBuyTable = this.objCreate("div")
              divBuyTable.classList.add("pc_buytable")
@@ -410,16 +415,13 @@ namespace BlackCat {
             divSellTable.classList.add("pc_selltable")
            this.ObjAppend(divRightPane,divSellTable)
 
-           //TODO: sell price amount table here
+           
            this.sellPriceTable = this.objCreate("div") as HTMLTableElement
            this.ObjAppend(divSellTable,this.sellPriceTable)
 
 
 
-            var divPriceTitle = this.objCreate("div")
-             divPriceTitle.classList.add("price")
-             divPriceTitle.textContent = Main.langMgr.get("buy_exchange_purchase_price") 
-            this.ObjAppend(divTitleBar,divPriceTitle)
+           
 
            // var divAmountTitle = this.objCreate("span")
             // divAmountTitle.classList.add("amount")
@@ -491,12 +493,13 @@ namespace BlackCat {
                 assetElement.innerHTML = Main.langMgr.get(coin)
                 this.ObjAppend(divAssetList, assetElement)
 
-                var assetBalance = this.objCreate("span")
+                var assetBalance = this.objCreate("span")    
                 assetBalance.classList.add("assetspan")
                 assetBalance.textContent = "0"
                 this.ObjAppend(assetElement, assetBalance)
 
-                var walletBalance = this.objCreate("span")
+                var walletBalance = this.objCreate("span")   
+                //walletBalance.classList.add("assetspan")
                 walletBalance.textContent = "0"
                 this.ObjAppend(assetElement, walletBalance)
               
@@ -522,35 +525,26 @@ namespace BlackCat {
             
             
             this.tradelogDiv = this.objCreate("div") 
-            this.tradelogDiv.classList.add("pc_exchangetab")
+            this.tradelogDiv.classList.add("pc_bj", "pc_paylist")  //pc_exchangetab
             this.ObjAppend(this.div,this.tradelogDiv)
 
             //钱包交易记录
             this.txlistsDiv = this.objCreate("ul")
             this.ObjAppend(this.tradelogDiv, this.txlistsDiv)
 
-            this.getMoreDiv = this.objCreate("div") as HTMLDivElement
+            /*this.getMoreDiv = this.objCreate("div") as HTMLDivElement
             this.getMoreDiv.classList.add("pc_txmore")
             this.getMoreDiv.onclick = () => {
                 this.doGetWalletLists()
             }
-            this.ObjAppend(this.tradelogDiv, this.getMoreDiv)
+            this.ObjAppend(this.tradelogDiv, this.getMoreDiv)*/
 
             this.doGetWalletLists()
             
 
          
 
-
-            
-
-
-
-            
-
-                  
-
-                  
+                 
             
  }
         
@@ -628,14 +622,14 @@ namespace BlackCat {
 
         if (res.r) {
             if (res.data && res.data.length >= 1) {
-                if (res.data.length < this.num) {
+              /*  if (res.data.length < this.num) {
                     this.isLast = true;
                     this.getMoreDiv.textContent = Main.langMgr.get("paylist_noMore") //"没有记录了"
                 }
                 else {
                     this.page += 1;
                     this.getMoreDiv.textContent = Main.langMgr.get("paylist_getMore") //"点击加载更多记录"
-                }
+                }*/
 
                 // 加载新数据
                 await res.data.forEach(
@@ -655,9 +649,7 @@ namespace BlackCat {
                             Main.viewMgr.change("PayListDetailView")
                         }
 
-
                         
-
 
                         // txState
                         var txStatediv = this.objCreate("div")
