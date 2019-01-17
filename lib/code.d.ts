@@ -2459,7 +2459,9 @@ declare namespace BlackCat {
         private doMakeRefundOld;
         private makeRefundTransaction;
         private addGetWalletLists;
-        private doGetWalletLists;
+        doGetBalances(): Promise<void>;
+        private getNep5BalanceOld;
+        private getNep5Balance;
         updateBalance(): void;
     }
 }

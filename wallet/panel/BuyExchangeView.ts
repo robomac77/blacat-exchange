@@ -284,6 +284,8 @@ namespace BlackCat {
                 }
                 this.ObjAppend(divWallet, makeTransferObj)
 
+                this.doGetBalances()
+
                 // 代币
             var divCurrency = this.objCreate("div")
             divCurrency.classList.add("pc_currency")
@@ -456,6 +458,9 @@ namespace BlackCat {
            var unconfirmedtxMore = this.objCreate("i")
            unconfirmedtxMore.classList.add("iconfont", "icon-bc-sanjiaoxing")
            this.ObjAppend(txunConfirmedDiv, unconfirmedtxMore)
+
+
+           
 
               
 
@@ -909,115 +914,78 @@ namespace BlackCat {
                 Main.viewMgr.payView.doGetWalletLists()
             }, timeout);
         }
+        
+        async doGetBalances() {
+            tools.CoinTool.initAllAsset();
 
-        private async doGetWalletLists() {
-            if (this.isLast) {
-                return;
-            }
-
-            // 获取已确认的订单
-            var res = await ApiTool.getWalletListss(Main.user.info.uid, Main.user.info.token, this.page, this.num, Main.netMgr.type, 0);
-
-            if (res.r) {
-                if (res.data && res.data.length >= 1) {
-                    if (res.data.length < this.num) {
-                        this.isLast = true;
-                        this.divRecListsMore.textContent = Main.langMgr.get("paylist_noMore") //"没有记录了"
-                    }
-                    else {
-                        this.page += 1;
-                        this.divRecListsMore.textContent = Main.langMgr.get("paylist_getMore") //"点击加载更多记录"
-                    }
-
-                    // 加载新数据
-                    await res.data.forEach(
-                        txlist => {
-                            // li
-                            var txlistObj = this.objCreate("li")
-                            txlistObj.onclick = () => {
-                                for (var i in this.divRecLists.children) {
-                                    if (this.divRecLists.children[i].className == "active") {
-                                        this.divRecLists.children[i].classList.remove('active')
-                                    }
-                                }
-                                txlistObj.classList.add("active")
-                                this.hidden()
-                                PayListDetailView.refer = "PayListMoreView"
-                                PayListDetailView.list = txlist;
-                                Main.viewMgr.change("PayListDetailView")
-                            }
-
-                            // img
-                            var gameimg_div = this.objCreate("div")
-                            gameimg_div.classList.add("pc_liststate")
-                            var img = this.objCreate("img") as HTMLImageElement
-                            img.src = Main.viewMgr.payView.getListImg(txlist)
-                            this.ObjAppend(gameimg_div, img)
-                            this.ObjAppend(txlistObj, gameimg_div)
-
-                            
-                             // Tokenname & amount
-                            var txcontent_div = this.objCreate("div")
-                            txcontent_div.classList.add("pc_txinfo")
-
-                            var tokenname_div = this.objCreate("div")
-                            tokenname_div.classList.add("pc_listname")
-                            tokenname_div.textContent = Main.viewMgr.payView.getListName(txlist)
-                            this.ObjAppend(txcontent_div, tokenname_div)
-
-
-                            //交易时间
-                            var txdate_p = this.objCreate("p")
-                            txdate_p .classList.add("pc_method")
-                            txdate_p .textContent = Main.viewMgr.payView.getListParamMethods(txlist)
-                            this.ObjAppend(txcontent_div, txdate_p )
-
-                            this.ObjAppend(txlistObj, txcontent_div)
-
-                            // cnts 
-                            var cnts_div = this.objCreate("div")
-                            cnts_div.classList.add("pc_cnts")
-
-                            //数量
-                            var txamount_span = this.objCreate("div")
-                            txamount_span.classList.add("pc_listdate")
-                            txamount_span.textContent = Main.viewMgr.payView.getListCtmMsg(txlist)
-                            this.ObjAppend(cnts_div, txamount_span)
-
-                            this.ObjAppend(txlistObj, cnts_div)
-
-                            
-
-                             var cnts = Main.viewMgr.payView.getListCnts(txlist)
-                            if (cnts) {
-                                this.ObjAppend(cnts_div, cnts);
-
-                                var cnts_class = Main.viewMgr.payView.getListCntsClass(txlist);
-                                if (cnts_class) cnts_div.classList.add(cnts_class)
-                            }
-
-                            var state = Main.viewMgr.payView.getListState(txlist)
-                            if (state) this.ObjAppend(cnts_div, state)
-
-                            this.ObjAppend(txlistObj, cnts_div)
-
-                            
-
-                            this.ObjAppend(this.divRecLists, txlistObj)
+            // 获得balance列表(gas)
+            var balances = (await tools.WWW.api_getBalance(Main.user.info.wallet)) as tools.BalanceInfo[];
+            if (balances) {
+                //余额不唯空
+                balances.map(item => (item.names = tools.CoinTool.assetID2name[item.asset])); //将列表的余额资产名称赋值
+                await balances.forEach(
+                    // 取GAS余额
+                    balance => {
+                        if (balance.asset == tools.CoinTool.id_GAS) {
+                            this.gas = balance.balance;
+                            // 判断一下有没有减号，不用科学计数法表示
+                            this["spanGAS"].textContent = Main.getStringNumber(this.gas)
                         }
-                    );
-                }
-                else {
-                    // 无交易记录
-                    this.divRecListsMore.textContent = Main.langMgr.get("paylist_noRecord") //"没有记录信息哦"
-                }
+                        else if (balance.asset == tools.CoinTool.id_NEO) {
+                            this.neo = balance.balance
+                            this["spanNEO"].textContent = Main.getStringNumber(this.neo)
+                        }
+                    }
+                );
             }
             else {
-                Main.showErrCode(res.errCode)
+                this.gas = 0;
+                this.neo = 0;
+                this["spanGAS"].textContent = "0";
+                this["spanNEO"].textContent = "0"
             }
-   
-}
 
+            // 获取NEP5余额
+            PayView.tokens_coin.forEach( token => {
+                token.forEach( coin => {
+                    if (coin != "gas" && coin != "neo") {
+                        this.getNep5Balance(coin.toUpperCase())
+                    }
+                })
+            })
+            // 获取CGAS_OLD/CNEO_OLD余额
+            for (let k in PayView.tokens_old) {
+                PayView.tokens_old[k].forEach( coin => {
+                    this.getNep5BalanceOld(coin.toUpperCase() + "_OLD")
+                })
+            }
+        }
+
+        private async getNep5BalanceOld(coin: string) {
+            try {
+                let coin_lowcase = coin.toLowerCase()
+                await tools.CoinTool["id_" + coin].forEach(async (old) => {
+                    this[coin_lowcase + old] = await Main["get" + coin + "BalanceByAddress"](old, Main.user.info.wallet)
+                    this["span" + coin + old].textContent = Main.getStringNumber(this[coin_lowcase + old])
+                })
+            }
+            catch (e) { }
+        }
+
+        private async getNep5Balance(coin: string) {
+            try {
+                let coin_lowcase = coin.toLowerCase()
+                this[coin_lowcase] = await Main["get" + coin + "BalanceByAddress"](tools.CoinTool["id_" + coin], Main.user.info.wallet)
+                this["span" + coin].textContent = Main.getStringNumber(this[coin_lowcase])
+
+                // 通知其他界面更新余额
+                Main.viewMgr.updateBalance()
+            }
+            catch (e) { }
+        }
+        
+        
+         
         updateBalance() {
             let type_lowcase = PayExchangeShowWalletView.callback_params.type_src.toLowerCase()
             PayExchangeShowWalletView.balance = Main.viewMgr.payView[type_lowcase]
