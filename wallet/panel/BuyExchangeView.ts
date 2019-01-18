@@ -393,7 +393,7 @@ namespace BlackCat {
                             this.ObjAppend(coinElement, this["span" + coin_upcase + old])
                             // 点击事件
                             coinElement.onclick = () => {
-                                this.doMakeRefundOld(old, coin_upcase)
+                             //   this.doMakeRefundOld(old, coin_upcase)
                             }
                         })
                     }

@@ -745,6 +745,8 @@ declare namespace BlackCat {
             buy_exchange_purchase_gas_fee_error: string;
             buy_exchange_purchase_do_succ: string;
             buy_exchange_purchase_do_fail: string;
+            buy_exchange_purchase_txtitle: string;
+            buy_exchange_purchase_alltx: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -1401,6 +1403,8 @@ declare namespace BlackCat {
             buy_exchange_purchase_gas_fee_error: string;
             buy_exchange_purchase_do_succ: string;
             buy_exchange_purchase_do_fail: string;
+            buy_exchange_purchase_txtitle: string;
+            buy_exchange_purchase_alltx: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -2057,6 +2061,8 @@ declare namespace BlackCat {
             buy_exchange_purchase_gas_fee_error: string;
             buy_exchange_purchase_do_succ: string;
             buy_exchange_purchase_do_fail: string;
+            buy_exchange_purchase_txtitle: string;
+            buy_exchange_purchase_alltx: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -2733,7 +2739,7 @@ declare namespace BlackCat {
         private netFeeChange;
         private txHash;
         private getBuyContractHash;
-        private updateBalance;
+        updateBalance(): void;
     }
 }
 declare namespace BlackCat {

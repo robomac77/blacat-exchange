@@ -629,6 +629,8 @@ namespace BlackCat {
             buy_exchange_purchase_gas_fee_error: "Gas not enough,can't pay fee!",
             buy_exchange_purchase_do_succ: "Withdrawal application successful!",
             buy_exchange_purchase_do_fail: "Withdrawal application failed!",
+            buy_exchange_purchase_txtitle:"TXs In Progress",
+            buy_exchange_purchase_alltx:"All TXs",
             
 
 

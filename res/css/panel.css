@@ -456,6 +456,8 @@ li.pc_txrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curso
 .pc_txreclistinfo{float: left;margin-left:10px;font-size: 14px;color: #a7a8ba;max-width: 43%;}
 .pc_txreclistname,.pc_txrectime,.pc_txrecmethod{line-height: 1.5;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size:2px;}
 
+.pc_alltxtitle{text-align:right;color: #dbdde9;margin-right:20px}
+
 
 
 
@@ -500,14 +502,14 @@ li.pc_txrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curso
 
  
  .pc_assetlist{margin-bottom: 15px;border-bottom:10px;color: #dbdde9;}
- .pc_assetlist .assetspan{width: 20px;top: 10px;margin-right: 90px; border-right:50px;color: #c8ab73;padding-left:50px;}
+ .pc_assetlist .assetspan{width: 20px;top: 10px;margin-right: 90px;color: #c8ab73;padding-left:90px;}
  .pc_assetlist .assetmorelement{float:right;color: #dbdde9;}
  .pc_assetlist div{padding: 0 20px;border-bottom: 1px solid #181717; margin-bottom:10px;}
  .pc_assetlist div:hover{background: #272836;}
  
  /* 交易所 - 交易记录 */
 
-.pc_txlist ul{margin-top: 45px;}
+.pc_txlist ul{margin-top: 5px; height:500px;}
 .pc_txlist li{height: 40px;padding: 10px 0; border-bottom: 1px solid #424453;margin: 0 20px;position: relative; cursor: pointer;box-sizing: content-box;}
 .pc_txlist li.active{box-shadow: 0 0 10px #000;margin: auto;padding: 10px 20px;}
 .pc_txlist li.active .pc_cnts span{right: 49px;}

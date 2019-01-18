@@ -533,7 +533,7 @@ namespace BlackCat {
             
             
             this.tradelogDiv = this.objCreate("div") 
-            this.tradelogDiv.classList.add("pc_bj", "pc_paylist")  //pc_exchangetab
+            this.tradelogDiv.classList.add("pc_txlist")  //pc_exchangetab
             this.ObjAppend(this.div,this.tradelogDiv)
 
             //钱包交易记录

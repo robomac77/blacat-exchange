@@ -272,12 +272,12 @@ namespace BlackCat {
             return cHash
         }
 
-        private updateBalance(){
-            var newBalance = PayExchangeShowWalletView.balance - (Number(this.inputTransferCount.value) + (Number(PayExchangeRefundView.crosschain_fee)))
-            PayExchangeShowWalletView.balance = newBalance
-
-            //PayExchangeShowWalletView.balanceElement.textContent = PayExchangeShowWalletView.balance.toString()
+        updateBalance() {
+            let type_lowcase = PayExchangeShowWalletView.callback_params.type_src.toLowerCase()
+            PayExchangeShowWalletView.balance = Main.viewMgr.payView[type_lowcase]
+           // this.balanceElement.textContent = PayExchangeShowWalletView.balance.toString()
         }
+        
 
     }
 }

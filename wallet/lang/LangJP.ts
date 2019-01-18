@@ -629,6 +629,8 @@ namespace BlackCat {
             buy_exchange_purchase_gas_fee_error: "GAS不足，无法支付手续费！",
             buy_exchange_purchase_do_succ: "提款申请提交成功！",
             buy_exchange_purchase_do_fail: "提款申请提交失败！",
+            buy_exchange_purchase_txtitle:"交易中",
+            buy_exchange_purchase_alltx:"全部交易",
             
             
             // PayExchangeBcpDetail

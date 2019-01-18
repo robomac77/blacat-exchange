@@ -49,79 +49,32 @@ namespace BlackCat {
             headerTitle.classList.add("pc_header")
             this.ObjAppend(this.div, headerTitle)
 
-            // 我的信息
-            var myinfo_a = this.objCreate("a")
-            myinfo_a.classList.add("iconfont", "icon-bc-touxiang")
-            myinfo_a.onclick = () => {
-                this.hidden()
-                PersonalCenterView.refer = "PayView"
-                Main.viewMgr.change("PersonalCenterView")
+            var returnA = this.objCreate("a")
+            returnA.classList.add("iconfont", "icon-bc-fanhui")
+            returnA.textContent = Main.langMgr.get("return")
+             
+            returnA.onclick = () => {
+                this.return()
             }
-            this.ObjAppend(headerTitle, myinfo_a)
-
-            // nodes高度
-            this.divHeight_nodes = this.objCreate("div")
-            this.divHeight_nodes.classList.add("pc_payheighet", "iconfont", "icon-bc-blalian", "network")
-            this.divHeight_nodes.style.top = "5px";
-            this.divHeight_nodes.textContent = "n/a"
-            this.divHeight_nodes.onclick = () => {
-                this.hidden()
-                ModifyNetworkLineView.refer = "PayView"
-
-                ModifyNetworkLineView.defaultType = "nodes"
-                Main.viewMgr.change("ModifyNetworkLineView")
-            }
-            this.ObjAppend(headerTitle, this.divHeight_nodes)
-
-            // clis高度
-            this.divHeight_clis = this.objCreate("div")
-            this.divHeight_clis.classList.add("pc_payheighet", "iconfont", "icon-bc-neolian", "network")
-            this.divHeight_clis.textContent = "n/a"
-            this.divHeight_clis.onclick = () => {
-                if (tools.WWW.api_clis && tools.WWW.api_clis != "") {
-                    this.hidden()
-                    ModifyNetworkLineView.refer = "PayView"
-
-                    ModifyNetworkLineView.defaultType = "clis"
-                    Main.viewMgr.change("ModifyNetworkLineView")
-                }
-            }
-            this.ObjAppend(headerTitle, this.divHeight_clis)
-
-
+            this.ObjAppend(headerTitle, returnA)
+           
 
             // 钱包标题
             var headerh1 = this.objCreate("h1")
-            headerh1.textContent = Main.platName;
+            headerh1.textContent = Main.langMgr.get("buy_exchange_purchase_txtitle")
             this.ObjAppend(headerTitle, headerh1)
 
-            //切换网络
-            var divNetType = this.objCreate("div")
-            divNetType.classList.add("pc_net", "iconfont")
-            divNetType.textContent = this.getNetTypeName() //Main.langMgr.get("nettype_" + Main.netMgr.type)
-            divNetType.onclick = () => {
-                this.showChangeNetType()
-            }
-            this.ObjAppend(headerTitle, divNetType)
-
-            this.divNetSelect = this.objCreate("div")
-            this.divNetSelect.classList.add("pc_netbox")
-            this.ObjAppend(headerTitle, this.divNetSelect)
+          
 
             //返回游戏
-            var aReturnGame = this.objCreate("i")
-            aReturnGame.classList.add("pc_returngame", "iconfont", "icon-bc-fanhui1")
-            aReturnGame.onclick = () => {
-                BlackCat.SDK.showIcon()
-            }
-            if (!window.hasOwnProperty("BC_androidSDK")) {
-                this.ObjAppend(headerTitle, aReturnGame)
-            }
+           var alltx = this.objCreate("div")
+            alltx.classList.add("pc_alltxtitle")
+            alltx.textContent = Main.langMgr.get("buy_exchange_purchase_alltx") ;
+            this.ObjAppend(headerTitle, alltx)
+            
 
-
-                
-             
-                  //近期记录
+                       
+            //近期记录
             this.divRecLists = this.objCreate("ul") as HTMLDivElement
             
             this.ObjAppend(this.div, this.divRecLists)
