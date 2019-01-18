@@ -55,6 +55,16 @@ namespace BlackCat {
         private buyintabDiv;
         private tradelogDiv;
 
+        private btcBalance;
+        private ethBalance;
+        private neoBalance;
+
+        private exchangeBalance;
+        private walletBalance
+
+        private net_fee: string // 网络交易费
+
+
 
         start() {
             super.start()
@@ -323,8 +333,8 @@ namespace BlackCat {
             divPriceBar.classList.add("pricebar")
             this.ObjAppend(divSelectBox,divPriceBar)
 
-            var divPriceBarPlus = this.objCreate("div")
-            divPriceBarPlus.classList.add("pricebarplus")
+            var divPriceBarPlus = this.objCreate("i")
+            //divPriceBarPlus.classList.add("withspan")
             divPriceBarPlus.classList.add("iconfont", "icon-bc-shuaxin")
             this.ObjAppend(divPriceBar,divPriceBarPlus)
 
@@ -346,12 +356,21 @@ namespace BlackCat {
             this.inputAmount.placeholder = Main.langMgr.get("buy_exchange_purchase_inputamountplaceholder") 
             this.inputAmount.onkeyup = () => {
                 //this.searchAddressbook()
+            divCountBar.textContent = this.inputAmount.value
+
             }
             this.ObjAppend(divAmountBar, this.inputAmount)
 
             var divCountBar = this.objCreate("div")
             divCountBar.classList.add("countbar")
+            divCountBar.textContent = this.inputAmount.value  
             this.ObjAppend(divSelectBox,divCountBar)
+
+            var divCountCurrency = this.objCreate("span")
+            divCountCurrency.classList.add("countcurrency")
+            divCountCurrency.textContent = "ETH"
+
+            this.ObjAppend(divCountBar,divCountCurrency)
             
             
             var gasSelect = this.objCreate("div")
@@ -366,6 +385,7 @@ namespace BlackCat {
               gasAmount.forEach(
                 gas => {
                     var gasoption = this.objCreate("option") as HTMLOptionElement;
+                    
                     gasoption.setAttribute("value", gas.codename);
                     gasoption.textContent = Main.langMgr.get("gas_amount_" + gas.codename)
                     if (gas.codename == "CN") {
@@ -406,7 +426,7 @@ namespace BlackCat {
             this.ObjAppend(divRightPane,divTitleBar)
 
             var divPriceTitle = this.objCreate("span")
-            divPriceTitle.classList.add("price")
+            divPriceTitle.classList.add("priceamount")
             divPriceTitle.textContent = Main.langMgr.get("buy_exchange_purchase_price") 
            this.ObjAppend(divTitleBar,divPriceTitle)
 
@@ -493,23 +513,25 @@ namespace BlackCat {
             for (let i = 0; i < PayView.tokens.length; i++) {
                 let coin = PayView.tokens[i]
 
+               // this.changeToken(coin);
 
+                this.getAssets()
 
                 let assetElement = this.objCreate("div")
-                 //assetElement.classList.add("assetspan")
+                 assetElement.classList.add("assetelement")
                 // 名称
-                assetElement.innerHTML = Main.langMgr.get(coin)
+                assetElement.innerHTML = "BTC"// Main.langMgr.get(coin)
                 this.ObjAppend(divAssetList, assetElement)
 
-                var assetBalance = this.objCreate("span")    
-                assetBalance.classList.add("assetspan")
-                assetBalance.textContent = "0"
-                this.ObjAppend(assetElement, assetBalance)
+                this.exchangeBalance = this.objCreate("span")    
+                this.exchangeBalance.classList.add("assetexspan")
+                this.exchangeBalance.textContent = this.btcBalance             // Main.getStringNumber(this.gas)
+                this.ObjAppend(assetElement, this.exchangeBalance)
 
-                var walletBalance = this.objCreate("span")   
-                //walletBalance.classList.add("assetspan")
-                walletBalance.textContent = "0"
-                this.ObjAppend(assetElement, walletBalance)
+                this.walletBalance = this.objCreate("span")   
+                this.walletBalance.classList.add("assetwalletspan")
+                this.walletBalance.textContent =   this.btcBalance             // Main.getStringNumber(this.gas)
+                this.ObjAppend(assetElement, this.walletBalance)
               
                 // 字体图标">"
                 let moreElement = this.objCreate("i")
@@ -610,6 +632,13 @@ namespace BlackCat {
         return divObj;
     }
 
+    private getAssets(){
+
+         this.btcBalance = Main.viewMgr.payView.btc
+         this.ethBalance  = Main.viewMgr.payView.eth
+         this.neoBalance = Main.viewMgr.payView.neo
+    }
+
     private changeToken(type: string) {
         let types = ['blact', 'neo', 'other']
         for (let i = 0; i < types.length; i++) {
@@ -619,6 +648,7 @@ namespace BlackCat {
         this["token_list_" + type].style.display = "block"
         this["token_" + type].classList.add("active")
     }
+
 
     private async doGetWalletLists() {
         if (this.isLast) {
@@ -739,8 +769,72 @@ namespace BlackCat {
     }
 
 
+    private async doTradeRequest(){
+
+         // 检查金额格式
+         if (!Main.viewMgr.payView.checkTransCount(this.inputPrice.value)) {
+            Main.showErrMsg("buy_exchange_purchase_amount_error", () => {
+                this.inputPrice.focus()
+            })
+            return;
+        }
+
+
+        if (!Main.viewMgr.payView.checkTransCount(this.inputAmount.value)) {
+            Main.showErrMsg("buy_exchange_purchase_amount_error", () => {
+                this.inputAmount.focus()
+            })
+            return;
+        }
+
+        // 手续费
+        var net_fee = this.net_fee
+                    
+        // 手续费判断
+        if (Number(net_fee) > Main.viewMgr.payView.gas) {
+            Main.showErrMsg("buy_exchange_purchase_gas_fee_error", () => {
+                this.inputPrice.focus()
+            })
+            return
+        }
+
+        /*
+
+           function brokerRequest() {
+            var asset_src = document.getElementById('broker_request_asset_src').value;
+            var asset_tat = document.getElementById('broker_request_asset_tat').value;
+            var action = document.getElementById('broker_request_action').value
+            var price = document.getElementById('broker_request_price').value                // var price = this.inputPrice.value
+            var amount = document.getElementById('broker_request_amount').value;             // var amount = this.inputAmount.value  
+            var ext = document.getElementById('broker_request_ext').value;
+
+            var data = {
+                asset_src: asset_src,
+                asset_tat: asset_tat,
+                action: action,
+                price: price,
+                amount: amount,
+                extString: ext,
+            }
+
+            BlackCat.SDK.brokerRequest(data, function (res) {
+                console.log("[index]", 'brokerWithdraw.callback.function.res => ', res)
+                showFuncRes(res)
+            })
+        }
+
+        */
+
+
+          //Main.viewMgr.change("ViewLoading")
+        // Main.viewMgr.viewLoading.remove()
+        //  // "存入操作成功"
+       // Main.showInfo("buy_exchange_purchase_traderequest_succ")
+        
+    }
+
+
 
 }
-
 
 }

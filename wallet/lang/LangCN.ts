@@ -595,7 +595,8 @@ namespace BlackCat {
             buy_exchange_pay_received:"收款",
             buy_exchange_pay_sent:"转账",
             buy_exchange_pay_balance:"ABC余额",
-            buy_exchange_pay_unconfirmed:"你有笔交易进行中",
+            buy_exchange_pay_unconfirmed:"你有 ",
+            buy_exchange_pay_processing:" 笔交易进行中",
             buy_exchange_pay_more:"更多",
 
 
@@ -631,6 +632,14 @@ namespace BlackCat {
             buy_exchange_purchase_do_fail: "提款申请提交失败！",
             buy_exchange_purchase_txtitle:"交易中",
             buy_exchange_purchase_alltx:"全部交易",
+            buy_exchange_purchase_deposit_succ: "存入申请提交成功！",
+            buy_exchange_purchase_deposit_fail: "存入申请提交失败！",
+            buy_exchange_purchase_withdraw_succ: "取出申请提交成功！",
+            buy_exchange_purchase_withdraw_fail: "取出申请提交失败！",
+            buy_exchange_purchase_traderequest_succ:"交易请求成功！",
+            buy_exchange_purchase_traderequest_fail:"交易请求失败！",
+
+
             
             
 

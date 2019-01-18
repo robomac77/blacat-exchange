@@ -449,11 +449,18 @@ namespace BlackCat {
                 BuyExchangeUnconfirmedTxView.callback_params = BuyExchangeView.callback_params
                 
 
-                Main.viewMgr.change("BuyExchangeUnconfirmedTxView")
-               
+                Main.viewMgr.change("BuyExchangeUnconfirmedTxView")     
         }
            
            this.ObjAppend(this.div, txunConfirmedDiv)
+
+           var TxNoDiv = this.objCreate("span")
+           TxNoDiv.innerText = "0"
+           this.ObjAppend(txunConfirmedDiv,TxNoDiv)
+
+           var txprocessingDiv = this.objCreate("span")
+           txprocessingDiv.innerText = Main.langMgr.get("buy_exchange_pay_processing")
+           this.ObjAppend(txunConfirmedDiv,txprocessingDiv)
 
            var unconfirmedtxMore = this.objCreate("i")
            unconfirmedtxMore.classList.add("iconfont", "icon-bc-sanjiaoxing")

@@ -194,6 +194,8 @@ namespace BlackCat {
             
              //存入
 
+             // PayExchangeShowWalletView.callback_params.type_src + Main.langMgr.get("pay_exchange_balance")
+
              this.depositDiv = this.objCreate("div")  
              this.depositDiv.classList.add("pc_exchangedeposit")
              this.ObjAppend(this.div,this.depositDiv)
@@ -420,7 +422,7 @@ namespace BlackCat {
         }
         
 
-        private makeDeposit(){
+        private async makeDeposit(){
 
              // 检查金额格式
             if (!Main.viewMgr.payView.checkTransCount(this.inputCount.value)) {
@@ -440,7 +442,10 @@ namespace BlackCat {
                 })
                 return
             }
-
+              //Main.viewMgr.change("ViewLoading")
+            // Main.viewMgr.viewLoading.remove()
+            //  // "存入操作成功"
+           // Main.showInfo("buy_exchange_purchase_deposit_succ")
 
           /*
             function brokerDeposit() {
@@ -466,7 +471,7 @@ namespace BlackCat {
         }
 
 
-        private makeWithdraw(){
+        private async  makeWithdraw(){
             
 
              // 检查金额格式
@@ -487,11 +492,19 @@ namespace BlackCat {
                 })
                 return
             }
+
+              //Main.viewMgr.change("ViewLoading")
+            // Main.viewMgr.viewLoading.remove()
+
+            //  "取出操作成功"
+           // Main.showInfo("buy_exchange_purchase_withdraw_succ")
           /*
              function brokerWithdraw() {
             var asset = document.getElementById('broker_withdraw_asset').value;    // var asset = BuyExchangePurchaseView.assetElement.innerHTML
             var count = document.getElementById('broker_withdraw_count').value;    // var count = this.inputwithdrawCount.value;
             var ext = document.getElementById('broker_withdraw_ext').value;
+
+            
 
             var data = {
                 asset: asset,

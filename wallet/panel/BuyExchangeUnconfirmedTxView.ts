@@ -6,7 +6,6 @@ namespace BlackCat {
 
         wallet_addr: string
         wallet_addr_other: any
-
       
 
         // cli高度
@@ -20,8 +19,6 @@ namespace BlackCat {
 
         // 钱包记录
         
-
-
         
         private divRecLists: HTMLDivElement
         private divRecListsMore: HTMLElement;
@@ -104,36 +101,7 @@ namespace BlackCat {
     
             
  
-    
-            private getNetTypeName() {
-                return Main.langMgr.get("pay_nettype_" + Main.netMgr.type);
-            }
-    
-            private showChangeNetType() {
-                if (this.divNetSelect.innerHTML.length > 0) {
-                    this.divNetSelect.innerHTML = "";
-                }
-                else {
-                    var other = Main.netMgr.getOtherTypes()
-                    for (let i = 0; i < other.length; i++) {
-                        this.ObjAppend(this.divNetSelect, this.getDivNetSelectType(other[i]))
-                    }
-                }
-            }
 
-
-           
-    
-    
-    
-            private getDivNetSelectType(type: number) {
-                var divObj = this.objCreate("div")
-                divObj.textContent = Main.langMgr.get("pay_nettype_" + type)
-                divObj.onclick = () => {
-                    Main.changeNetType(type)
-                }
-                return divObj;
-            }
 
 
             private async doGetWalletLists() {

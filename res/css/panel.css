@@ -502,8 +502,10 @@ li.pc_txrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curso
 
  
  .pc_assetlist{margin-bottom: 15px;border-bottom:10px;color: #dbdde9;}
- .pc_assetlist .assetspan{width: 20px;top: 10px;margin-right: 90px;color: #c8ab73;padding-left:90px;}
- .pc_assetlist .assetmorelement{float:right;color: #dbdde9;}
+ .pc_assetlist .assetelement{font-size:2px;text-align:left;padding-right:20px;}
+ .pc_assetlist .assetexspan{width: 20px;top: 10px;margin-right: 10px;color: #c8ab73;padding-left:10px;text-align:center;}
+ .pc_assetlist .assetwalletspan{width: 20px;top: 10px;color: #dbdde9;text-align: right;}
+ .pc_assetlist .assetmorelement{text-align:right;color: #dbdde9;margin-left: 15px;}
  .pc_assetlist div{padding: 0 20px;border-bottom: 1px solid #181717; margin-bottom:10px;}
  .pc_assetlist div:hover{background: #272836;}
  
@@ -560,19 +562,20 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_exleftpane .selecttoken{width: 95%;height: 35px;padding-left: 12%; margin-bottom:10px; background-color: #2b2c39;color: #606174;font-size: 10px ;padding-top:5px;}
 .pc_exleftpane .tokenoption{float:right;padding-top:5px;background-color: #2b2c39;color: #606174}
 .pc_exleftpane .daygraph{width: 95%;height: 100px;padding-left: 12%; margin-bottom:10px;background-color: #2b2c39;color: #606174}
-.pc_exleftpane .pricebar{width: 95%;height: 35px;padding-left: 12%;float: center; margin-bottom:10px; background-color: #2b2c39;color: #606174}
+.pc_exleftpane .pricebar{width: 95%;height: 35px;padding-left: 12%;float: center; margin-bottom:10px; background-color: #2b2c39;color: #606174;}
 .pc_exleftpane .pricebarplus.pc_popupbox input{ background-color: #2b2c39;color: #606174; display: inline-block;}
-.pc_exleftpane .inputprice{text-align: center;width: 85%;height: 35px;padding-left: 12%; position: relative; background-color: #2b2c39;color: #606174}
-.pc_exleftpane .amountbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:10px; background-color: #2b2c39;color: #606174}
-.pc_exleftpane .countbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:5px; background-color: #2b2c39;color: #606174}
+.pc_exleftpane .inputprice{text-align: center;width: 85%;height: 35px;padding-left: 12%; position: relative; background-color: #2b2c39;color: #606174;}
+.pc_exleftpane .amountbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:10px; background-color: #2b2c39;color: #606174;}
+.pc_exleftpane .countbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:5px; background-color: #2b2c39;color: #606174;text-align: center;}
+.pc_exleftpane .countcurrency{float: right;color:#f3ce87; margin-right:10px;padding-top:5px;}
 .pc_exleftpane .gasselect{width: 85%;height: 15px;padding-right: 12%;color: #606174;font-size: 10px }
 .pc_exleftpane .gasoption{padding-top:5px;background-color: #2b2c39;color: #606174}
-.pc_exleftpane .buybutton{width:95%;border: 1px solid #f3ce87;color:#f3ce87;margin-top: 15px; padding: 2px 0; height: 35px; border-radius: 3px;font-weight: bold}
+.pc_exleftpane .buybutton{width:95%;border: 1px solid #f3ce87;color:#f3ce87;margin-top: 15px; padding: 2px 0; height: 25px; border-radius: 3px;font-weight: bold}
 
 
 .pc_exrightpane{float:right; width:40%; height: 420px ; padding:10px 10px 10px;color: #606174; box-sizing:border-box }
 .pc_exrightpane .titlebar{width: 98%;height: 35px;padding-left: 12%; background-color: #2b2a2a;color: #ffffff;font-size: 2px;text-align: center;}
-.pc_exrightpane .priceamount{width: 98%;height: 310px;padding-left: 12%; margin-top: 12%;background-color: #2b2c39;}
+.pc_exrightpane .priceamount{width: 98%;height: 310px; margin-top: 12%;background-color: #2b2c39;text-align: center;}
 .pc_exrightpane .pc_buytable{width: 98%;height: 155px;padding-left: 12%; background-color: #2b2c39;color: #2b2c39}
 .pc_exrightpane .pc_selltable{width: 98%;height: 155px;padding-left: 12%; background-color: #2b2c39;color: #2b2c39}
 
@@ -592,11 +595,11 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 
 
 .pc_exchangebalance{position: center;width: 95%;height: 20px;padding:5px 10px 5px ;margin:10px 10px 5px; background-color: #2b2c39;color: #606174}
-.pc_exchangebalance .exspan{margin-left: 10px;color: #cac7c7 ;font-size:5px;margin-right:85px;}
+.pc_exchangebalance .exspan{margin-left: 10px;color: #cac7c7 ;font-size:5px;margin-right:10px; text-align: left;}
 .pc_exchangebalance .centerlabel{border-right:30px;color: #cac7c7  ;font-size:5px;float: center;padding-left: 10%;text-align: center;}
 .pc_exchangebalance .excenterlabel{border-right:30px;color: #cac7c7 ;font-size:5px;float: center;padding-left: 14%;text-align: center;}
 
-.pc_exchangebalance .exrightlabel{border-right:10px;color: #910505 ;font-size:5px ;float: right;}
+.pc_exchangebalance .exrightlabel{border-right:10px;color: #910505 ;font-size:5px ; float: right;}
 
 .pc_exchangebalance .rightlabel{border-right:10px;color: #059144 ;font-size:5px ;float: right;}
 .pc_exchangebalance .countbar{width: 80%;height: 35px;padding-left: 12%; margin-bottom:30px; background-color: #2b2c39;color: #ffffff;}

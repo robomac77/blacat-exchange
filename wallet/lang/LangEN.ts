@@ -595,7 +595,8 @@ namespace BlackCat {
             buy_exchange_pay_received:"receive",
             buy_exchange_pay_sent:"send",
             buy_exchange_pay_balance:"ABC Balance",
-            buy_exchange_pay_unconfirmed:"You have transactions in progress",
+            buy_exchange_pay_unconfirmed:"You have",
+            buy_exchange_pay_processing:"transactions in progress",
             buy_exchange_pay_more:"More",
 
 
@@ -631,6 +632,10 @@ namespace BlackCat {
             buy_exchange_purchase_do_fail: "Withdrawal application failed!",
             buy_exchange_purchase_txtitle:"TXs In Progress",
             buy_exchange_purchase_alltx:"All TXs",
+            buy_exchange_purchase_deposit_succ: "Deposit Application Successful！",
+            buy_exchange_purchase_deposit_fail: "Deposit Application Failed！",
+            buy_exchange_purchase_traderequest_succ:"Transaction Request Successful！",
+            buy_exchange_purchase_traderequest_fail:"Transaction Request Failed！",
             
 
 

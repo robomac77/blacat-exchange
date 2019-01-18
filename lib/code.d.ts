@@ -715,6 +715,7 @@ declare namespace BlackCat {
             buy_exchange_pay_sent: string;
             buy_exchange_pay_balance: string;
             buy_exchange_pay_unconfirmed: string;
+            buy_exchange_pay_processing: string;
             buy_exchange_pay_more: string;
             buy_exchange_purchase_myasset: string;
             buy_exchange_purchase_buyin: string;
@@ -747,6 +748,12 @@ declare namespace BlackCat {
             buy_exchange_purchase_do_fail: string;
             buy_exchange_purchase_txtitle: string;
             buy_exchange_purchase_alltx: string;
+            buy_exchange_purchase_deposit_succ: string;
+            buy_exchange_purchase_deposit_fail: string;
+            buy_exchange_purchase_withdraw_succ: string;
+            buy_exchange_purchase_withdraw_fail: string;
+            buy_exchange_purchase_traderequest_succ: string;
+            buy_exchange_purchase_traderequest_fail: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -1373,6 +1380,7 @@ declare namespace BlackCat {
             buy_exchange_pay_sent: string;
             buy_exchange_pay_balance: string;
             buy_exchange_pay_unconfirmed: string;
+            buy_exchange_pay_processing: string;
             buy_exchange_pay_more: string;
             buy_exchange_purchase_myasset: string;
             buy_exchange_purchase_buyin: string;
@@ -1405,6 +1413,10 @@ declare namespace BlackCat {
             buy_exchange_purchase_do_fail: string;
             buy_exchange_purchase_txtitle: string;
             buy_exchange_purchase_alltx: string;
+            buy_exchange_purchase_deposit_succ: string;
+            buy_exchange_purchase_deposit_fail: string;
+            buy_exchange_purchase_traderequest_succ: string;
+            buy_exchange_purchase_traderequest_fail: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -2031,6 +2043,7 @@ declare namespace BlackCat {
             buy_exchange_pay_sent: string;
             buy_exchange_pay_balance: string;
             buy_exchange_pay_unconfirmed: string;
+            buy_exchange_pay_processing: string;
             buy_exchange_pay_more: string;
             buy_exchange_purchase_myasset: string;
             buy_exchange_purchase_buyin: string;
@@ -2063,6 +2076,10 @@ declare namespace BlackCat {
             buy_exchange_purchase_do_fail: string;
             buy_exchange_purchase_txtitle: string;
             buy_exchange_purchase_alltx: string;
+            buy_exchange_purchase_deposit_succ: string;
+            buy_exchange_purchase_deposit_fail: string;
+            buy_exchange_purchase_traderequest_succ: string;
+            buy_exchange_purchase_traderequest_fail: string;
             pay_exchange_bcp: string;
             pay_exchange_create_wallet_fail: string;
             pay_exchange_detail_buy_CGAS_fail: string;
@@ -2378,6 +2395,12 @@ declare namespace BlackCat {
         private assettabDiv;
         private buyintabDiv;
         private tradelogDiv;
+        private btcBalance;
+        private ethBalance;
+        private neoBalance;
+        private exchangeBalance;
+        private walletBalance;
+        private net_fee;
         start(): void;
         constructor();
         create(): void;
@@ -2388,9 +2411,11 @@ declare namespace BlackCat {
         private getNetTypeName;
         private showChangeNetType;
         private getDivNetSelectType;
+        private getAssets;
         private changeToken;
         private doGetWalletLists;
         private addGetWalletLists;
+        private doTradeRequest;
     }
 }
 declare namespace BlackCat {
@@ -2413,9 +2438,6 @@ declare namespace BlackCat {
         private isLast;
         create(): void;
         toRefer(): void;
-        private getNetTypeName;
-        private showChangeNetType;
-        private getDivNetSelectType;
         private doGetWalletLists;
     }
 }
