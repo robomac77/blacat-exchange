@@ -638,6 +638,7 @@ namespace BlackCat {
             buy_exchange_purchase_withdraw_fail: "取出申请提交失败！",
             buy_exchange_purchase_traderequest_succ:"交易请求成功！",
             buy_exchange_purchase_traderequest_fail:"交易请求失败！",
+            
 
 
             

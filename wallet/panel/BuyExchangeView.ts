@@ -455,6 +455,7 @@ namespace BlackCat {
            this.ObjAppend(this.div, txunConfirmedDiv)
 
            var TxNoDiv = this.objCreate("span")
+           TxNoDiv.classList.add("activetxnum")
            TxNoDiv.innerText = "0"
            this.ObjAppend(txunConfirmedDiv,TxNoDiv)
 

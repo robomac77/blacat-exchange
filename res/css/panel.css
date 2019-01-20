@@ -442,6 +442,7 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_txprogress{text-align: center;color: #fff;cursor: pointer;margin: 10px auto 30px;padding: 10px 0; clear:both;}
 .pc_txprogress:active{color: #c8ab73}
 .pc_txprogress i{font-size: 12px}
+.pc_txprogress .activetxnum{color: #c8ab73}
 
 
 /*    进行中交易记录  */

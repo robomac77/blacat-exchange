@@ -48,6 +48,8 @@ namespace BlackCat {
         private txlistsDiv: HTMLElement;
         private getMoreDiv: HTMLDivElement;
 
+        private divCountBar
+
        
         private divNetSelect: HTMLElement;
 
@@ -55,9 +57,13 @@ namespace BlackCat {
         private buyintabDiv;
         private tradelogDiv;
 
-        private btcBalance;
-        private ethBalance;
-        private neoBalance;
+         btcwalletBalance:number
+         ethwalletBalance:number
+         neowalletBalance:number
+
+         btcexchangeBalance:number
+         ethexchangeBalance:number
+         neoexchangeBalance:number
 
         private exchangeBalance;
         private walletBalance
@@ -356,21 +362,21 @@ namespace BlackCat {
             this.inputAmount.placeholder = Main.langMgr.get("buy_exchange_purchase_inputamountplaceholder") 
             this.inputAmount.onkeyup = () => {
                 //this.searchAddressbook()
-            divCountBar.textContent = this.inputAmount.value
+            this.divCountBar.textContent = this.inputAmount.value
 
             }
             this.ObjAppend(divAmountBar, this.inputAmount)
 
-            var divCountBar = this.objCreate("div")
-            divCountBar.classList.add("countbar")
-            divCountBar.textContent = this.inputAmount.value  
-            this.ObjAppend(divSelectBox,divCountBar)
+            this.divCountBar = this.objCreate("div")
+            this.divCountBar.classList.add("countbar")
+            this.divCountBar.textContent = this.inputAmount.value  
+            this.ObjAppend(divSelectBox,this.divCountBar)
 
             var divCountCurrency = this.objCreate("span")
             divCountCurrency.classList.add("countcurrency")
             divCountCurrency.textContent = "ETH"
 
-            this.ObjAppend(divCountBar,divCountCurrency)
+            this.ObjAppend(this.divCountBar,divCountCurrency)
             
             
             var gasSelect = this.objCreate("div")
@@ -525,12 +531,12 @@ namespace BlackCat {
 
                 this.exchangeBalance = this.objCreate("span")    
                 this.exchangeBalance.classList.add("assetexspan")
-                this.exchangeBalance.textContent = this.btcBalance             // Main.getStringNumber(this.gas)
+                this.exchangeBalance.textContent = this.btcwalletBalance             // Main.getStringNumber(this.gas)
                 this.ObjAppend(assetElement, this.exchangeBalance)
 
                 this.walletBalance = this.objCreate("span")   
                 this.walletBalance.classList.add("assetwalletspan")
-                this.walletBalance.textContent =   this.btcBalance             // Main.getStringNumber(this.gas)
+                this.walletBalance.textContent =   this.btcwalletBalance             // Main.getStringNumber(this.gas)
                 this.ObjAppend(assetElement, this.walletBalance)
               
                 // 字体图标">"
@@ -634,9 +640,9 @@ namespace BlackCat {
 
     private getAssets(){
 
-         this.btcBalance = Main.viewMgr.payView.btc
-         this.ethBalance  = Main.viewMgr.payView.eth
-         this.neoBalance = Main.viewMgr.payView.neo
+         this.btcwalletBalance = Main.viewMgr.payView.btc
+         this.ethwalletBalance  = Main.viewMgr.payView.eth
+         this.neowalletBalance = Main.viewMgr.payView.neo
     }
 
     private changeToken(type: string) {
@@ -800,13 +806,51 @@ namespace BlackCat {
 
         /*
 
-           function brokerRequest() {
-            var asset_src = document.getElementById('broker_request_asset_src').value;
-            var asset_tat = document.getElementById('broker_request_asset_tat').value;
-            var action = document.getElementById('broker_request_action').value
-            var price = document.getElementById('broker_request_price').value                // var price = this.inputPrice.value
-            var amount = document.getElementById('broker_request_amount').value;             // var amount = this.inputAmount.value  
-            var ext = document.getElementById('broker_request_ext').value;
+        private async doWithdraw() {
+            if(!Main.viewMgr.payView.verifyAddr(this.inputTransferAddr.value)){
+               Main.showErrMsg("pay_exchange_refund_addrformat_error", () => {
+                   this.inputTransferAddr.focus()
+            })
+            return;
+        }
+
+      
+            // 检查金额格式
+            if (!Main.viewMgr.payView.checkTransCount(this.inputTransferCount.value)) {
+                Main.showErrMsg("pay_exchange_refund_amount_error", () => {
+                    this.inputTransferCount.focus()
+                })
+                return;
+            }
+
+            // 手续费
+            var net_fee = this.net_fee
+                        
+            // 手续费判断
+            if (Number(net_fee) > Main.viewMgr.payView.gas) {
+                Main.showErrMsg("pay_exchange_refund_gas_fee_error", () => {
+                    this.inputTransferCount.focus()
+                })
+                return
+            }
+
+            // 余额判断
+            if (Number(this.inputTransferCount.value) > (Number(PayExchangeRefundView.balance)) - Number(PayExchangeRefundView.crosschain_fee) ){  
+                Main.showErrMsg("pay_exchange_refund_not_enough", () => {
+                    this.inputTransferCount.focus()
+                })
+                return
+            }
+
+            Main.viewMgr.change("ViewLoading")
+
+            try {
+                    var asset_src = PayExchangeRefundView.callback_params.type_src
+                    //var asset_tat = tokenoption.value
+                    //var action = document.getElementById('broker_request_action').value
+                    var price = this.inputPrice.value;              
+                    var amount = this.inputAmount.value               
+                    var ext = document.getElementById('broker_request_ext').value;
 
             var data = {
                 asset_src: asset_src,
@@ -816,20 +860,66 @@ namespace BlackCat {
                 amount: amount,
                 extString: ext,
             }
-
-            BlackCat.SDK.brokerRequest(data, function (res) {
-                console.log("[index]", 'brokerWithdraw.callback.function.res => ', res)
+                BlackCat.SDK.brokerRequest(data, function (res) {
+                console.log("[BlaCat]", 'brokerRequest.callback.function.res => ', res)
                 showFuncRes(res)
-            })
-        }
+              })
+
+            }
+            catch (e) {
+                var res = new Result()
+                res.err = true;
+                res.info = e.toString();
+
+                console.log("[BlaCat]", '[BuyExchangePurchaseView]', 'makeTradeRequest, BlackCat.SDK.brokerDeposit error => ', e.toString())
+            }
+
+
+            Main.viewMgr.viewLoading.remove()
+
+            if (res) {
+                console.log("[BlaCat]", '[BuyExchangePurchaseView]', '交易所请求结果 => ', res)
+                if (res.err == false) {
+                    // 成功，上报
+                    await ApiTool.addUserWalletLogs(
+                        Main.user.info.uid,
+                        Main.user.info.token,
+                        res.info,
+                        "0",
+                        this.inputTransferCount.value,
+                        "19",
+                        '{"sbPushString":"transfer", "toaddr":"' + tat_addr + '", "count": "' + this.inputTransferCount.value + '", "nnc": "' + tools.CoinTool["id_" + transfer_type] + '"}',
+                        Main.netMgr.type, 
+                        "0",
+                        net_fee,
+                        PayTransferView.log_type_detail[transfer_type.toLowerCase()]
+                    );
+
+                   // this.updateBalance()
+
+                    // "提款操作成功"
+                    Main.showInfo("buy_exchange_purchase_traderequest_succ")
+
+
+
+                    this.remove();
+                    if (PayExchangeRefundView.callback) PayExchangeRefundView.callback();
+                    PayExchangeRefundView.callback = null;
+                }
+                else {
+                    // 转账失败
+                    Main.showErrMsg(("buy_exchange_purchase_traderequest_fail"))
+                }
+            }
+            else {
+                {
+                Main.showErrMsg(("buy_exchange_purchase_traderequest_fail"))
+            }
+               
 
         */
 
-
-          //Main.viewMgr.change("ViewLoading")
-        // Main.viewMgr.viewLoading.remove()
-        //  // "存入操作成功"
-       // Main.showInfo("buy_exchange_purchase_traderequest_succ")
+        
         
     }
 

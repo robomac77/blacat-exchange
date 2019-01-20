@@ -46,7 +46,7 @@ namespace BlackCat {
         private withdrawwalletAmount;
         private withdrawwalletCount;
 
-        private net_fee: string // 网络交易费
+        private net_fee: number = 5.5 // 网络交易费
         
 
 
@@ -428,6 +428,7 @@ namespace BlackCat {
             if (!Main.viewMgr.payView.checkTransCount(this.inputCount.value)) {
                 Main.showErrMsg("buy_exchange_purchase_amount_error", () => {
                     this.inputCount.focus()
+                   // Main.viewMgr.buyExchangePurchaseView.btcBalance
                 })
                 return;
             }
@@ -442,33 +443,98 @@ namespace BlackCat {
                 })
                 return
             }
-              //Main.viewMgr.change("ViewLoading")
-            // Main.viewMgr.viewLoading.remove()
-            //  // "存入操作成功"
-           // Main.showInfo("buy_exchange_purchase_deposit_succ")
 
-          /*
-            function brokerDeposit() {
-            var asset = document.getElementById('broker_deposit_asset').value;    // var asset = BuyExchangePurchaseView.assetElement.innerHTML
-            var count = document.getElementById('broker_withdraw_count').value;  // var count = this.inputCount.value;
+            if(Number(this.inputCount.value) > Main.viewMgr.buyExchangePurchaseView.btcwalletBalance)   { // this should be changed dynamically per asset
+             Main.showErrMsg("buy_exchange_purchase_not_enough",() => {
+               this.inputCount.focus()
 
-            var ext = document.getElementById('broker_deposit_ext').value;
-
-            var data = {
-                asset: asset,
-                count: count,
-                extString: ext,
+             })
+             return
             }
 
-            BlackCat.SDK.brokerDeposit(data, function (res) {
-                console.log("[BlaCat]", 'brokerDeposit.callback.function.res => ', res)
-                showFuncRes(res)
+            if(Number(this.inputCount.value) > Main.viewMgr.buyExchangePurchaseView.ethwalletBalance) { 
+                Main.showErrMsg("buy_exchange_purchase_not_enough",() => {
+                this.inputCount.focus()
+                
             })
-        }
+            return
 
+            }
+            //  Main.viewMgr.change("ViewLoading")
+            
+            
+           /*
+            
+            try {
+                var dep_count = this.inputCount.value  
+                var dep_type = PayExchangeRefundView.callback_params.type_src
+                //var ext     = 
+
+                var data = {
+                    asset: dep_type,
+                    count: dep_count,
+                  //  extString: ext,
+
+                }
+                
+                var res: Result = await BlackCat.SDK.brokerDeposit(data, function (res) {
+                         console.log("[BlaCat]", 'brokerDeposit.callback.function.res => ', res)
+                         showFuncRes(res)
+                }
+            }
+            catch (e) {
+                var res = new Result()
+                res.err = true;
+                res.info = e.toString();
+
+                console.log("[BlaCat]", '[BuyExchangeDepositView]', 'makeDeposit, BlackCat.SDK.brokerDeposit error => ', e.toString())
+            }
+        
+
+            // Main.viewMgr.viewLoading.remove()
+        
+
+             if (res) {
+                console.log("[BlaCat]", '[BuyExchangeDepositView]', '交易所存入结果 => ', res)
+                if (res.err == false) {
+                    // 成功，上报
+                    await ApiTool.addUserWalletLogs(
+                        Main.user.info.uid,
+                        Main.user.info.token,
+                        res.info,
+                        "0",
+                        this.inputCount.value,
+                        "19",
+                        '{"sbPushString":"transfer", "toaddr":"' + tat_addr + '", "count": "' + this.inputCount.value + '", "nnc": "' + tools.CoinTool["id_" + transfer_type] + '"}',
+                        Main.netMgr.type, 
+                        "0",
+                        net_fee,
+                        PayTransferView.log_type_detail[transfer_type.toLowerCase()]
+                    );
+
+                   // this.updateBalance()
+
+                    // "提款操作成功"
+                    Main.showInfo("buy_exchange_purchase_deposit_succ")
+
+
+
+                    this.remove();
+                    if (BuyExchangeDepositView.callback) BuyExchangeDepositView.callback();
+                    BuyExchangeDepositView.callback = null;
+                }
+                else {
+                    // 转账失败
+                    Main.showErrMsg(("buy_exchange_purchase_deposit_fail"))
+                }
+            }
+            else {
+                Main.showErrMsg(("buy_exchange_purchase_deposit_fail"))
+            }
             */
+            
+       }
 
-        }
 
 
         private async  makeWithdraw(){
@@ -493,33 +559,98 @@ namespace BlackCat {
                 return
             }
 
-              //Main.viewMgr.change("ViewLoading")
-            // Main.viewMgr.viewLoading.remove()
-
-            //  "取出操作成功"
-           // Main.showInfo("buy_exchange_purchase_withdraw_succ")
-          /*
-             function brokerWithdraw() {
-            var asset = document.getElementById('broker_withdraw_asset').value;    // var asset = BuyExchangePurchaseView.assetElement.innerHTML
-            var count = document.getElementById('broker_withdraw_count').value;    // var count = this.inputwithdrawCount.value;
-            var ext = document.getElementById('broker_withdraw_ext').value;
-
-            
-
-            var data = {
-                asset: asset,
-                count: count,
-                extString: ext,
+            if(Number(this.inputwithdrawCount.value) > Main.viewMgr.buyExchangePurchaseView.btcwalletBalance)   { // this should be changed dynamically per asset
+               
+                Main.showErrMsg("buy_exchange_purchase_not_enough",() => {
+                    this.inputwithdrawCount.focus()
+     
+                  })
+                  return
             }
 
-            BlackCat.SDK.brokerWithdraw(data, function (res) {
-                console.log("[BlaCat]", 'brokerWithdraw.callback.function.res => ', res)
-                showFuncRes(res)
-            })
-        }
+            if(Number(this.inputwithdrawCount.value) > Main.viewMgr.buyExchangePurchaseView.ethwalletBalance) {
+                Main.showErrMsg("buy_exchange_purchase_not_enough",() => {
+                    this.inputwithdrawCount.focus()
+     
+                  })
+                  return
 
+            }
+
+
+             
+            /*
+            try {
+                var withdraw_count = this.inputwithdrawCount.value  
+                var withdraw_type = PayExchangeRefundView.callback_params.type_src
+                //var ext     = 
+
+                var data = {
+                    asset: withdraw_type,
+                    count: withdraw_count,
+                   // extString: ext,
+                }
+            
+                
+                var res: Result = await BlackCat.SDK.brokerWithdraw(data, function (res) {
+                         console.log("[BlaCat]", 'brokerWithdraw.callback.function.res => ', res) 
+                         showFuncRes(res)
+                
+            }
+        }
+            catch (e) {
+                var res = new Result()
+                res.err = true;
+                res.info = e.toString();
+
+                console.log("[BlaCat]", '[BuyExchangeDepositView]', 'makeWithdraw, BlackCat.SDK.brokerWithdraw error => ', e.toString())
+            }
+
+            // Main.viewMgr.viewLoading.remove()
+
+             if (res) {
+                console.log("[BlaCat]", '[BuyExchangeDepositView]', '交易所取出结果 => ', res)
+                if (res.err == false) {
+                    // 成功，上报
+                    await ApiTool.addUserWalletLogs(
+                        Main.user.info.uid,
+                        Main.user.info.token,
+                        res.info,
+                        "0",
+                        this.inputwithdrawCount.value,
+                        "19",
+                        '{"sbPushString":"transfer", "toaddr":"' + tat_addr + '", "count": "' + this.inputCount.value + '", "nnc": "' + tools.CoinTool["id_" + transfer_type] + '"}',
+                        Main.netMgr.type, 
+                        "0",
+                        net_fee,
+                        PayTransferView.log_type_detail[transfer_type.toLowerCase()]
+                    );
+
+                   // this.updateBalance()
+
+                    // "提款操作成功"
+                    Main.showInfo("buy_exchange_purchase_withdraw_succ")
+
+
+
+                    this.remove();
+                    if (BuyExchangeDepositView.callback) BuyExchangeDepositView.callback();
+                    BuyExchangeDepositView.callback = null;
+                }
+                else {
+                    // 转账失败
+                    Main.showErrMsg(("buy_exchange_purchase_withdraw_fail"))
+                }
+            }
+            else {
+                Main.showErrMsg(("buy_exchange_purchase_withdraw_fail"))
+            }
             */
         }
+              
+                     
+ 
+
        
     
         private getDivNetSelectType(type: number) {
