@@ -400,7 +400,7 @@ namespace BlackCat {
                 })
             }
             
-            // ABC 余额
+            // ABC 余额 &
             this.divLists = this.objCreate("ul") as HTMLDivElement
             this.divLists.classList.add("pc_paylists")
             this.ObjAppend(this.div, this.divLists)
