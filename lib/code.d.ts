@@ -739,6 +739,9 @@ declare namespace BlackCat {
             buy_exchange_purchase_exchangetitle: string;
             buy_exchange_purchase_wallettitle: string;
             buy_exchange_purchase_buyunconfirmed: string;
+            buy_exchange_purchase_buyconfirmed: string;
+            buy_exchange_purchase_sellunconfirmed: string;
+            buy_exchange_purchase_sellconfirmed: string;
             buy_exchange_purchase_deposit: string;
             buy_exchange_purchase_withdraw: string;
             buy_exchange_purchase_amount_error: string;
@@ -1404,6 +1407,9 @@ declare namespace BlackCat {
             buy_exchange_purchase_exchangetitle: string;
             buy_exchange_purchase_wallettitle: string;
             buy_exchange_purchase_buyunconfirmed: string;
+            buy_exchange_purchase_buyconfirmed: string;
+            buy_exchange_purchase_sellunconfirmed: string;
+            buy_exchange_purchase_sellconfirmed: string;
             buy_exchange_purchase_deposit: string;
             buy_exchange_purchase_withdraw: string;
             buy_exchange_purchase_amount_error: string;
@@ -2067,6 +2073,9 @@ declare namespace BlackCat {
             buy_exchange_purchase_exchangetitle: string;
             buy_exchange_purchase_wallettitle: string;
             buy_exchange_purchase_buyunconfirmed: string;
+            buy_exchange_purchase_buyconfirmed: string;
+            buy_exchange_purchase_sellunconfirmed: string;
+            buy_exchange_purchase_sellconfirmed: string;
             buy_exchange_purchase_deposit: string;
             buy_exchange_purchase_withdraw: string;
             buy_exchange_purchase_amount_error: string;
@@ -2363,7 +2372,6 @@ declare namespace BlackCat {
         private getNetTypeName;
         private showChangeNetType;
         private makeDeposit;
-        private makeWithdraw;
         private getDivNetSelectType;
         private addGetWalletLists;
     }

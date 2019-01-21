@@ -6,6 +6,8 @@
 
 
 
+
+
 namespace BlackCat {
     
     export class BuyExchangePurchaseView extends ViewBase {
@@ -300,8 +302,8 @@ namespace BlackCat {
             chartDiv.classList.add("chart")
             this.ObjAppend(divDayGraph, chartDiv)
 
-             /*   var myChart = echarts.init(chartDiv);
-                option = {
+               /* var myChart = echarts.init(chartDiv);
+                var  option = {
                 grid: {
                     left: 0,
                     right: 0
@@ -317,7 +319,7 @@ namespace BlackCat {
                     splitLine: false,
                 },
                 series: [{
-                    data: vmm.dataList[key]["7D"],
+                    data: vmm.dataList[key]["7D"],   // data source from database
                     type: 'line',
                     areaStyle: {},
                     symbolSize: 0,
@@ -347,7 +349,6 @@ namespace BlackCat {
 
 
             this.inputPrice = this.objCreate("input") as HTMLInputElement
-            
             this.inputPrice.placeholder = Main.langMgr.get("buy_exchange_purchase_inputpriceplaceholder") 
             this.inputPrice.onkeyup = () => {
                 //this.searchAddressbook()
@@ -432,10 +433,14 @@ namespace BlackCat {
             this.ObjAppend(divRightPane,divTitleBar)
 
             var divPriceTitle = this.objCreate("span")
-            divPriceTitle.classList.add("priceamount")
+            divPriceTitle.classList.add("price")
             divPriceTitle.textContent = Main.langMgr.get("buy_exchange_purchase_price") 
            this.ObjAppend(divTitleBar,divPriceTitle)
 
+           var divAmountTitle = this.objCreate("span")
+           divAmountTitle.classList.add("amount")
+           divAmountTitle.textContent = Main.langMgr.get("buy_exchange_purchase_amount") 
+           this.ObjAppend(divTitleBar,divAmountTitle)  
 
             var divBuyTable = this.objCreate("div")
              divBuyTable.classList.add("pc_buytable")
@@ -458,8 +463,8 @@ namespace BlackCat {
            
 
            // var divAmountTitle = this.objCreate("span")
-            // divAmountTitle.classList.add("amount")
-            // divAmountTitle.textContent = Main.langMgr.get("buy_exchange_purchase_amount") 
+          // divAmountTitle.classList.add("amount")
+          // divAmountTitle.textContent = Main.langMgr.get("buy_exchange_purchase_amount") 
           //  this.ObjAppend(divTitleBar,divAmountTitle)
 
             this.assettabDiv = this.objCreate("div") 
@@ -699,11 +704,11 @@ namespace BlackCat {
                         var txStatediv = this.objCreate("div")
                         txStatediv.classList.add("pc_liststate")
                         
-                        txStatediv.textContent = BlackCat.Main.langMgr.get("buy_exchange_purchase_buyunconfirmed"); // 买入中
+                        txStatediv.textContent = BlackCat.Main.langMgr.get("buy_exchange_purchase_buyunconfirmed"); 
                         this.ObjAppend(txlistObj, txStatediv)
 
                          // Tokenname & amount
-                        var txcontent_div = this.objCreate("div")
+                        var txcontent_div = this.objCreate("div")  
                         txcontent_div.classList.add("pc_txinfo")
 
                         var tokenname_div = this.objCreate("div")

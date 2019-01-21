@@ -58,8 +58,6 @@ namespace BlackCat {
         private divNetSelect: HTMLElement;
 
 
-      
-
         
             create() {
 

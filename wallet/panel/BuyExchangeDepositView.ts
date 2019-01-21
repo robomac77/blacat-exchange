@@ -536,7 +536,7 @@ namespace BlackCat {
        }
 
 
-
+    /*
         private async  makeWithdraw(){
             
 
@@ -576,10 +576,8 @@ namespace BlackCat {
                   return
 
             }
-
-
              
-            /*
+            
             try {
                 var withdraw_count = this.inputwithdrawCount.value  
                 var withdraw_type = PayExchangeRefundView.callback_params.type_src
@@ -596,7 +594,7 @@ namespace BlackCat {
                          console.log("[BlaCat]", 'brokerWithdraw.callback.function.res => ', res) 
                          showFuncRes(res)
                 
-            }
+            })
         }
             catch (e) {
                 var res = new Result()
@@ -622,7 +620,7 @@ namespace BlackCat {
                         '{"sbPushString":"transfer", "toaddr":"' + tat_addr + '", "count": "' + this.inputCount.value + '", "nnc": "' + tools.CoinTool["id_" + transfer_type] + '"}',
                         Main.netMgr.type, 
                         "0",
-                        net_fee,
+                        net_fee.toString(),
                         PayTransferView.log_type_detail[transfer_type.toLowerCase()]
                     );
 
@@ -645,10 +643,10 @@ namespace BlackCat {
             else {
                 Main.showErrMsg(("buy_exchange_purchase_withdraw_fail"))
             }
-            */
+            
         }
               
-                     
+         */                    
  
 
        
