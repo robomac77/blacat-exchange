@@ -615,6 +615,7 @@ namespace BlackCat {
             buy_exchange_purchase_depositlabel:"Deposit Amount",
             buy_exchange_purchase_withdrawlabel:"Withdraw Amount",
             buy_exchange_purchase_depositamount:"Please Input Deposit Amount",
+            buy_exchange_purchase_withdrawamount:"Please Input Withdraw Amount",
             buy_exchange_purchase_gas:"Gas Fee 5.5GAS",
             buy_exchange_purchase_confirmdeposit:"Confirm Deposit",
             buy_exchange_purchase_confirmwithdraw:"Confirm Withdraw",

@@ -51,6 +51,7 @@ namespace BlackCat {
         private getMoreDiv: HTMLDivElement;
 
         private divCountBar
+        private divSelectToken 
 
        
         private divNetSelect: HTMLElement;
@@ -71,6 +72,18 @@ namespace BlackCat {
         private walletBalance
 
         private net_fee: string // 网络交易费
+
+        tokenInfo = [
+            {  "tokenname": "BTC" },
+            {  "tokenname": "ETH" },
+            {  "tokenname": "NEO" },
+            {  "tokenname": "BCT" },
+            {  "tokenname": "BCP" },
+            {  "tokenname": "GAS" },
+            {  "tokenname": "CGAS" },
+            {  "tokenname": "NEO" },
+            {  "tokenname": "CNEO" },]
+            
 
 
 
@@ -259,10 +272,10 @@ namespace BlackCat {
             divSelectBox.classList.add("pc_exleftpane")
             this.ObjAppend(this.buyintabDiv,divSelectBox)
 
-            var divSelectToken = this.objCreate("div")
-            divSelectToken.classList.add("selecttoken")  
-            divSelectToken.innerText = Main.langMgr.get("buy_exchange_purchase_selecttoken") 
-            this.ObjAppend(divSelectBox,divSelectToken)
+            this.divSelectToken = this.objCreate("div")
+            this.divSelectToken.classList.add("selecttoken")  
+            this.divSelectToken.innerText = Main.langMgr.get("buy_exchange_purchase_selecttoken") 
+            this.ObjAppend(divSelectBox,this.divSelectToken)
 
             
 
@@ -272,10 +285,10 @@ namespace BlackCat {
               tokenType.forEach(
                 token => {
                     var tokenoption = this.objCreate("option") as HTMLOptionElement;
-                    tokenoption.setAttribute("value", token.codename);
-                    tokenoption.textContent = Main.langMgr.get("token_type_" + token.codename)
-                    if (token.codename == "CN") {
-                        tokenoption.setAttribute("selected", "selected")
+                    tokenoption.setAttribute("value", token.tokenname);
+                    tokenoption.textContent = Main.langMgr.get("token_type_" + token.tokenname)
+                    if (token.tokenname == "BTC") {
+                        tokenoption.setAttribute("selected", "selected") 
                     }
                     this.selectToken.options.add(tokenoption)
 
@@ -284,14 +297,16 @@ namespace BlackCat {
             this.selectToken.onchange = () => {
                 tokenType.forEach(
                     token => {
-                       // if (area.codename == this.selectArea.value) {
-                        //    this.divArea.textContent = area.areacode
-                     //   }
+                        if (token.tokenname == this.selectToken.value) {
+                           this.divSelectToken.textContent = token.tokenname
+                        }
                     }
                 )
             }
-            this.ObjAppend(divSelectToken, this.selectToken)
 
+            this.ObjAppend(this.divSelectToken, this.selectToken)
+
+           
             
 
             var divDayGraph = this.objCreate("div")
@@ -523,15 +538,16 @@ namespace BlackCat {
             // 数字币种具体
             for (let i = 0; i < PayView.tokens.length; i++) {
                 let coin = PayView.tokens[i]
-
-               // this.changeToken(coin);
+               
+                
+                //this.changeToken(coin);
 
                 this.getAssets()
 
                 let assetElement = this.objCreate("div")
                  assetElement.classList.add("assetelement")
                 // 名称
-                assetElement.innerHTML = "BTC"// Main.langMgr.get(coin)
+                assetElement.innerHTML =  PayExchangeShowWalletView.callback_params.type_src //  "BTC"// Main.langMgr.get(coin)
                 this.ObjAppend(divAssetList, assetElement)
 
                 this.exchangeBalance = this.objCreate("span")    
@@ -556,6 +572,7 @@ namespace BlackCat {
                 BuyExchangeDepositView.refer = ""
                 BuyExchangeDepositView.callback_params = BuyExchangePurchaseView.callback_params
                 BuyExchangeDepositView.balance = BuyExchangePurchaseView.balance
+                
 
                 Main.viewMgr.change("BuyExchangeDepositView")
 
@@ -778,6 +795,22 @@ namespace BlackCat {
             Main.viewMgr.payView.doGetWalletLists()
         }, timeout);
     }
+
+    /*
+     
+    static getByCodeName(codeName: string) {
+            var areaInfo = null;
+            AreaView.areaInfo.forEach(
+                area => {
+                    if (area.codename == codeName) {
+                        areaInfo = area;
+                    }
+                }
+            )
+            return areaInfo;
+        }
+
+    */
 
 
     private async doTradeRequest(){

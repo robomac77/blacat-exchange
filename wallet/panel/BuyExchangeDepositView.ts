@@ -191,7 +191,7 @@ namespace BlackCat {
               }
             this.ObjAppend(divexTab,this.withdrawSpan)
 
-            
+             
              //存入
 
              // PayExchangeShowWalletView.callback_params.type_src + Main.langMgr.get("pay_exchange_balance")
@@ -213,7 +213,7 @@ namespace BlackCat {
 
             this.exchangeAmount = this.objCreate("span")
             this.exchangeAmount.classList.add("centerlabel")
-            this.exchangeAmount.textContent = "0"
+            this.exchangeAmount.value = 0
             this.ObjAppend(divExBalanceBar, this.exchangeAmount)
 
             this.exchangeCount = this.objCreate("span")
@@ -235,7 +235,8 @@ namespace BlackCat {
 
             this.walletAmount = this.objCreate("span")
             this.walletAmount.classList.add("excenterlabel")
-            this.walletAmount.textContent = "0"
+            this.walletAmount.value = BuyExchangePurchaseView.balance
+            this.walletAmount.innerText = BuyExchangePurchaseView.balance +" "+ BuyExchangePurchaseView.callback_params.type_src
             this.ObjAppend(divwalletBalanceBar, this.walletAmount)
 
             this.walletCount = this.objCreate("span")
@@ -259,8 +260,8 @@ namespace BlackCat {
             this.inputCount.placeholder = Main.langMgr.get("buy_exchange_purchase_depositamount") 
             this.inputCount.onkeyup = () => {
 
-                this.exchangeAmount.textContent = this.inputCount.value 
-                this.walletAmount.textContent = this.inputCount.value
+                this.exchangeAmount.textContent = this.exchangeAmount.value + (Number(this.inputCount.value)) 
+                this.walletAmount.textContent = this.walletAmount.value  - (Number(this.inputCount.value)) 
 
                 this.exchangeCount.textContent = "+" + this.inputCount.value
                 this.walletCount.textContent = "-" + this.inputCount.value
@@ -303,12 +304,12 @@ namespace BlackCat {
 
             this.withdrawAmount = this.objCreate("span")
             this.withdrawAmount.classList.add("withcnlabel")
-            this.withdrawAmount.textContent = "0"
+            this.withdrawAmount.value = 0
             this.ObjAppend(divExWithdrawBar, this.withdrawAmount)
 
             this.withdrawCount = this.objCreate("span")
             this.withdrawCount.classList.add("withrightlabel")
-            this.withdrawCount.textContent = "0"
+            
             this.ObjAppend(divExWithdrawBar,this.withdrawCount)
 
            
@@ -325,6 +326,8 @@ namespace BlackCat {
 
             this.withdrawwalletAmount = this.objCreate("span")
             this.withdrawwalletAmount.classList.add("withcenterlabel")
+            this.withdrawwalletAmount.value = BuyExchangePurchaseView.balance
+            this.withdrawwalletAmount.textContent = BuyExchangePurchaseView.balance +" "+ BuyExchangePurchaseView.callback_params.type_src
             
             this.ObjAppend(divwalletBalance, this.withdrawwalletAmount)
 
@@ -345,13 +348,13 @@ namespace BlackCat {
 
 
             this.inputwithdrawCount = this.objCreate("input")as HTMLInputElement
-            this.inputwithdrawCount.placeholder = Main.langMgr.get("buy_exchange_purchase_depositamount") 
+            this.inputwithdrawCount.placeholder = Main.langMgr.get("buy_exchange_purchase_withdrawamount") 
             this.inputwithdrawCount.onkeyup = () => {
                 
                 
 
-                this.withdrawAmount.textContent = this.inputwithdrawCount.value 
-                this.withdrawwalletAmount.textContent = this.inputwithdrawCount.value
+                this.withdrawAmount.textContent = this.withdrawAmount.value + (Number(this.inputwithdrawCount.value ))
+                this.withdrawwalletAmount.textContent = this.withdrawwalletAmount.value - (Number(this.inputwithdrawCount.value))
 
                 this.withdrawCount.textContent = "+" + this.inputwithdrawCount.value
                 this.withdrawwalletCount.textContent = "-" + this.inputwithdrawCount.value

@@ -731,6 +731,7 @@ declare namespace BlackCat {
             buy_exchange_purchase_depositlabel: string;
             buy_exchange_purchase_withdrawlabel: string;
             buy_exchange_purchase_depositamount: string;
+            buy_exchange_purchase_withdrawamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
             buy_exchange_purchase_confirmwithdraw: string;
@@ -1399,6 +1400,7 @@ declare namespace BlackCat {
             buy_exchange_purchase_depositlabel: string;
             buy_exchange_purchase_withdrawlabel: string;
             buy_exchange_purchase_depositamount: string;
+            buy_exchange_purchase_withdrawamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
             buy_exchange_purchase_confirmwithdraw: string;
@@ -2065,6 +2067,7 @@ declare namespace BlackCat {
             buy_exchange_purchase_depositlabel: string;
             buy_exchange_purchase_withdrawlabel: string;
             buy_exchange_purchase_depositamount: string;
+            buy_exchange_purchase_withdrawamount: string;
             buy_exchange_purchase_gas: string;
             buy_exchange_purchase_confirmdeposit: string;
             buy_exchange_purchase_confirmwithdraw: string;
@@ -2400,6 +2403,7 @@ declare namespace BlackCat {
         private txlistsDiv;
         private getMoreDiv;
         private divCountBar;
+        private divSelectToken;
         private divNetSelect;
         private assettabDiv;
         private buyintabDiv;
@@ -2413,6 +2417,9 @@ declare namespace BlackCat {
         private exchangeBalance;
         private walletBalance;
         private net_fee;
+        tokenInfo: {
+            "tokenname": string;
+        }[];
         start(): void;
         constructor();
         create(): void;

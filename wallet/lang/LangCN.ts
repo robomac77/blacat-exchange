@@ -615,6 +615,7 @@ namespace BlackCat {
             buy_exchange_purchase_depositlabel:"存入金额",
             buy_exchange_purchase_withdrawlabel:"取出金额",
             buy_exchange_purchase_depositamount:"请输入存入金额",
+            buy_exchange_purchase_withdrawamount:"请输入取出金额",
             buy_exchange_purchase_gas:"手续费 5.5GAS",
             buy_exchange_purchase_confirmdeposit:"确定存入",
             buy_exchange_purchase_confirmwithdraw:"确定取出",
