@@ -534,54 +534,45 @@ namespace BlackCat {
             this.ObjAppend(this.assettabDiv, divAssetList)
 
 
-
-            // 数字币种具体
-            for (let i = 0; i < PayView.tokens.length; i++) {
-                let coin = PayView.tokens[i]
-               
-                
-                //this.changeToken(coin);
-
-                this.getAssets()
+            
+            
+              // 数量归零
+                PayView.tokens_coin.forEach((coins) => {
+                coins.forEach((coin) => {
+                    
 
                 let assetElement = this.objCreate("div")
-                 assetElement.classList.add("assetelement")
-                // 名称
-                assetElement.innerHTML =  PayExchangeShowWalletView.callback_params.type_src //  "BTC"// Main.langMgr.get(coin)
+                assetElement.classList.add("assetelement")
+                
+                assetElement.innerHTML =  Main.langMgr.get(coin)//
                 this.ObjAppend(divAssetList, assetElement)
 
                 this.exchangeBalance = this.objCreate("span")    
                 this.exchangeBalance.classList.add("assetexspan")
-                this.exchangeBalance.textContent = this.btcwalletBalance             // Main.getStringNumber(this.gas)
+                this.exchangeBalance.textContent = 0           // 
                 this.ObjAppend(assetElement, this.exchangeBalance)
 
                 this.walletBalance = this.objCreate("span")   
                 this.walletBalance.classList.add("assetwalletspan")
-                this.walletBalance.textContent =   this.btcwalletBalance             // Main.getStringNumber(this.gas)
+                this.walletBalance.textContent = Main.viewMgr.payView[coin] 
                 this.ObjAppend(assetElement, this.walletBalance)
               
-                // 字体图标">"
+                
                 let moreElement = this.objCreate("i")
                 moreElement.classList.add("assetmorelement")
                 moreElement.classList.add("iconfont", "icon-bc-gengduo")
                 this.ObjAppend(assetElement, moreElement)
 
-               
-               
                 assetElement.onclick = () => {
-                BuyExchangeDepositView.refer = ""
-                BuyExchangeDepositView.callback_params = BuyExchangePurchaseView.callback_params
-                BuyExchangeDepositView.balance = BuyExchangePurchaseView.balance
-                
+                 this.changecoin(coin)    
+                  }
 
-                Main.viewMgr.change("BuyExchangeDepositView")
-
-                }
-                
-                
-            } 
+                })
+            })
             
             
+               
+                       
             this.tradelogDiv = this.objCreate("div") 
             this.tradelogDiv.classList.add("pc_txlist")  //pc_exchangetab
             this.ObjAppend(this.div,this.tradelogDiv)
@@ -600,9 +591,7 @@ namespace BlackCat {
             this.doGetWalletLists()
             
 
-         
-
-                 
+                          
             
  }
         
@@ -660,12 +649,20 @@ namespace BlackCat {
         return divObj;
     }
 
-    private getAssets(){
-
-         this.btcwalletBalance = Main.viewMgr.payView.btc
-         this.ethwalletBalance  = Main.viewMgr.payView.eth
-         this.neowalletBalance = Main.viewMgr.payView.neo
-    }
+    private async changecoin(type: string) {
+      
+            this.hidden()
+            BuyExchangeDepositView.refer = "BuyExchangePurchaseView"
+            BuyExchangeDepositView.balance = PayView.tokens_coin[type]
+            BuyExchangeDepositView.callback_params = {
+                type_src: type.toUpperCase(),
+                
+            }
+            
+                Main.viewMgr.change("BuyExchangeDepositView")
+            }
+        
+    
 
     private changeToken(type: string) {
         let types = ['blact', 'neo', 'other']

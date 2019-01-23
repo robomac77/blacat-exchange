@@ -2430,7 +2430,7 @@ declare namespace BlackCat {
         private getNetTypeName;
         private showChangeNetType;
         private getDivNetSelectType;
-        private getAssets;
+        private changecoin;
         private changeToken;
         private doGetWalletLists;
         private addGetWalletLists;

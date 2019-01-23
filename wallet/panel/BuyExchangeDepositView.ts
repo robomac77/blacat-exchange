@@ -235,8 +235,8 @@ namespace BlackCat {
 
             this.walletAmount = this.objCreate("span")
             this.walletAmount.classList.add("excenterlabel")
-            this.walletAmount.value = BuyExchangePurchaseView.balance
-            this.walletAmount.innerText = BuyExchangePurchaseView.balance +" "+ BuyExchangePurchaseView.callback_params.type_src
+            this.walletAmount.value = BuyExchangeDepositView.balance
+            this.walletAmount.innerText = BuyExchangeDepositView.balance +" "+ BuyExchangePurchaseView.callback_params.type_src
             this.ObjAppend(divwalletBalanceBar, this.walletAmount)
 
             this.walletCount = this.objCreate("span")
