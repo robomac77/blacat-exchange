@@ -563,28 +563,26 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_exleftpane .selecttoken{width: 95%;height: 35px;padding-left: 12%; margin-bottom:10px; background-color: #2b2c39;color: #606174;font-size: 10px ;padding-top:5px;}
 .pc_exleftpane .tokenoption{float:right;padding-top:5px;background-color: #2b2c39;color: #606174}
 .pc_exleftpane .daygraph{width: 95%;height: 94px;padding-left: 12%; margin-bottom:10px;background-color: #2b2c39;color: #606174}
-.pc_exleftpane .pricebar{width: 95%;height: 35px;padding-left: 12%;float: center; margin-bottom:10px; background-color: #2b2c39;color: #606174;}
-.pc_exleftpane .pricebarplus{color: #cac7c7 ;font-size:5px ; border-right:50px;float:left;}
-.pc_exleftpane .inputprice{text-align: center; position: fixed; background-color: #2b2c39;color: #606174;border-left:50px}
-.pc_exleftpane .pricebarminus{color: #cac7c7 ;font-size:5px ; border-right:50px; float:right;}
-.pc_exleftpane .amountbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:10px; background-color: #2b2c39;color: #606174;text-align: center;}
-.pc_exleftpane .countbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:5px; background-color: #2b2c39;color: #606174;text-align: center;}
-.pc_exleftpane .countcurrency{float: right;color:#f3ce87; margin-right:10px;padding-top:5px;}
+.pc_exleftpane .pricebar{width: 105%;height: 35px;float: center; margin-bottom:10px; background-color: #2b2c39;color: #606174;font-size:5px}
+.pc_exleftpane .pricebarplus{color: #cac7c7 ;font-size:5px ;float:left;padding-left:5%;}
+.pc_exleftpane .inputprice{width: 70%;text-align: center; background-color: #2b2c39;color: #fff}
+.pc_exleftpane .pricebarminus{color: #cac7c7 ;font-size:5px ; float:right;border-bottom:50px;padding-right:5%;}
+.pc_exleftpane .amountbar{width: 105%;height: 35px; margin-bottom:10px; background-color: #2b2c39;color: #606174;text-align: center;font-size:5px}
+.pc_exleftpane .amountbarplus{color: #cac7c7 ;font-size:5px ; border-right:50px;float:left; border-top:60px;padding-left:5%; }
+.pc_exleftpane .inputamount{width: 40%;text-align: center; background-color: #2b2c39;color: #fff}
+.pc_exleftpane .amountbarminus{color: #cac7c7 ;font-size:5px ;float:right;padding-right:5%; }
+.pc_exleftpane .countbar{width: 105%;height: 35px;margin-bottom:5px; background-color: #2b2c39;color: #fff;text-align: center;font-size:5px}
 .pc_exleftpane .gasselect{width: 65%;height: 15px;padding-right: 12%;color: #606174;font-size: 10px }
 .pc_exleftpane .gasoption{padding-top:5px;background-color: #2b2c39;color: #606174}
 .pc_exleftpane .buybutton{width:190px;border: 1px solid #f3ce87;color:#f3ce87;margin-top: 15px; padding: 2px 0; height: 25px; border-radius: 3px;font-weight: bold}
 
 
 .pc_exrightpane{float:right; width:40%; height: 420px ; padding:10px 10px 10px;color: #606174; box-sizing:border-box }
-.pc_exrightpane .titlebar{width: 98%;height: 35px;padding-left: 12%; background-color: #2b2a2a;color: #ffffff;font-size: 2px;}
-.pc_exrightpane .price{width: 98%;height: 310px; margin-top: 12%;background-color: #2b2c39;text-align: left;}
-.pc_exrightpane .amount{ margin-right: 12%;background-color: #2b2c39;float: right;color:#ffffff;}
+.pc_exrightpane .titlebar{width: 98%;height: 35px;padding-left: 12%; background-color: #2b2a2a;color: #ffffff;font-size: 2px}
+.pc_exrightpane .price{width: 98%;height: 310px; margin-top: 12%;background-color: #2b2c39;text-align: left;color:#606174;}
+.pc_exrightpane .amount{ margin-right: 12%;background-color: #2b2c39;float: right;color:#606174;}
 .pc_exrightpane .pc_buytable{width: 98%;height: 155px;padding-left: 12%; background-color: #2b2c39;color: #2b2c39}
 .pc_exrightpane .pc_selltable{width: 98%;height: 155px;padding-left: 12%; background-color: #2b2c39;color: #2b2c39}
-
-
-.priceamount .price{float:left;font-size: 2px;color: #f6f7fa;border-left: 10px; border-top: 10px;}
-.priceamount .amount{float:right; position: absolute; font-size: 5px}
 
 
 /*钱包交易所-存入*/
@@ -605,7 +603,7 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_exchangebalance .exrightlabel{border-right:10px;color: #910505 ;font-size:5px ; float: right;}
 
 .pc_exchangebalance .rightlabel{border-right:10px;color: #059144 ;font-size:5px ;float: right;}
-.pc_exchangebalance .countbar{width: 80%;height: 35px;padding-left: 12%; margin-bottom:30px; background-color: #2b2c39;color: #ffffff;}
+.pc_exchangebalance .countbar{width: 80%;height: 35px;padding-left: 12%; margin-bottom:30px; background-color: #2b2c39;color: #ffffff;text-align: left;}
 
 .pc_exchangedeposit .gaslabel{margin-left: 30px;color: #cac7c7  ;font-size:2px; border-top:10px;}
 .pc_exchangedeposit .depositbutton{ width:95%;border: 1px solid #f3ce87;color:#f3ce87;margin-top: 30px; margin-left: 20px;padding: 2px 0; height: 35px; border-radius: 3px;font-weight: bold}

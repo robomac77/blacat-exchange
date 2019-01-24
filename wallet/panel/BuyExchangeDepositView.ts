@@ -216,7 +216,7 @@ namespace BlackCat {
 
             this.exchangeAmount = this.objCreate("span")
             this.exchangeAmount.classList.add("centerlabel")
-            
+            this.exchangeAmount.value = 0
             this.ObjAppend(divExBalanceBar, this.exchangeAmount)
 
             this.exchangeCount = this.objCreate("span")
