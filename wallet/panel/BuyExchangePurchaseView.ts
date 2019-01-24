@@ -360,14 +360,15 @@ namespace BlackCat {
             divPriceBarPlus.classList.add("pricebarplus")
             divPriceBarPlus.classList.add("iconfont", "icon-bc-shuaxin")
             divPriceBarPlus.onclick = () => {
-                this.inputPrice.value = this.inputPrice.value + 1
-                
+                this.inputPrice.value += Number(1)
+                    
             }
             this.ObjAppend(divPriceBar,divPriceBarPlus)
 
 
 
             this.inputPrice = this.objCreate("input") as HTMLInputElement
+            this.inputPrice.setAttribute("type", "number");
             this.inputPrice.classList.add("inputprice")
             this.inputPrice.placeholder = Main.langMgr.get("buy_exchange_purchase_inputpriceplaceholder") 
             this.inputPrice.onkeyup = () => {
@@ -379,6 +380,10 @@ namespace BlackCat {
             var divPriceBarMinus = this.objCreate("i")
             divPriceBarMinus.classList.add("pricebarminus")
             divPriceBarMinus.classList.add("iconfont", "icon-bc-shuaxin")
+            divPriceBarMinus.onclick = () => {
+                //this.inputPrice.value -=  Number(1)
+                    
+            }
             this.ObjAppend(divPriceBar,divPriceBarMinus)
 
 
@@ -610,8 +615,6 @@ namespace BlackCat {
        
         
         
-    
-
     toRefer() {
         if (PayExchangeShowWalletView.refer) {
             Main.viewMgr.change(PayExchangeShowWalletView.refer)
@@ -720,7 +723,7 @@ namespace BlackCat {
         }
 
         // 获取已确认的订单
-        var res = await ApiTool.getWalletListss(Main.user.info.uid, Main.user.info.token, this.page, this.num, Main.netMgr.type, 0);
+        var res = await ApiTool.getWalletListss(Main.user.info.uid, Main.user.info.token, this.page, this.num, Main.netMgr.type, 0); // 
 
         if (res.r) {
             if (res.data && res.data.length >= 1) {
@@ -757,7 +760,7 @@ namespace BlackCat {
                         var txStatediv = this.objCreate("div")
                         txStatediv.classList.add("pc_liststate")
                         
-                        txStatediv.textContent = BlackCat.Main.langMgr.get("buy_exchange_purchase_buyunconfirmed"); 
+                        txStatediv.textContent = BlackCat.Main.langMgr.get("buy_exchange_purchase_buyconfirmed"); 
                         this.ObjAppend(txlistObj, txStatediv)
 
                          // Tokenname & amount

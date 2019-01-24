@@ -519,7 +519,9 @@ li.pc_txrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curso
 li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;cursor: auto;height: 30px;}
 .pc_liststate{width: 60px;height: 40px;float: left;border-radius:10px;overflow:hidden;color: #059144}
 .pc_txinfo{float: left;margin-left:10px;font-size: 14px;color: #a7a8ba;max-width: 43%;}
-.pc_txname,.pc_date{line-height: 1.5;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: bold}
+.pc_txname{line-height: 1.5;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 15px;font-weight: bold;}
+
+.pc_date{line-height: 1.5;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 5px;}
 .pc_amounts{float: right;font-size: 14px;text-align: right;line-height: 1;color: #f3ce87}
 .pc_amounts a{font-size: 28px;float: right;margin-left: 5px;position: relative;}
 .pc_amounts .icon-bc-gou{color: #309368;}
@@ -564,13 +566,13 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_exleftpane .tokenoption{float:right;padding-top:5px;background-color: #2b2c39;color: #606174}
 .pc_exleftpane .daygraph{width: 95%;height: 94px;padding-left: 12%; margin-bottom:10px;background-color: #2b2c39;color: #606174}
 .pc_exleftpane .pricebar{width: 105%;height: 35px;float: center; margin-bottom:10px; background-color: #2b2c39;color: #606174;font-size:5px}
-.pc_exleftpane .pricebarplus{color: #cac7c7 ;font-size:5px ;float:left;padding-left:5%;}
-.pc_exleftpane .inputprice{width: 70%;text-align: center; background-color: #2b2c39;color: #fff}
-.pc_exleftpane .pricebarminus{color: #cac7c7 ;font-size:5px ; float:right;border-bottom:50px;padding-right:5%;}
+.pc_exleftpane .pricebarplus{color: #cac7c7 ;font-size:5px ;float:left;padding-left:5%;padding-top:5%;}
+.pc_exleftpane .inputprice{width: 70%;text-align: center; background-color: #2b2c39;color: #fff;padding-top:5%;}
+.pc_exleftpane .pricebarminus{color: #cac7c7 ;font-size:5px ; float:right;border-bottom:50px;padding-right:5%;padding-top:5%;}
 .pc_exleftpane .amountbar{width: 105%;height: 35px; margin-bottom:10px; background-color: #2b2c39;color: #606174;text-align: center;font-size:5px}
-.pc_exleftpane .amountbarplus{color: #cac7c7 ;font-size:5px ; border-right:50px;float:left; border-top:60px;padding-left:5%; }
-.pc_exleftpane .inputamount{width: 40%;text-align: center; background-color: #2b2c39;color: #fff}
-.pc_exleftpane .amountbarminus{color: #cac7c7 ;font-size:5px ;float:right;padding-right:5%; }
+.pc_exleftpane .amountbarplus{color: #cac7c7 ;font-size:5px ; border-right:50px;float:left; border-top:60px;padding-left:5%;padding-top:5%; }
+.pc_exleftpane .inputamount{width: 40%;text-align: center; background-color: #2b2c39;color: #fff;padding-top:5%;}
+.pc_exleftpane .amountbarminus{color: #cac7c7 ;font-size:5px ;float:right;padding-right:5%; padding-top:5%;}
 .pc_exleftpane .countbar{width: 105%;height: 35px;margin-bottom:5px; background-color: #2b2c39;color: #fff;text-align: center;font-size:5px}
 .pc_exleftpane .gasselect{width: 65%;height: 15px;padding-right: 12%;color: #606174;font-size: 10px }
 .pc_exleftpane .gasoption{padding-top:5px;background-color: #2b2c39;color: #606174}

@@ -353,16 +353,12 @@ namespace BlackCat {
             this.inputwithdrawCount = this.objCreate("input")as HTMLInputElement
             this.inputwithdrawCount.placeholder = Main.langMgr.get("buy_exchange_purchase_withdrawamount") 
             this.inputwithdrawCount.onkeyup = () => {
-                
-                
-
+                                
                 this.withdrawAmount.textContent = this.withdrawAmount.value + (Number(this.inputwithdrawCount.value ))
-                this.withdrawwalletAmount.textContent = this.withdrawwalletAmount.value - (Number(this.inputwithdrawCount.value))
+                this.withdrawwalletAmount.textContent = this.withdrawwalletAmount.value - (Number(this.inputwithdrawCount.value)) // 
 
                 this.withdrawCount.textContent = "+" + this.inputwithdrawCount.value
                 this.withdrawwalletCount.textContent = "-" + this.inputwithdrawCount.value
-
-
                 
             }
             this.ObjAppend(divwithdrawCountBar, this.inputwithdrawCount)
