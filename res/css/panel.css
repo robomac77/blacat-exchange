@@ -504,8 +504,8 @@ li.pc_txrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curso
  
  .pc_assetlist{margin-bottom: 15px;border-bottom:10px;color: #dbdde9;}
  .pc_assetlist .assetelement{font-size:2px;text-align:left;padding-right:20px;}
- .pc_assetlist .assetexspan{width: 20px;top: 10px;margin-right: 10px;color: #c8ab73;padding-left:10px;text-align:center;}
- .pc_assetlist .assetwalletspan{width: 20px;top: 10px;color: #dbdde9;text-align: right;}
+ .pc_assetlist .assetexspan{width: 20px;top: 10px;margin-right: 10px;color: #c8ab73;padding-left:40px;padding-right:60px;text-align:center;}
+ .pc_assetlist .assetwalletspan{width: 20px;top: 10px;color: #dbdde9; text-align: right;}
  .pc_assetlist .assetmorelement{text-align:right;color: #dbdde9;margin-left: 15px;}
  .pc_assetlist div{padding: 0 20px;border-bottom: 1px solid #181717; margin-bottom:10px;}
  .pc_assetlist div:hover{background: #272836;}
@@ -564,8 +564,9 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_exleftpane .tokenoption{float:right;padding-top:5px;background-color: #2b2c39;color: #606174}
 .pc_exleftpane .daygraph{width: 95%;height: 94px;padding-left: 12%; margin-bottom:10px;background-color: #2b2c39;color: #606174}
 .pc_exleftpane .pricebar{width: 95%;height: 35px;padding-left: 12%;float: center; margin-bottom:10px; background-color: #2b2c39;color: #606174;}
-.pc_exleftpane .pricebarplus.pc_popupbox input{ background-color: #2b2c39;color: #606174; display: inline-block;}
-.pc_exleftpane .inputprice{text-align: center;width: 85%;height: 35px;padding-left: 12%; position: relative; background-color: #2b2c39;color: #606174;}
+.pc_exleftpane .pricebarplus{color: #cac7c7 ;font-size:5px ; border-right:50px;float:left;}
+.pc_exleftpane .inputprice{text-align: center; position: fixed; background-color: #2b2c39;color: #606174;border-left:50px}
+.pc_exleftpane .pricebarminus{color: #cac7c7 ;font-size:5px ; border-right:50px; float:right;}
 .pc_exleftpane .amountbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:10px; background-color: #2b2c39;color: #606174;text-align: center;}
 .pc_exleftpane .countbar{width: 95%;height: 35px;padding-left: 12%; margin-bottom:5px; background-color: #2b2c39;color: #606174;text-align: center;}
 .pc_exleftpane .countcurrency{float: right;color:#f3ce87; margin-right:10px;padding-top:5px;}

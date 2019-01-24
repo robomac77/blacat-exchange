@@ -2430,8 +2430,15 @@ declare namespace BlackCat {
         private getNetTypeName;
         private showChangeNetType;
         private getDivNetSelectType;
-        private changecoin;
-        private changeToken;
+        private depositCoin;
+        private doExchangeBTC;
+        private doExchangeETH;
+        private doExchangeCNEO;
+        private doExchangeNEO;
+        private doExchangeCGAS;
+        private doExchangeGAS;
+        private doExchangeBCP;
+        private doExchangeBCT;
         private doGetWalletLists;
         private addGetWalletLists;
         private doTradeRequest;

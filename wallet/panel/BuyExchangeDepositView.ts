@@ -6,6 +6,7 @@ namespace BlackCat {
     export class BuyExchangeDepositView extends ViewBase {
 
         static balance: number;
+       
         
         private inputCount:HTMLInputElement;
         private inputwithdrawCount:HTMLInputElement;
@@ -45,6 +46,8 @@ namespace BlackCat {
 
         private withdrawwalletAmount;
         private withdrawwalletCount;
+
+        
 
         private net_fee: number = 5.5 // 网络交易费
         
@@ -213,7 +216,7 @@ namespace BlackCat {
 
             this.exchangeAmount = this.objCreate("span")
             this.exchangeAmount.classList.add("centerlabel")
-            this.exchangeAmount.value = 0
+            
             this.ObjAppend(divExBalanceBar, this.exchangeAmount)
 
             this.exchangeCount = this.objCreate("span")
@@ -236,7 +239,7 @@ namespace BlackCat {
             this.walletAmount = this.objCreate("span")
             this.walletAmount.classList.add("excenterlabel")
             this.walletAmount.value = BuyExchangeDepositView.balance
-            this.walletAmount.innerText = BuyExchangeDepositView.balance +" "+ BuyExchangePurchaseView.callback_params.type_src
+            this.walletAmount.innerText = BuyExchangeDepositView.balance +" "+ BuyExchangeDepositView.callback_params.type_src
             this.ObjAppend(divwalletBalanceBar, this.walletAmount)
 
             this.walletCount = this.objCreate("span")
@@ -326,8 +329,8 @@ namespace BlackCat {
 
             this.withdrawwalletAmount = this.objCreate("span")
             this.withdrawwalletAmount.classList.add("withcenterlabel")
-            this.withdrawwalletAmount.value = BuyExchangePurchaseView.balance
-            this.withdrawwalletAmount.textContent = BuyExchangePurchaseView.balance +" "+ BuyExchangePurchaseView.callback_params.type_src
+            this.withdrawwalletAmount.value = BuyExchangeDepositView.balance
+            this.withdrawwalletAmount.textContent = BuyExchangeDepositView.balance +" "+ BuyExchangeDepositView.callback_params.type_src
             
             this.ObjAppend(divwalletBalance, this.withdrawwalletAmount)
 
