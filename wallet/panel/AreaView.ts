@@ -224,6 +224,14 @@ namespace BlackCat {
             { "areacode": "263", "codename": "ZW" },
         ]
 
+
+        private static gasAmount = [
+            {  "gascode": "5" },
+            {  "gascode": "10" },
+            {  "gascode": "15" },
+            {  "gascode": "20" },
+            {  "gascode": "25" },]
+         
         static getAreaByLang(lang: string) {
             var idx = []
             switch (lang) {
@@ -248,6 +256,7 @@ namespace BlackCat {
         }
 
 
+
         static getByAreaCode(areaCode: string) {
             var areaInfo = null;
             AreaView.areaInfo.forEach(
@@ -258,6 +267,17 @@ namespace BlackCat {
                 }
             )
             return areaInfo;
+        }
+        static getByGas(gasVolume:string){
+            var gasInfo = null;
+            AreaView.gasAmount.forEach(
+                gas => {
+                    if(gas.gascode == gasVolume){
+                        gasInfo = gas
+                    }
+                }
+            )
+            return gasInfo;
         }
 
         static getByCodeName(codeName: string) {

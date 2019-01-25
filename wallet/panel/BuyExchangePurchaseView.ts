@@ -73,19 +73,11 @@ namespace BlackCat {
 
         private net_fee: string // 网络交易费
 
-        tokenInfo = [
-            {  "tokenname": "BTC" },
-            {  "tokenname": "ETH" },
-            {  "tokenname": "NEO" },
-            {  "tokenname": "BCT" },
-            {  "tokenname": "BCP" },
-            {  "tokenname": "GAS" },
-            {  "tokenname": "CGAS" },
-            {  "tokenname": "NEO" },
-            {  "tokenname": "CNEO" },]
+
+        
+
+        
             
-
-
 
         start() {
             super.start()
@@ -113,15 +105,13 @@ namespace BlackCat {
             headerTitle.classList.add("pc_header")
             this.ObjAppend(this.div, headerTitle)
 
-            // 我的信息
-            var myinfo_a = this.objCreate("a")
-            myinfo_a.classList.add("iconfont", "icon-bc-touxiang")
-            myinfo_a.onclick = () => {
-                this.hidden()
-                PersonalCenterView.refer = "PayView"
-                Main.viewMgr.change("PersonalCenterView")
+            //返回
+            var returnA = this.objCreate("a")
+            returnA.classList.add("iconfont", "icon-bc-fanhui")
+            returnA.onclick = () => {
+                this.doCancel()
             }
-            this.ObjAppend(headerTitle, myinfo_a)
+            this.ObjAppend(headerTitle, returnA)
 
             // nodes高度
             this.divHeight_nodes = this.objCreate("div")
@@ -283,11 +273,11 @@ namespace BlackCat {
             this.selectToken.classList.add("tokenoption")
             var tokenType = AreaView.getAreaByLang(Main.langMgr.type)
               tokenType.forEach(
-                token => {
+                area => {
                     var tokenoption = this.objCreate("option") as HTMLOptionElement;
-                    tokenoption.setAttribute("value", token.tokenname);
-                    tokenoption.textContent = Main.langMgr.get("token_type_" + token.tokenname)
-                    if (token.tokenname == "BTC") {
+                    tokenoption.setAttribute("value", area.codename); 
+                    tokenoption.textContent = Main.langMgr.get("token_type_" + area.codename)
+                    if (area.codename == "EN") {
                         tokenoption.setAttribute("selected", "selected") 
                     }
                     this.selectToken.options.add(tokenoption)
@@ -296,9 +286,10 @@ namespace BlackCat {
             )
             this.selectToken.onchange = () => {
                 tokenType.forEach(
-                    token => {
-                        if (token.tokenname == this.selectToken.value) {
-                           this.divSelectToken.textContent = token.tokenname
+                    area => {
+                        if (area.codename == this.selectToken.value) {
+                           this.divSelectToken.textContent = area.codename
+                           
                         }
                     }
                 )
@@ -334,7 +325,7 @@ namespace BlackCat {
                     splitLine: false,
                 },
                 series: [{
-                    data: vmm.dataList[key]["7D"],   // data source from database
+                    data: vmm.dataList[key]["7D"],   
                     type: 'line',
                     areaStyle: {},
                     symbolSize: 0,
@@ -356,19 +347,19 @@ namespace BlackCat {
             divPriceBar.classList.add("pricebar")
             this.ObjAppend(divSelectBox,divPriceBar)
 
-            var divPriceBarPlus = this.objCreate("i")
-            divPriceBarPlus.classList.add("pricebarplus")
-            divPriceBarPlus.classList.add("iconfont", "icon-bc-shuaxin")
-            divPriceBarPlus.onclick = () => {
-                this.inputPrice.value += Number(1)
+           
+            var divPriceBarMinus = this.objCreate("i")
+            divPriceBarMinus.classList.add("pricebarminus")
+            divPriceBarMinus.classList.add("iconfont", "icon-bc-shuaxin")
+            divPriceBarMinus.onclick = () => {
+                //this.inputPrice.value -=  Number(1)
+                this.inputPrice.stepDown(1)
                     
             }
-            this.ObjAppend(divPriceBar,divPriceBarPlus)
-
-
+            this.ObjAppend(divPriceBar,divPriceBarMinus)
 
             this.inputPrice = this.objCreate("input") as HTMLInputElement
-            this.inputPrice.setAttribute("type", "number");
+            this.inputPrice.setAttribute("type","number")
             this.inputPrice.classList.add("inputprice")
             this.inputPrice.placeholder = Main.langMgr.get("buy_exchange_purchase_inputpriceplaceholder") 
             this.inputPrice.onkeyup = () => {
@@ -377,14 +368,19 @@ namespace BlackCat {
             }
             this.ObjAppend(divPriceBar, this.inputPrice)
 
-            var divPriceBarMinus = this.objCreate("i")
-            divPriceBarMinus.classList.add("pricebarminus")
-            divPriceBarMinus.classList.add("iconfont", "icon-bc-shuaxin")
-            divPriceBarMinus.onclick = () => {
-                //this.inputPrice.value -=  Number(1)
-                    
+            var divPriceBarPlus = this.objCreate("i")
+            divPriceBarPlus.classList.add("pricebarplus")
+            divPriceBarPlus.classList.add("iconfont", "icon-bc-shuaxin")
+            divPriceBarPlus.onclick = () => {
+                
+               //this.inputPrice.value = this.inputPrice.value + 1
+               this.inputPrice.stepUp(1)
+              
             }
-            this.ObjAppend(divPriceBar,divPriceBarMinus)
+            this.ObjAppend(divPriceBar,divPriceBarPlus)
+
+
+           
 
 
             var divAmountBar = this.objCreate("div")
@@ -393,11 +389,17 @@ namespace BlackCat {
 
             var divAmountPlus = this.objCreate("i")
             divAmountPlus.classList.add("amountbarplus")
-            divAmountPlus.classList.add("iconfont", "icon-bc-shuaxin") 
+            divAmountPlus.classList.add("iconfont", "icon-bc-shuaxin")
+            divAmountPlus.onclick = () => {
+                //this.inputPrice.value -=  Number(1)
+                this.inputAmount.stepUp(1)
+                    
+            } 
             this.ObjAppend(divAmountBar , divAmountPlus)
 
             this.inputAmount = this.objCreate("input") as HTMLInputElement
             this.inputAmount.classList.add("inputamount")
+            this.inputAmount.setAttribute("type","number")
             this.inputAmount.placeholder = Main.langMgr.get("buy_exchange_purchase_inputamountplaceholder") 
             this.inputAmount.onkeyup = () => {
             
@@ -409,6 +411,11 @@ namespace BlackCat {
             var divAmountMinus = this.objCreate("i")
             divAmountMinus.classList.add("amountbarminus")
             divAmountMinus.classList.add("iconfont", "icon-bc-shuaxin") 
+            divAmountMinus.onclick = () => {
+                //this.inputPrice.value -=  Number(1)
+                this.inputAmount.stepDown(1)
+                    
+            } 
             this.ObjAppend(divAmountBar , divAmountMinus)
 
             this.divCountBar = this.objCreate("div")
@@ -428,12 +435,12 @@ namespace BlackCat {
             this.selectGas.classList.add("gasoption")
             var gasAmount = AreaView.getAreaByLang(Main.langMgr.type)
               gasAmount.forEach(
-                gas => {
+                area => {
                     var gasoption = this.objCreate("option") as HTMLOptionElement;
                     
-                    gasoption.setAttribute("value", gas.codename);
-                    gasoption.textContent = Main.langMgr.get("gas_amount_" + gas.codename)
-                    if (gas.codename == "CN") {
+                    gasoption.setAttribute("value", area.codename);
+                    gasoption.textContent = Main.langMgr.get("area_code_" + area.codename)
+                    if (area.codename == "CN") {
                         gasoption.setAttribute("selected", "selected")
                     }
                     this.selectGas.options.add(gasoption)
@@ -442,9 +449,9 @@ namespace BlackCat {
             )
             this.selectGas.onchange = () => {
                 gasAmount.forEach(
-                    gas => {
-                       // if (area.codename == this.selectArea.value) {
-                        //    this.divArea.textContent = area.areacode
+                    area => {
+                    //    if (area.codename == this.selectArea.value) {
+                     //       this.divArea.textContent = area.areacode
                      //   }
                     }
                 )
@@ -473,7 +480,7 @@ namespace BlackCat {
             var divPriceTitle = this.objCreate("span")
             divPriceTitle.classList.add("price")
             divPriceTitle.textContent = Main.langMgr.get("buy_exchange_purchase_price") 
-           this.ObjAppend(divTitleBar,divPriceTitle)
+            this.ObjAppend(divTitleBar,divPriceTitle)
 
            var divAmountTitle = this.objCreate("span")
            divAmountTitle.classList.add("amount")
@@ -573,16 +580,17 @@ namespace BlackCat {
                 this.exchangeBalance.textContent = 0            
                 this.ObjAppend(assetElement, this.exchangeBalance)
 
+
                 this.walletBalance = this.objCreate("span")   
                 this.walletBalance.classList.add("assetwalletspan")
                 this.walletBalance.textContent = Main.viewMgr.payView[coin] 
                 this.ObjAppend(assetElement, this.walletBalance)
               
-                
                 let moreElement = this.objCreate("i")
                 moreElement.classList.add("assetmorelement")
                 moreElement.classList.add("iconfont", "icon-bc-gengduo")
                 this.ObjAppend(assetElement, moreElement)
+               
 
                 assetElement.onclick = () => {
                
@@ -604,7 +612,6 @@ namespace BlackCat {
             this.ObjAppend(this.tradelogDiv, this.txlistsDiv)
 
            
-
             this.doGetWalletLists()
             
 

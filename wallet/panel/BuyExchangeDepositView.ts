@@ -197,7 +197,7 @@ namespace BlackCat {
              
              //存入
 
-             // PayExchangeShowWalletView.callback_params.type_src + Main.langMgr.get("pay_exchange_balance")
+             
 
              this.depositDiv = this.objCreate("div")  
              this.depositDiv.classList.add("pc_exchangedeposit")

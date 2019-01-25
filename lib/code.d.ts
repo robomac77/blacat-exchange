@@ -2328,8 +2328,10 @@ declare namespace BlackCat {
 declare namespace BlackCat {
     class AreaView extends ViewBase {
         private static areaInfo;
+        private static gasAmount;
         static getAreaByLang(lang: string): any[];
         static getByAreaCode(areaCode: string): any;
+        static getByGas(gasVolume: string): any;
         static getByCodeName(codeName: string): any;
     }
 }
@@ -2417,9 +2419,6 @@ declare namespace BlackCat {
         private exchangeBalance;
         private walletBalance;
         private net_fee;
-        tokenInfo: {
-            "tokenname": string;
-        }[];
         start(): void;
         constructor();
         create(): void;

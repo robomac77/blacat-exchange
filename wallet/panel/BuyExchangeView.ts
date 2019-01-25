@@ -286,12 +286,12 @@ namespace BlackCat {
 
                 // 代币
             var divCurrency = this.objCreate("div")
-            divCurrency.classList.add("pc_currency")
+            divCurrency.classList.add("pc_mainpage")
             this.ObjAppend(this.div, divCurrency)
 
             // === 代币导航栏
             var divCurrencyNumber = this.objCreate("div")
-            divCurrencyNumber.classList.add("pc_currencynumber")
+            divCurrencyNumber.classList.add("pc_mainpagecurrency")
             this.ObjAppend(divCurrency, divCurrencyNumber)
 
             for (let i = 0; i < PayView.tokens.length; i++) {
@@ -307,7 +307,7 @@ namespace BlackCat {
 
                 // 数字币种list，默认不显示
                 this["token_list_" + token] = this.objCreate("div")
-                this["token_list_" + token].classList.add("pc_currencylist")
+                this["token_list_" + token].classList.add("pc_mainpagecurlist")
                 this["token_list_" + token].style.display = "none"
                 this.ObjAppend(divCurrency, this["token_list_" + token])
 
@@ -332,7 +332,7 @@ namespace BlackCat {
                     if (descText != "") {
                         // ?描述
                         let descElement = this.objCreate("div")
-                        descElement.classList.add("pc_coincon")
+                        descElement.classList.add("pc_coindiv")
                         descElement.textContent = Main.langMgr.get("pay_" + coin + "_desc")
                         this.ObjAppend(labelElement, descElement)
                     }
@@ -370,7 +370,7 @@ namespace BlackCat {
                             // LOGO
                             let logoElement = this.objCreate("img") as HTMLImageElement
                             logoElement.src = Main.resHost + "res/img/old" + coin + ".png"
-                            logoElement.classList.add("coinlogo")
+                            logoElement.classList.add("coinimg")
                             this.ObjAppend(coinElement, logoElement)
                             // ?号
                             let labelElement = this.objCreate("label")
@@ -378,7 +378,7 @@ namespace BlackCat {
                             this.ObjAppend(coinElement, labelElement)
                             // ?描述
                             let descElement = this.objCreate("div")
-                            descElement.classList.add("pc_coincon")
+                            descElement.classList.add("pc_coindiv")
                             descElement.textContent = old
                             this.ObjAppend(labelElement, descElement)
                             // 字体图标">"
