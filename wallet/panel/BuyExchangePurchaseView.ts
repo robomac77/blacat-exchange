@@ -352,7 +352,7 @@ namespace BlackCat {
             divPriceBarMinus.classList.add("pricebarminus")
             divPriceBarMinus.classList.add("iconfont", "icon-bc-shuaxin")
             divPriceBarMinus.onclick = () => {
-                //this.inputPrice.value -=  Number(1)
+                
                 this.inputPrice.stepUp(1)
                 this.divCountBar.textContent = (Number(this.inputPrice.value) * Number(this.inputAmount.value))
                     
@@ -374,15 +374,13 @@ namespace BlackCat {
             divPriceBarPlus.classList.add("iconfont", "icon-bc-shuaxin")
             divPriceBarPlus.onclick = () => {
                 
-               //this.inputPrice.value = this.inputPrice.value + 1
+              
                this.inputPrice.stepDown(1)
                this.divCountBar.textContent = (Number(this.inputPrice.value) * Number(this.inputAmount.value))
               
             }
             this.ObjAppend(divPriceBar,divPriceBarPlus)
 
-
-           
 
 
             var divAmountBar = this.objCreate("div")
@@ -393,10 +391,9 @@ namespace BlackCat {
             divAmountPlus.classList.add("amountbarplus")
             divAmountPlus.classList.add("iconfont", "icon-bc-shuaxin")
             divAmountPlus.onclick = () => {
-                //this.inputPrice.value -=  Number(1)
+                
                 this.inputAmount.stepDown(1)
                 this.divCountBar.textContent = (Number(this.inputPrice.value) * Number(this.inputAmount.value)) 
-
                     
             } 
             this.ObjAppend(divAmountBar , divAmountPlus)
@@ -416,7 +413,7 @@ namespace BlackCat {
             divAmountMinus.classList.add("amountbarminus")
             divAmountMinus.classList.add("iconfont", "icon-bc-shuaxin") 
             divAmountMinus.onclick = () => {
-                //this.inputPrice.value -=  Number(1)
+                
                 this.inputAmount.stepUp(1)
                 this.divCountBar.textContent = (Number(this.inputPrice.value) * Number(this.inputAmount.value)) 
     
