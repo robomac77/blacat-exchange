@@ -406,7 +406,6 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 
   /*钱包交易所 */
 
-
 .pc_exc{ position: relative;width:90%;height: 50px;padding: 28px;margin:20px auto;border-radius: 5px;color: #fff;margin-bottom:0px;}
 .pc_exc .pc_exmydetail{font-size: 10px;color: #e7e7e7;border: 1px solid #666;padding: 2px 5px;border-radius: 3px;cursor: pointer;}
 .pc_exc .pc_exmydetail.icon-bc-tongxunlu{float: right;margin-right:10px;}
@@ -423,14 +422,14 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_mainpage>div{line-height: 40px;color: #a7a8ba;cursor: pointer;}
 .pc_mainpage .pc_mainpagecurrency{color: #dbdde9;padding: 0 20px; }
 .pc_mainpage .pc_mainpagecurrency div{color: #9a9fbf;display: inline;margin-right: 15px;padding-bottom: 5px;font-size: 16px;cursor: pointer;}
-.pc_payrecord div{color: #fff;padding-left: 15px;border-left: 3px solid #fff;display: inline;}
-.pc_mainpagecurrency .active{color: #dbdde9 !important;border-top: 2px solid #bca172;border-left: 1px solid#9a9fbf;border-right: 1px solid#9a9fbf;}
+.pc_exrecord div{color: #fff;padding-left: 15px;border-left: 3px solid #fff;display: inline;}
+.pc_mainpagecurrency .active{color: #dbdde9 !important;border-top: 2px solid #bca172;}
 .pc_mainpage .pc_mainpagecurrency button{width: auto;right: 20px;left: auto;padding: 1px 5px;border-left: 1px solid#fff;}
 .pc_mainpage label{cursor: pointer;margin-left: 10px;color: #ff4242}
 .pc_mainpage label:hover .pc_coindiv{display: block;}
 .pc_coindiv{position: absolute;max-width: 85%; background-color: rgba(0, 0, 0, 0.8);color: #c8ab73;font-size: 12px;font-family: none; line-height: 1.5; padding:10px; border-radius: 5px;display: none;margin-top: -70px;z-index: 1;}
 .pc_mainpage div i{float: right;margin-left: 5px;}
-.pc_mainpagecurlist{margin-bottom: 15px;border: 1px solid#9a9fbf;margin-left:20px;margin-right:20px;}
+.pc_mainpagecurlist{margin-bottom: 15px;}
 .pc_mainpagecurlist .coinimg{float: left;width: 20px;position: relative;top: 10px;margin-right: 5px}
 .pc_mainpagecurlist div{padding: 0 20px;border-bottom: 1px solid #3a3c4a;}
 .pc_mainpagecurlist div:hover{background: #272836;}
@@ -501,7 +500,6 @@ li.pc_txrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curso
  .pc_tokentitle .exbalance{color: #dbdde9;border: auto;text-align :center;padding-right:50px}
  .pc_tokentitle .walbalance{color: #dbdde9;border: auto;text-align :right;}
 
- 
  .pc_assetlist{margin-bottom: 15px;border-bottom:10px;color: #dbdde9;}
  .pc_assetlist .assetelement{font-size:2px;text-align:left;padding-right:20px;}
  .pc_assetlist .assetexspan{width: 20px;top: 10px;margin-right: 10px;color: #c8ab73;padding-left:40px;padding-right:60px;text-align:center;}

@@ -182,7 +182,7 @@ namespace BlackCat {
             this.withdrawSpan.innerText = Main.langMgr.get("buy_exchange_purchase_withdraw")
               
 
-              this.withdrawSpan.onclick = () => {
+                this.withdrawSpan.onclick = () => {
                
                 this.depositDiv.style.display = "none"
                 
@@ -194,11 +194,8 @@ namespace BlackCat {
               }
             this.ObjAppend(divexTab,this.withdrawSpan)
 
-             
+        
              //存入
-
-             
-
              this.depositDiv = this.objCreate("div")  
              this.depositDiv.classList.add("pc_exchangedeposit")
              this.ObjAppend(this.div,this.depositDiv)

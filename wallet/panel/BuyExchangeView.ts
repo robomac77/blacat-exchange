@@ -58,6 +58,30 @@ namespace BlackCat {
         private divNetSelect: HTMLElement;
 
 
+
+        reset() {
+
+            // 数量归零
+            PayView.tokens_coin.forEach((coins) => {
+                coins.forEach((coin) => {
+                    this[coin] = 0
+                })
+            })
+            // 旧合约数量归零
+            for (let token in PayView.tokens_old) {
+                PayView.tokens_old[token].forEach((coin) => {
+                    if (tools.CoinTool["id_" + coin.toUpperCase() + "_OLD"].length > 0) {
+                        tools.CoinTool["id_" + coin.toUpperCase() + "_OLD"].forEach((old) => {
+                            this[coin + "_old" + old] = 0
+                            this["span" + coin.toUpperCase() + "_OLD" + old] = null
+                        })
+                    }
+                })
+            }
+        }
+        
+
+       
         
             create() {
 
@@ -252,9 +276,9 @@ namespace BlackCat {
                 payRefresh.textContent = Main.langMgr.get("pay_refresh") // "刷新"
                 payRefresh.onclick = async () => {
                     Main.viewMgr.change("ViewLoading")
-                   // await this.doGetBalances()
-                  //  await this.doGetWalletLists(1)
-                   // Main.viewMgr.viewLoading.remove()
+                    await this.doGetBalances()
+                   // await this.doGetWalletLists(1)
+                    Main.viewMgr.viewLoading.remove()
                 }
                 this.ObjAppend(divAddress, payRefresh)
 
@@ -282,135 +306,19 @@ namespace BlackCat {
                 }
                 this.ObjAppend(divWallet, makeTransferObj)
 
-                this.doGetBalances()
-
-                // 代币
-            var divCurrency = this.objCreate("div")
-            divCurrency.classList.add("pc_mainpage")
-            this.ObjAppend(this.div, divCurrency)
-
-            // === 代币导航栏
-            var divCurrencyNumber = this.objCreate("div")
-            divCurrencyNumber.classList.add("pc_mainpagecurrency")
-            this.ObjAppend(divCurrency, divCurrencyNumber)
-
-            for (let i = 0; i < PayView.tokens.length; i++) {
-                let token = PayView.tokens[i]
-
-                // 导航栏
-                this["token_" + token] = this.objCreate("div")
-                this["token_" + token].innerText = Main.langMgr.get("pay_coin_" + token)
-                this["token_" + token].onclick = () => {
-                    this.changeToken(token);
-                }
-                this.ObjAppend(divCurrencyNumber, this["token_" + token])
-
-                // 数字币种list，默认不显示
-                this["token_list_" + token] = this.objCreate("div")
-                this["token_list_" + token].classList.add("pc_mainpagecurlist")
-                this["token_list_" + token].style.display = "none"
-                this.ObjAppend(divCurrency, this["token_list_" + token])
-
-                // 数字币种具体
-                for (let k = 0; k < PayView.tokens_coin[i].length; k++) {
-                    let coin = PayView.tokens_coin[i][k]
-
-                    let coinElement = this.objCreate("div")
-                    // 名称
-                    coinElement.innerHTML = Main.langMgr.get(coin)
-                    this.ObjAppend(this["token_list_" + token], coinElement)
-                    // LOGO
-                    //let logoElement = this.objCreate("img") as HTMLImageElement
-                    //logoElement.src = Main.resHost + "res/img/" + coin + ".png"
-                    //logoElement.classList.add("coinlogo")
-                    //this.ObjAppend(coinElement, logoElement)
-                    // ?号
-                    let labelElement = this.objCreate("label")
-                    labelElement.classList.add("iconfont", "icon-bc-help")
-                    this.ObjAppend(coinElement, labelElement)
-                    let descText = Main.langMgr.get("pay_" + coin + "_desc")
-                    if (descText != "") {
-                        // ?描述
-                        let descElement = this.objCreate("div")
-                        descElement.classList.add("pc_coindiv")
-                        descElement.textContent = Main.langMgr.get("pay_" + coin + "_desc")
-                        this.ObjAppend(labelElement, descElement)
-                    }
-                    else {
-                        labelElement.style.display = "none"
-                    }
-                    // 字体图标">"
-                    let moreElement = this.objCreate("i")
-                    moreElement.classList.add("iconfont", "icon-bc-gengduo")
-                    this.ObjAppend(coinElement, moreElement)
-                    // 余额
-                    this["span" + coin.toUpperCase()] = this.objCreate("span")
-                    this["span" + coin.toUpperCase()].textContent = "0"
-                    this.ObjAppend(coinElement, this["span" + coin.toUpperCase()])
-                    // 点击事件
-                    coinElement.onclick = () => {
-                        this["doExchange" + coin.toUpperCase()]()
-                    }
-                }
-            }
-            // 显示第一组代币
-            this["token_" + PayView.tokens[0]].classList.add("active")
-            this["token_list_" + PayView.tokens[0]].style.display = ""
-
-            // cgas_old/cneo_old信息
-            for (let token in PayView.tokens_old) {
-                PayView.tokens_old[token].forEach((coin) => {
-                    let coin_upcase = coin.toUpperCase() + "_OLD"
-                    if (tools.CoinTool["id_" + coin_upcase].length > 0) {
-                        tools.CoinTool["id_" + coin_upcase].forEach((old) => {
-                            let coinElement = this.objCreate("div")
-                            // 名称
-                            coinElement.innerHTML = Main.langMgr.get("pay_" + coin)
-                            this.ObjAppend(this["token_list_" + token], coinElement)
-                            // LOGO
-                            let logoElement = this.objCreate("img") as HTMLImageElement
-                            logoElement.src = Main.resHost + "res/img/old" + coin + ".png"
-                            logoElement.classList.add("coinimg")
-                            this.ObjAppend(coinElement, logoElement)
-                            // ?号
-                            let labelElement = this.objCreate("label")
-                            labelElement.classList.add("iconfont", "icon-bc-help")
-                            this.ObjAppend(coinElement, labelElement)
-                            // ?描述
-                            let descElement = this.objCreate("div")
-                            descElement.classList.add("pc_coindiv")
-                            descElement.textContent = old
-                            this.ObjAppend(labelElement, descElement)
-                            // 字体图标">"
-                            let moreElement = this.objCreate("i")
-                            moreElement.classList.add("iconfont", "icon-bc-gengduo")
-                            this.ObjAppend(coinElement, moreElement)
-                            // 余额
-                            this["span"+ coin_upcase + old] = this.objCreate("span")
-                            this["span"+ coin_upcase + old].textContent = "0"
-                            this.ObjAppend(coinElement, this["span" + coin_upcase + old])
-                            // 点击事件
-                            coinElement.onclick = () => {
-                             //   this.doMakeRefundOld(old, coin_upcase)
-                            }
-                        })
-                    }
-                })
-            }
-            
-            // ABC 余额 &
+                 // ABC 余额 
             this.divLists = this.objCreate("ul") as HTMLDivElement
             this.divLists.classList.add("pc_paylists")
             this.ObjAppend(this.div, this.divLists)
 
 
             var liRecord = this.objCreate("li")
-            liRecord.classList.add("pc_payrecord")
+            liRecord.classList.add("pc_exrecord")
             // liRecord.innerText = Main.langMgr.get("pay_recentLists") //"近期记录"
             this.ObjAppend(this.divLists, liRecord)
 
             var spanRecord = this.objCreate("div")
-            spanRecord.innerText = Main.langMgr.get("buy_exchange_pay_balance") //"近期记录"
+            spanRecord.innerText = Main.langMgr.get("buy_exchange_pay_balance") 
             this.ObjAppend(liRecord, spanRecord)
 
            
@@ -464,8 +372,127 @@ namespace BlackCat {
            var unconfirmedtxMore = this.objCreate("i")
            unconfirmedtxMore.classList.add("iconfont", "icon-bc-sanjiaoxing")
            this.ObjAppend(txunConfirmedDiv, unconfirmedtxMore)
+            
 
+           
 
+                this.doGetBalances()
+
+                // 代币
+            var divCurrency = this.objCreate("div")
+            divCurrency.classList.add("pc_mainpage")
+            this.ObjAppend(this.div, divCurrency)
+
+            // === 代币导航栏
+            var divCurrencyNumber = this.objCreate("div")
+            divCurrencyNumber.classList.add("pc_mainpagecurrency")
+            this.ObjAppend(divCurrency, divCurrencyNumber)  
+
+            for (let i = 0; i < PayView.extokens.length; i++) {
+                let token = PayView.extokens[i]
+
+                // 导航栏
+                this["token_" + token] = this.objCreate("div")
+                this["token_" + token].innerText = Main.langMgr.get("pay_coin_" + token)
+                this["token_" + token].onclick = () => {
+                    this.changeToken(token);
+                }
+                this.ObjAppend(divCurrencyNumber, this["token_" + token])
+
+                // 数字币种list，默认不显示
+                this["token_list_" + token] = this.objCreate("div")
+                this["token_list_" + token].classList.add("pc_mainpagecurlist")
+                this["token_list_" + token].style.display = "none"
+                this.ObjAppend(divCurrency, this["token_list_" + token]) 
+
+                // 数字币种具体
+                for (let k = 0; k < PayView.tokens_coin[i].length; k++) {
+                    let coin = PayView.tokens_coin[i][k]
+
+                    let coinElement = this.objCreate("div")
+                    // 名称
+                    coinElement.innerHTML = Main.langMgr.get(coin)
+                    this.ObjAppend(this["token_list_" + token], coinElement)
+                    // LOGO
+                    let logoElement = this.objCreate("img") as HTMLImageElement
+                    logoElement.src = Main.resHost + "res/img/" + coin + ".png"
+                    logoElement.classList.add("coinimg")
+                    this.ObjAppend(coinElement, logoElement)
+                    // ?号
+                    let labelElement = this.objCreate("label")
+                    labelElement.classList.add("iconfont", "icon-bc-help")
+                    this.ObjAppend(coinElement, labelElement)
+                    let descText = Main.langMgr.get("pay_" + coin + "_desc")
+                    if (descText != "") {
+                        // ?描述
+                        let descElement = this.objCreate("div")
+                        descElement.classList.add("pc_coindiv")
+                        descElement.textContent = Main.langMgr.get("pay_" + coin + "_desc")
+                        this.ObjAppend(labelElement, descElement)
+                    }
+                    else {
+                        labelElement.style.display = "none"
+                    }
+                    // 字体图标">"
+                    let moreElement = this.objCreate("i")
+                    moreElement.classList.add("iconfont", "icon-bc-gengduo")
+                    this.ObjAppend(coinElement, moreElement)
+                    // 余额
+                    this["span" + coin.toUpperCase()] = this.objCreate("span")
+                    this["span" + coin.toUpperCase()].textContent = "0"
+                    this.ObjAppend(coinElement, this["span" + coin.toUpperCase()])
+                    // 点击事件
+                    coinElement.onclick = () => {
+                        this["doExchange" + coin.toUpperCase()]()
+                        
+                    }
+                }
+            }
+            // 显示第一组代币
+            this["token_" + PayView.tokens[0]].classList.add("active")
+            this["token_list_" + PayView.tokens[0]].style.display = ""
+
+            // cgas_old/cneo_old信息
+            for (let token in PayView.tokens_old) {
+                PayView.tokens_old[token].forEach((coin) => {
+                    let coin_upcase = coin.toUpperCase() + "_OLD"
+                    if (tools.CoinTool["id_" + coin_upcase].length > 0) {
+                        tools.CoinTool["id_" + coin_upcase].forEach((old) => {
+                            let coinElement = this.objCreate("div")
+                            // 名称
+                            coinElement.innerHTML = Main.langMgr.get("pay_" + coin)
+                            this.ObjAppend(this["token_list_" + token], coinElement)
+                            // LOGO
+                            let logoElement = this.objCreate("img") as HTMLImageElement
+                            logoElement.src = Main.resHost + "res/img/old" + coin + ".png"
+                            logoElement.classList.add("coinimg")
+                            this.ObjAppend(coinElement, logoElement)
+                            // ?号
+                            let labelElement = this.objCreate("label")
+                            labelElement.classList.add("iconfont", "icon-bc-help")
+                            this.ObjAppend(coinElement, labelElement)
+                            // ?描述
+                            let descElement = this.objCreate("div")
+                            descElement.classList.add("pc_coindiv")
+                            descElement.textContent = old
+                            this.ObjAppend(labelElement, descElement)
+                            // 字体图标">"
+                            let moreElement = this.objCreate("i")
+                            moreElement.classList.add("iconfont", "icon-bc-gengduo")
+                            this.ObjAppend(coinElement, moreElement)
+                            // 余额
+                            this["span"+ coin_upcase + old] = this.objCreate("span")
+                            this["span"+ coin_upcase + old].textContent = "0"
+                            this.ObjAppend(coinElement, this["span" + coin_upcase + old])
+                            // 点击事件
+                            coinElement.onclick = () => {
+                                this.doMakeRefundOld(old, coin_upcase)
+                            }
+                        })
+                    }
+                })
+            }
+            
            
 
               
@@ -567,7 +594,7 @@ namespace BlackCat {
         }
 
         private changeToken(type: string) {
-            let types = ['blacat', 'neo', 'other']
+            let types = ['blacat', 'neo']
             for (let i = 0; i < types.length; i++) {
                 this["token_list_" + types[i]].style.display = "none"
                 this["token_" + types[i]].classList.remove("active")
@@ -576,7 +603,34 @@ namespace BlackCat {
             this["token_" + type].classList.add("active")
         }
 
+         // 获取其他类型的交易钱包地址，注意：type是小写字符串
+         async getWalletAddrOther(type: string) {
+            if (!this.wallet_addr_other) {
+                this.wallet_addr_other = {}
+            }
+            if (!this.wallet_addr_other.hasOwnProperty[type]) {
+                Main.viewMgr.change("ViewLoading")
+                try {
+                    // 获取交易钱包地址
+                    var res = await ApiTool.getOtherAddress(Main.user.info.uid, Main.user.info.token, type, Main.netMgr.type)
+                }
+                catch (e) {
 
+                }
+                Main.viewMgr.viewLoading.remove()
+
+                if (!res || !res.r) {
+                    // 获取失败
+                    Main.showErrMsg("pay_exchange_create_wallet_fail")
+                    return null
+                }
+
+                this.wallet_addr_other[type] = res.data.address
+            }
+            return this.wallet_addr_other[type]
+        }
+
+      
         private async doMakeRefundOld(id_old: string, type: string = "CGAS_OLD") {
             if (Main.isWalletOpen()) {
                 // 打开钱包了

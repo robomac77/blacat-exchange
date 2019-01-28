@@ -7,6 +7,8 @@ namespace BlackCat {
 
         // === 种类
         static tokens: Array<string> = ["blacat", "neo", "other"]
+
+        static extokens: Array<string> = ["blacat", "neo"]
         // === 币种
         static tokens_coin: Array<Array<string>> = [
             ["bct", "bcp"],

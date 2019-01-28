@@ -667,7 +667,7 @@ namespace BlackCat {
 
         //  获取交易所金额
         var res = await ApiTool.getBrokerBalance(Main.user.info.uid, Main.user.info.token);  
-         this.exBalance = res
+         this.exBalance = res.data
     }
 
    

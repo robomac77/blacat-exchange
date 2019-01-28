@@ -2507,6 +2507,7 @@ declare namespace BlackCat {
         private divListsMore;
         private divRecListsMore;
         private divNetSelect;
+        reset(): void;
         create(): void;
         toRefer(): void;
         key_esc(): void;
@@ -2518,6 +2519,7 @@ declare namespace BlackCat {
         private doMakeReceivables;
         private doMakeTransfer;
         private changeToken;
+        getWalletAddrOther(type: string): Promise<any>;
         private doMakeRefundOld;
         private makeRefundTransaction;
         private addGetWalletLists;
@@ -2920,6 +2922,7 @@ declare namespace BlackCat {
 declare namespace BlackCat {
     class PayView extends ViewBase {
         static tokens: Array<string>;
+        static extokens: Array<string>;
         static tokens_coin: Array<Array<string>>;
         static tokens_old: Object;
         wallet_addr: string;
