@@ -198,5 +198,24 @@ namespace BlackCat {
         static async getGameAssets(uid: string, token: string, assets: Array<string>, appid: string = "") {
             return this.common('user_wallet.get_game_assets', { uid: uid, token: token, assets: assets, appid: appid })
         }
+
+        // 获取交易所转账记录
+        static async getBrokerTransferLog(uid: string, token: string, transfer_type: number, page: number, num: number) {
+            return this.common('user_broker.get_transfer_log', {uid: uid, token: token, transfer_type: transfer_type, page: page, num: num})
+        }
+
+        // 获取交易所余额
+        static async getBrokerBalance(uid: string, token: string) {
+            return this.common('user_broker.get_balance', {uid: uid, token: token})
+        }
+
+        // 提交交易请求
+        static async brokerRequest(uid: string, token: string, asset_src: string, asset_tat: string, action: string, price: string, amount: string) {
+            return this.common('user_broker.request', {uid: uid, token: token, asset_src: asset_src, asset_tat: asset_tat, action: action, price: price, amount: amount})
+        }
+
+        static async brokerWithdraw(uid: string, token: string, asset_src: string, amount: string) {
+            return this.common('user_broker.withdraw', {uid: uid, token: token, asset_src: asset_src, amount: amount})
+        }
     }
 }

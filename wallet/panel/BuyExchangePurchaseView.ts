@@ -64,9 +64,9 @@ namespace BlackCat {
          ethwalletBalance:number
          neowalletBalance:number
 
-         btcexchangeBalance:number
-         ethexchangeBalance:number
-         neoexchangeBalance:number
+         exBalance:number
+        
+        
 
         private exchangeBalance;
         private walletBalance
@@ -258,7 +258,7 @@ namespace BlackCat {
 
             
         
-             var divSelectBox = this.objCreate("div")
+            var divSelectBox = this.objCreate("div")
             divSelectBox.classList.add("pc_exleftpane")
             this.ObjAppend(this.buyintabDiv,divSelectBox)
 
@@ -579,7 +579,7 @@ namespace BlackCat {
 
                 this.exchangeBalance = this.objCreate("span")    
                 this.exchangeBalance.classList.add("assetexspan")
-                this.exchangeBalance.textContent = 0            
+                this.exchangeBalance.textContent = this.dogetBrokerBalance(coin)            
                 this.ObjAppend(assetElement, this.exchangeBalance)
 
 
@@ -614,7 +614,7 @@ namespace BlackCat {
             this.ObjAppend(this.tradelogDiv, this.txlistsDiv)
 
            
-            this.doGetWalletLists()
+            this.doGetTransferLog()
             
 
                           
@@ -660,6 +660,14 @@ namespace BlackCat {
                 this.ObjAppend(this.divNetSelect, this.getDivNetSelectType(other[i]))
             }
         }
+    }
+
+
+    private async dogetBrokerBalance(token:string){
+
+        //  获取交易所金额
+        var res = await ApiTool.getBrokerBalance(Main.user.info.uid, Main.user.info.token);  
+         this.exBalance = res
     }
 
    
@@ -726,13 +734,13 @@ namespace BlackCat {
 
 
    
-           private async doGetWalletLists() {
+           private async doGetTransferLog() {
         if (this.isLast) {
             return;
         }
 
-        // 获取已确认的订单
-        var res = await ApiTool.getWalletListss(Main.user.info.uid, Main.user.info.token, this.page, this.num, Main.netMgr.type, 0); // 
+        //  获取交易所转账记录
+        var res = await ApiTool.getBrokerTransferLog(Main.user.info.uid, Main.user.info.token, this.page, this.num, 0);  
 
         if (res.r) {
             if (res.data && res.data.length >= 1) {

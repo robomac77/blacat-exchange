@@ -2382,6 +2382,18 @@ declare namespace BlackCat {
     }
 }
 declare namespace BlackCat {
+    class BuyExchangeListDetailView extends ViewBase {
+        static list: walletLists;
+        constructor();
+        create(): void;
+        toRefer(): void;
+        private getCnts;
+        private getTxid;
+        private getWallet;
+        private getParams;
+    }
+}
+declare namespace BlackCat {
     class BuyExchangePurchaseView extends ViewBase {
         static balance: number;
         private inputPrice;
@@ -2413,9 +2425,7 @@ declare namespace BlackCat {
         btcwalletBalance: number;
         ethwalletBalance: number;
         neowalletBalance: number;
-        btcexchangeBalance: number;
-        ethexchangeBalance: number;
-        neoexchangeBalance: number;
+        exBalance: number;
         private exchangeBalance;
         private walletBalance;
         private net_fee;
@@ -2428,6 +2438,7 @@ declare namespace BlackCat {
         private doCancel;
         private getNetTypeName;
         private showChangeNetType;
+        private dogetBrokerBalance;
         private getDivNetSelectType;
         private depositCoin;
         private doExchangeBTC;
@@ -2438,7 +2449,7 @@ declare namespace BlackCat {
         private doExchangeGAS;
         private doExchangeBCP;
         private doExchangeBCT;
-        private doGetWalletLists;
+        private doGetTransferLog;
         private addGetWalletLists;
         private doTradeRequest;
     }
@@ -3184,6 +3195,7 @@ declare namespace BlackCat {
         buyExchangePurchaseView: BuyExchangePurchaseView;
         buyExchangeDepositView: BuyExchangeDepositView;
         buyExchangeUnconfirmedTxView: BuyExchangeUnconfirmedTxView;
+        buyExchangeListDetailView: BuyExchangeListDetailView;
         addressbookView: AddressbookView;
         addressbookDetailsView: AddressbookDetailsView;
         addressbookOpView: AddressbookOpView;
@@ -3572,6 +3584,10 @@ declare namespace BlackCat {
         static transferByOther(uid: string, token: string, type_src: string, type: string, price: string, count: string, net_type: number, txid: string, c_hash: string): Promise<any>;
         static getBctIframe(uid: string, token: string, net_type: string, lang: string, m: string): Promise<any>;
         static getGameAssets(uid: string, token: string, assets: Array<string>, appid?: string): Promise<any>;
+        static getBrokerTransferLog(uid: string, token: string, transfer_type: number, page: number, num: number): Promise<any>;
+        static getBrokerBalance(uid: string, token: string): Promise<any>;
+        static brokerRequest(uid: string, token: string, asset_src: string, asset_tat: string, action: string, price: string, amount: string): Promise<any>;
+        static brokerWithdraw(uid: string, token: string, asset_src: string, amount: string): Promise<any>;
     }
 }
 declare namespace BlackCat {
