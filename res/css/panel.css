@@ -422,8 +422,11 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_mainpage>div{line-height: 40px;color: #a7a8ba;cursor: pointer;}
 .pc_mainpage .pc_mainpagecurrency{color: #dbdde9;padding: 0 20px; }
 .pc_mainpage .pc_mainpagecurrency div{color: #9a9fbf;display: inline;margin-right: 15px;padding-bottom: 5px;font-size: 16px;cursor: pointer;}
-.pc_exrecord div{color: #fff;padding-left: 15px;border-left: 3px solid #fff;display: inline;}
-.pc_mainpagecurrency .active{color: #dbdde9 !important;border-top: 2px solid #bca172;}
+.pc_exrecord div{color: #dbdce8;padding-left: 15px;font-size: 15px}
+.pc_abcbalance{float: right;color:#c8ab73;font-size: 12px}
+.pc_abcbalance:active{color: #c8ab73}
+.pc_abcbalance i{font-size: 12px}
+.pc_mainpagecurrency .active{color: #dbdde9 !important;border-bottom: 2px solid #bca172;}
 .pc_mainpage .pc_mainpagecurrency button{width: auto;right: 20px;left: auto;padding: 1px 5px;border-left: 1px solid#fff;}
 .pc_mainpage label{cursor: pointer;margin-left: 10px;color: #ff4242}
 .pc_mainpage label:hover .pc_coindiv{display: block;}
@@ -434,31 +437,42 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_mainpagecurlist div{padding: 0 20px;border-bottom: 1px solid #3a3c4a;}
 .pc_mainpagecurlist div:hover{background: #272836;}
 
-.pc_abcbalance{float: right;color:#dbdce8;}
-.pc_abcbalance:active{color: #c8ab73}
-.pc_abcbalance i{font-size: 12px}
 
-.pc_txprogress{text-align: center;color: #fff;cursor: pointer;margin: 10px auto 30px;padding: 10px 0; clear:both;}
+
+.pc_txprogress{text-align: center;color: #fff;cursor: pointer;margin: 10px auto 10px;padding: 10px 0; clear:both;}
 .pc_txprogress:active{color: #c8ab73}
 .pc_txprogress i{font-size: 12px}
 .pc_txprogress .activetxnum{color: #c8ab73}
 
+.pc_gamerecord div{color: #dbdce8;padding-left: 15px;border-left: 3px solid #dbdce8;display: inline;}
 
-/*    进行中交易记录  */
+.pc_paymore{float: right;color:#dbdce8;}
+.pc_paymore:active{color: #c8ab73}
+.pc_paymore i{font-size: 12px}
 
+
+.pc_reclistimg{width: 40px;height: 40px;float: left;border-radius:10px;overflow:hidden}
+.pc_recliftinfo{float: left;margin-left:10px;font-size: 14px;color: #a7a8ba;max-width: 43%;}
+.pc_reclistname,.pc_method{line-height: 1.5;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
+.pc_reccnts{float: right;font-size: 14px;text-align: right;line-height: 1}
+.pc_reccnts a{font-size: 28px;float: right;margin-left: 5px;position: relative;}
+.pc_reccnts .icon-bc-gou{color: #309368;}
+.pc_reccnts .icon-bc-chacha{color: #93304b;}
+
+
+/*  进行中交易记录 */
 
 .pc_txreclist ul{margin-top: 45px;}
 .pc_txreclist li{height: 40px;padding: 10px 0; border-bottom: 1px solid #424453;margin: 0 20px;position: relative; cursor: pointer;box-sizing: content-box;}
 .pc_txreclist li.active{box-shadow: 0 0 10px #000;margin: auto;padding: 10px 20px;}
 .pc_txreclist li.active .pc_cnts span{right: 49px;}
+
 li.pc_txrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;cursor: auto;height: 30px;}
 .pc_txreclistimg{width: 40px;height: 40px;float: left;border-radius:10px;overflow:hidden}
 .pc_txreclistinfo{float: left;margin-left:10px;font-size: 14px;color: #a7a8ba;max-width: 43%;}
 .pc_txreclistname,.pc_txrectime,.pc_txrecmethod{line-height: 1.5;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size:2px;}
 
 .pc_alltxtitle{text-align:right;color: #dbdde9;margin-right:20px}
-
-
 
 
 .pc_payrec{ padding-bottom: 10px;}

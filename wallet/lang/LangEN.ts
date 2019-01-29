@@ -597,6 +597,7 @@ namespace BlackCat {
             buy_exchange_pay_balance:"ABC Balance",
             buy_exchange_pay_unconfirmed:"You have",
             buy_exchange_pay_processing:"transactions in progress",
+            buy_exchange_pay_recentgame:"Recent",
             buy_exchange_pay_more:"More",
 
 

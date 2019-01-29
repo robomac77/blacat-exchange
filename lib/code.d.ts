@@ -716,6 +716,7 @@ declare namespace BlackCat {
             buy_exchange_pay_balance: string;
             buy_exchange_pay_unconfirmed: string;
             buy_exchange_pay_processing: string;
+            buy_exchange_pay_recentgame: string;
             buy_exchange_pay_more: string;
             buy_exchange_purchase_myasset: string;
             buy_exchange_purchase_buyin: string;
@@ -1385,6 +1386,7 @@ declare namespace BlackCat {
             buy_exchange_pay_balance: string;
             buy_exchange_pay_unconfirmed: string;
             buy_exchange_pay_processing: string;
+            buy_exchange_pay_recentgame: string;
             buy_exchange_pay_more: string;
             buy_exchange_purchase_myasset: string;
             buy_exchange_purchase_buyin: string;
@@ -2052,6 +2054,7 @@ declare namespace BlackCat {
             buy_exchange_pay_balance: string;
             buy_exchange_pay_unconfirmed: string;
             buy_exchange_pay_processing: string;
+            buy_exchange_pay_recentgame: string;
             buy_exchange_pay_more: string;
             buy_exchange_purchase_myasset: string;
             buy_exchange_purchase_buyin: string;
@@ -2406,6 +2409,7 @@ declare namespace BlackCat {
         private s_getWalletLists;
         wallet_addr: string;
         wallet_addr_other: any;
+        private myAssets;
         height_clis: number;
         private divHeight_clis;
         height_nodes: number;
@@ -2416,9 +2420,11 @@ declare namespace BlackCat {
         private isLast;
         private txlistsDiv;
         private getMoreDiv;
+        private assetElement;
         private divCountBar;
         private divSelectToken;
         private divNetSelect;
+        private divAssetList;
         private assettabDiv;
         private buyintabDiv;
         private tradelogDiv;
@@ -2451,6 +2457,7 @@ declare namespace BlackCat {
         private doExchangeBCT;
         private doGetTransferLog;
         private addGetWalletLists;
+        private searchMyAssets;
         private doTradeRequest;
     }
 }
@@ -2482,6 +2489,8 @@ declare namespace BlackCat {
         static balance: number;
         private balanceElement;
         private abcbalanceElement;
+        private recentElement;
+        private recgetMoreDiv;
         private s_getWalletLists;
         private page;
         private num;
@@ -2507,6 +2516,7 @@ declare namespace BlackCat {
         private divListsMore;
         private divRecListsMore;
         private divNetSelect;
+        private reclistsDiv;
         reset(): void;
         create(): void;
         toRefer(): void;
@@ -2526,6 +2536,13 @@ declare namespace BlackCat {
         doGetBalances(): Promise<void>;
         private getNep5BalanceOld;
         private getNep5Balance;
+        private doExchangeGAS;
+        private doExchangeCNEO;
+        private doExchangeBCT;
+        private doExchangeBCP;
+        private doExchangeCGAS;
+        private doExchangeToken;
+        private doExchangeNEO;
         updateBalance(): void;
     }
 }

@@ -31,6 +31,7 @@ namespace BlackCat {
 
         wallet_addr: string
         wallet_addr_other: any
+        private myAssets: any;
 
 
         height_clis: number;
@@ -49,12 +50,14 @@ namespace BlackCat {
 
         private txlistsDiv: HTMLElement;
         private getMoreDiv: HTMLDivElement;
+        private assetElement: HTMLElement;
 
         private divCountBar
         private divSelectToken 
 
        
         private divNetSelect: HTMLElement;
+        private divAssetList:HTMLElement;
 
         private assettabDiv;
         private buyintabDiv;
@@ -65,6 +68,8 @@ namespace BlackCat {
          neowalletBalance:number
 
          exBalance:number
+
+        
         
         
 
@@ -533,7 +538,7 @@ namespace BlackCat {
             this.inputassetSearch = this.objCreate("input") as HTMLInputElement
             this.inputassetSearch.placeholder = Main.langMgr.get("buy_exchange_purchase_assetsearch") // "搜索"
             this.inputassetSearch.onkeyup = () => {
-               // this.searchAddressbook()
+               // this.searchmyAssets()
             }
             this.ObjAppend(divassetSearch, this.inputassetSearch)  
      
@@ -560,10 +565,10 @@ namespace BlackCat {
 
 
 
-            var divAssetList = this.objCreate("div")
-            divAssetList.classList.add("pc_assetlist")
+            this.divAssetList = this.objCreate("div")
+            this.divAssetList.classList.add("pc_assetlist")
            // divAssetList.style.display = "none"
-            this.ObjAppend(this.assettabDiv, divAssetList)
+            this.ObjAppend(this.assettabDiv, this.divAssetList)
 
             
             
@@ -571,30 +576,30 @@ namespace BlackCat {
                 coins.forEach((coin) => {
                     
 
-                let assetElement = this.objCreate("div")
-                assetElement.classList.add("assetelement")
-                assetElement.innerHTML =  Main.langMgr.get(coin)
-                this.ObjAppend(divAssetList, assetElement)
+                this.assetElement = this.objCreate("div")
+                this.assetElement.classList.add("assetelement")
+                this.assetElement.innerHTML =  Main.langMgr.get(coin)
+                this.ObjAppend(this.divAssetList, this.assetElement)
                 
 
                 this.exchangeBalance = this.objCreate("span")    
                 this.exchangeBalance.classList.add("assetexspan")
                 this.exchangeBalance.textContent = this.dogetBrokerBalance(coin)            
-                this.ObjAppend(assetElement, this.exchangeBalance)
+                this.ObjAppend(this.assetElement, this.exchangeBalance)
 
 
                 this.walletBalance = this.objCreate("span")   
                 this.walletBalance.classList.add("assetwalletspan")
                 this.walletBalance.textContent = Main.viewMgr.payView[coin] 
-                this.ObjAppend(assetElement, this.walletBalance)
+                this.ObjAppend(this.assetElement, this.walletBalance)
               
                 let moreElement = this.objCreate("i")
                 moreElement.classList.add("assetmorelement")
                 moreElement.classList.add("iconfont", "icon-bc-gengduo")
-                this.ObjAppend(assetElement, moreElement)
+                this.ObjAppend(this.assetElement, moreElement)
                
 
-                assetElement.onclick = () => {
+                this.assetElement.onclick = () => {
                
                  this["doExchange" + coin.toUpperCase()]()   
                   }
@@ -852,21 +857,66 @@ namespace BlackCat {
         }, timeout);
     }
 
-    /*
-     
-    static getByCodeName(codeName: string) {
-            var areaInfo = null;
-            AreaView.areaInfo.forEach(
-                area => {
-                    if (area.codename == codeName) {
-                        areaInfo = area;
+    
+     private searchMyAssets() { // change data type names
+            var search_str = this.inputassetSearch.value
+            var search_data = {}
+            for (let k in this.myAssets) {
+                for (let i = 0; i < this.myAssets[k].length; i++) {
+                    let name = this.myAssets[k][i]['asset_name'];
+                    if (name.indexOf(search_str) != -1) {
+                        if (!search_data.hasOwnProperty(k)) {
+                            search_data[k] = []
+                        }
+                        search_data[k].push(this.myAssets[k][i])
                     }
                 }
-            )
-            return areaInfo;
+            }
+            var assets = this.divAssetList.getElementsByTagName("div")
+            for (let l = 0; l < assets.length; l++) {
+                var li = assets[l];
+                let type = li.getAttribute("data-type")
+
+                if (type == "title") {
+                    let k = li.getAttribute("data-value")
+                    if (search_data.hasOwnProperty(k)) {
+                        li.style.display = ""
+                    }
+                    else {
+                        li.style.display = "none"
+                    }
+                }
+                else if (type == "contact") {
+                    let k = li.getAttribute("data-title")
+                    if (search_data.hasOwnProperty(k)) {
+                        let id = li.getAttribute("data-value")
+                        var isMatch = 0
+                        for (let i = 0; i < search_data[k].length; i++) {
+                            if (search_data[k][i]["id"] == id) {
+                                isMatch = 1;
+                                break;
+                            }
+                        }
+                        if (li.style.display == "") {
+                            if (isMatch == 0) {
+                                li.style.display = "none"
+                            }
+                        }
+                        else {
+                            if (isMatch == 1) {
+                                li.style.display = ""
+                            }
+                        }
+                    }
+                    else {
+                        li.style.display = "none"
+                    }
+                }
+            }
         }
 
-    */
+
+    
 
 
     private async doTradeRequest(){

@@ -11,6 +11,10 @@ namespace BlackCat {
 
         private abcbalanceElement : HTMLElement
 
+        private recentElement : HTMLElement
+
+        private recgetMoreDiv: HTMLDivElement
+
         
 
         private s_getWalletLists = {};
@@ -56,6 +60,7 @@ namespace BlackCat {
         private divListsMore: HTMLElement;
         private divRecListsMore: HTMLElement;
         private divNetSelect: HTMLElement;
+        private reclistsDiv : HTMLElement;
 
 
 
@@ -273,7 +278,7 @@ namespace BlackCat {
 
                 var payRefresh = this.objCreate("div")
                 payRefresh.classList.add("pc_exchangecardrefresh")
-                payRefresh.textContent = Main.langMgr.get("pay_refresh") // "刷新"
+                //payRefresh.textContent = Main.langMgr.get("pay_refresh") // "刷新"
                 payRefresh.onclick = async () => {
                     Main.viewMgr.change("ViewLoading")
                     await this.doGetBalances()
@@ -316,6 +321,10 @@ namespace BlackCat {
             liRecord.classList.add("pc_exrecord")
             // liRecord.innerText = Main.langMgr.get("pay_recentLists") //"近期记录"
             this.ObjAppend(this.divLists, liRecord)
+            
+           // this.abcbalanceElement = this.objCreate("i")
+          //  this.abcbalanceElement.classList.add("iconfont", "icon-bc-gengduo")
+          //  this.ObjAppend(liRecord, this.abcbalanceElement)
 
             var spanRecord = this.objCreate("div")
             spanRecord.innerText = Main.langMgr.get("buy_exchange_pay_balance") 
@@ -334,26 +343,24 @@ namespace BlackCat {
                 Main.viewMgr.change("BuyExchangePurchaseView")
             }
             // this.divListsMore.style.display = "none"
-            this.ObjAppend(liRecord, this.divListsMore)
+            this.ObjAppend(spanRecord, this.divListsMore)
 
             var iListsMore = this.objCreate("i")
-            iListsMore.classList.add("iconfont", "icon-bc-sanjiaoxing")
+            iListsMore.classList.add("iconfont", "icon-bc-gengduo")
             this.ObjAppend(this.divListsMore, iListsMore)
 
             
-            this.abcbalanceElement = this.objCreate("div")
-            this.ObjAppend(this.divLists, this.abcbalanceElement)
+            
 
             
            var txunConfirmedDiv  = this.objCreate("div")
            txunConfirmedDiv.classList.add("pc_txprogress")
            txunConfirmedDiv.innerText = Main.langMgr.get("buy_exchange_pay_unconfirmed") 
-            txunConfirmedDiv.onclick = () => {
+           txunConfirmedDiv.onclick = () => {
          
                               
                 BuyExchangeUnconfirmedTxView.refer = ""
                 BuyExchangeUnconfirmedTxView.callback_params = BuyExchangeView.callback_params
-                
 
                 Main.viewMgr.change("BuyExchangeUnconfirmedTxView")     
         }
@@ -492,9 +499,39 @@ namespace BlackCat {
                     }
                 })
             }
-            
-           
 
+            
+
+            var liRecentRecord = this.objCreate("li")
+            liRecentRecord.classList.add("pc_gamerecord")
+            //liRecentRecord.innerText = Main.langMgr.get("pay_recentLists") //"近期记录"
+            this.ObjAppend(this.div, liRecentRecord)
+
+            var spanRecentRecord = this.objCreate("div")
+            spanRecentRecord.innerText = Main.langMgr.get("buy_exchange_pay_recentgame") //"近期记录"
+            this.ObjAppend(liRecentRecord, spanRecentRecord)
+
+            this.divRecListsMore = this.objCreate("button")
+            this.divRecListsMore.classList.add("pc_paymore")
+            this.divRecListsMore.textContent = Main.langMgr.get("buy_exchange_pay_more") 
+            this.divRecListsMore.onclick = () => {
+                this.hidden()
+
+             
+            }
+            
+            this.ObjAppend(liRecentRecord, this.divRecListsMore)
+
+            var iRecListsMore = this.objCreate("i")
+            iRecListsMore.classList.add("iconfont", "icon-bc-sanjiaoxing")
+            this.ObjAppend(this.divRecListsMore, iRecListsMore)
+
+            this.recentElement = this.objCreate("div")
+            this.ObjAppend(this.divRecListsMore, this.recentElement)
+            
+             //  this.doGetWalletLists()
+            
+    
               
 
     }
@@ -1042,6 +1079,126 @@ namespace BlackCat {
                 Main.viewMgr.updateBalance()
             }
             catch (e) { }
+        }
+
+        private async doExchangeGAS() {
+            this.doExchangeToken("CGAS")
+        }
+
+        private async doExchangeCNEO() {
+            this.doExchangeToken("CNEO")
+        }
+
+        private async doExchangeBCT() {
+            if (Main.isWalletOpen()) {
+                // 打开钱包了
+
+                // 打开输入数量
+                PayExchangeBCTView.refer = "PayView"
+                this.hidden()
+                Main.viewMgr.change("PayExchangeBCTView")
+
+            } else {
+                // 未打开钱包
+                ViewWalletOpen.refer = "PayView"
+                ViewWalletOpen.callback = () => {
+                    this.doExchangeBCT();
+                }
+                Main.viewMgr.change("ViewWalletOpen")
+                // this.hidden()
+            }
+        }
+
+        private async doExchangeBCP() {
+            if (Main.isWalletOpen()) {
+                // 打开钱包了
+
+                // 打开输入数量
+                PayExchangeView.refer = "PayView"
+                this.hidden()
+                PayExchangeView.type_src = "bcp"
+                Main.viewMgr.change("PayExchangeView")
+
+            } else {
+                // 未打开钱包
+                ViewWalletOpen.refer = "PayView"
+                ViewWalletOpen.callback = () => {
+                    this.doExchangeBCP();
+                }
+                Main.viewMgr.change("ViewWalletOpen")
+                // this.hidden()
+            }
+        }
+
+        private async doExchangeCGAS() {
+            if (Main.isWalletOpen()) {
+                // 打开钱包了
+
+                // 打开输入数量
+                PayExchangeView.refer = "PayView"
+                this.hidden()
+                PayExchangeView.type_src = "cgas"
+                Main.viewMgr.change("PayExchangeView")
+
+            } else {
+                // 未打开钱包
+                ViewWalletOpen.refer = "PayView"
+                ViewWalletOpen.callback = () => {
+                    this.doExchangeCGAS()
+                }
+                Main.viewMgr.change("ViewWalletOpen")
+                // this.hidden()
+            }
+        }
+
+        private async doExchangeToken(coinType: string = "CGAS") {
+            if (Main.isWalletOpen()) {
+                // 打开钱包了
+                // 打开输入数量
+                ViewTransferCount.coinType = coinType
+                ViewTransferCount.transType = ""
+                ViewTransferCount.transNncOld = ""
+
+                ViewTransferCount.refer = "PayView"
+                ViewTransferCount.callback = () => {
+                    switch (ViewTransferCount.transType) {
+                        case "mint":
+                            //this.makeMintTokenTransaction(coinType)
+                            break
+                        case "refund":
+                            this.makeRefundTransaction(tools.CoinTool["id_" + coinType], coinType)
+                            break;
+                    }
+                }
+                Main.viewMgr.change("ViewTransferCount")
+
+            } else {
+                // 未打开钱包
+                ViewWalletOpen.refer = "PayView"
+                ViewWalletOpen.callback = () => {
+                    this.doExchangeToken(coinType)
+                }
+                Main.viewMgr.change("ViewWalletOpen")
+                // this.hidden()
+            }
+        }
+
+        private async doExchangeNEO() {
+
+            this.hidden()
+
+            var res: any = {}
+            res['data'] = {
+                address: Main.user.info.wallet
+            }
+
+            PayExchangeShowWalletView.refer = "PayView"
+            PayExchangeShowWalletView.balance = Main.viewMgr.payView.neo
+            PayExchangeShowWalletView.callback_params = {
+                type_src: "NEO",
+                data: res.data,
+            }
+            Main.viewMgr.change("PayExchangeShowWalletView")
         }
         
         
