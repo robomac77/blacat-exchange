@@ -299,7 +299,7 @@ button.pc_cancel{background-color: #3b3d4a !important;color: #b2b2b2 !important;
 .pc_paymore:active{color: #c8ab73}
 .pc_paymore i{font-size: 12px}
 
-.pc_paylists{ padding-bottom: 10px;}
+.pc_paylists{ padding-bottom: 2px;}
 .pc_paylists li{height: 40px;padding: 10px 0;margin: 0 20px; border-bottom: 1px solid #424453;position: relative; cursor: pointer;box-sizing: content-box;}
 .pc_paylists li:last-child{border-bottom: none}
 .pc_paylists .pc_listdate{font-size: 12px}
@@ -422,7 +422,7 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_mainpage>div{line-height: 40px;color: #a7a8ba;cursor: pointer;}
 .pc_mainpage .pc_mainpagecurrency{color: #dbdde9;padding: 0 20px; }
 .pc_mainpage .pc_mainpagecurrency div{color: #9a9fbf;display: inline;margin-right: 15px;padding-bottom: 5px;font-size: 16px;cursor: pointer;}
-.pc_exrecord div{color: #dbdce8;padding-left: 15px;font-size: 15px}
+.pc_exrecord div{color: #dbdce8;padding-left: 15px;font-size: 15px;padding-bottom:10px;border-bottom: 1px solid #3a3c4a;}
 .pc_abcbalance{float: right;color:#c8ab73;font-size: 12px}
 .pc_abcbalance:active{color: #c8ab73}
 .pc_abcbalance i{font-size: 12px}

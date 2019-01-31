@@ -440,26 +440,26 @@ namespace BlackCat {
 
             this.selectGas = this.objCreate("select") as HTMLSelectElement
             this.selectGas.classList.add("gasoption")
-            var gasAmount = AreaView.getAreaByLang(Main.langMgr.type)
+            var gasAmount = AreaView.getGasByAmount(Main.langMgr.type) 
               gasAmount.forEach(
-                area => {
+                gas => {
                     var gasoption = this.objCreate("option") as HTMLOptionElement;
                     
-                    gasoption.setAttribute("value", area.codename);
-                    gasoption.textContent = Main.langMgr.get("area_code_" + area.codename)
-                    if (area.codename == "CN") {
+                /*    gasoption.setAttribute("value", "selected");
+                    gasoption.textContent = Main.langMgr.get("area_code_" + "selected")
+                    if (gas.gasname == "very slow") {
                         gasoption.setAttribute("selected", "selected")
                     }
-                    this.selectGas.options.add(gasoption)
+                    this.selectGas.options.add(gasoption)*/
 
                 }
             )
             this.selectGas.onchange = () => {
                 gasAmount.forEach(
-                    area => {
-                    //    if (area.codename == this.selectArea.value) {
-                     //       this.divArea.textContent = area.areacode
-                     //   }
+                    gas => {
+                      if (gas.gasname == this.selectGas.value) {
+                            gasSelect.textContent = gas.gasname  
+                       }
                     }
                 )
             }
@@ -536,7 +536,7 @@ namespace BlackCat {
 
             //搜索input
             this.inputassetSearch = this.objCreate("input") as HTMLInputElement
-            this.inputassetSearch.placeholder = Main.langMgr.get("buy_exchange_purchase_assetsearch") // "搜索"
+            this.inputassetSearch.placeholder = Main.langMgr.get("buy_exchange_purchase_assetsearch") 
             this.inputassetSearch.onkeyup = () => {
                // this.searchmyAssets()
             }

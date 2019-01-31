@@ -2333,6 +2333,7 @@ declare namespace BlackCat {
         private static areaInfo;
         private static gasAmount;
         static getAreaByLang(lang: string): any[];
+        static getGasByAmount(lang: string): any[];
         static getByAreaCode(areaCode: string): any;
         static getByGas(gasVolume: string): any;
         static getByCodeName(codeName: string): any;

@@ -390,6 +390,7 @@ namespace BlackCat {
             divCurrency.classList.add("pc_mainpage")
             this.ObjAppend(this.div, divCurrency)
 
+
             // === 代币导航栏
             var divCurrencyNumber = this.objCreate("div")
             divCurrencyNumber.classList.add("pc_mainpagecurrency")
@@ -501,14 +502,13 @@ namespace BlackCat {
             }
 
             
-
+            //"近期记录"
             var liRecentRecord = this.objCreate("li")
             liRecentRecord.classList.add("pc_gamerecord")
-            //liRecentRecord.innerText = Main.langMgr.get("pay_recentLists") //"近期记录"
             this.ObjAppend(this.div, liRecentRecord)
 
             var spanRecentRecord = this.objCreate("div")
-            spanRecentRecord.innerText = Main.langMgr.get("buy_exchange_pay_recentgame") //"近期记录"
+            spanRecentRecord.innerText = Main.langMgr.get("buy_exchange_pay_recentgame") 
             this.ObjAppend(liRecentRecord, spanRecentRecord)
 
             this.divRecListsMore = this.objCreate("button")

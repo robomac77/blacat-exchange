@@ -78,10 +78,10 @@ namespace BlackCat {
 
                       
             this.divRecListsMore = this.objCreate("div") as HTMLDivElement
-            //this.divRecListsMore.classList.add("pc_listmore")
+            //this.divRecListsMore.classList.add("pc_listmore") 
             //this.divRecListsMore.textContent = Main.langMgr.get("buy_exchange_pay_more") 
             this.divRecListsMore.onclick = () => {
-                
+               
             }
           
             this.ObjAppend(this.divRecLists, this.divRecListsMore)
@@ -120,7 +120,7 @@ namespace BlackCat {
                         }
                         else {
                             this.page += 1;
-                            this.divRecListsMore.textContent = Main.langMgr.get("paylist_getMore") //"点击加载更多记录"
+                            this.divRecListsMore.textContent = Main.langMgr.get("paylist_getMore") //"点击加载更多记录" 
                         }*/
     
                         // 加载新数据

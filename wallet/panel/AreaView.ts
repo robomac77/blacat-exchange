@@ -226,11 +226,12 @@ namespace BlackCat {
 
 
         private static gasAmount = [
-            {  "gascode": "5" },
-            {  "gascode": "10" },
-            {  "gascode": "15" },
-            {  "gascode": "20" },
-            {  "gascode": "25" },]
+            { "gascode": "5", "gasname":"very slow"},
+            { "gascode": "10", "gasname":"slow" },
+            { "gascode": "15","gasname":"normal" },
+            { "gascode": "20","gasname":"fast" },
+            { "gascode": "25","gasname":"very fast"},
+        ]
          
         static getAreaByLang(lang: string) {
             var idx = []
@@ -254,6 +255,31 @@ namespace BlackCat {
                 return AreaView.areaInfo
             }
         }
+
+        static getGasByAmount(lang:string){
+            var options = []
+            switch (lang){
+                case "en":
+                options = [20 ,25]
+                break;
+                default:
+                options = [5,10,15]
+                break;
+
+
+            }
+            if(options.length > 0){
+                var rtn = []
+                for (let i=0;i<options.length;i++){
+                    let a_options = options[i]
+                    rtn.push(this.gasAmount[a_options])
+                }
+                return rtn
+            }
+            else {
+                return AreaView.gasAmount
+            }
+     }
 
 
 
