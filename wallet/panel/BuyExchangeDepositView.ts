@@ -256,7 +256,7 @@ namespace BlackCat {
             this.ObjAppend(divCountBar,divExDepLabel)
 
             this.inputCount = this.objCreate("input")as HTMLInputElement
-            //this.inputCount.classList.add("inputlabel")
+            this.inputCount.classList.add("inputlabel")
             this.inputCount.placeholder = Main.langMgr.get("buy_exchange_purchase_depositamount") 
             this.inputCount.onkeyup = () => {
 

@@ -612,6 +612,7 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 
 .pc_exchangebalance{position: center;width: 95%;height: 20px;padding:5px 10px 5px ;margin:10px 10px 5px; background-color: #2b2c39;color: #606174}
 .pc_exchangebalance .exspan{margin-left: 10px;color: #cac7c7 ;font-size:5px;margin-right:10px; text-align: left;}
+.pc_exchangebalance .inputlabel{text-align:center;}
 .pc_exchangebalance .centerlabel{border-right:30px;color: #cac7c7  ;font-size:5px;float:center;padding-left: 10%;text-align: center;}
 .pc_exchangebalance .excenterlabel{border-right:30px;color: #cac7c7 ;font-size:5px;float: center;padding-left: 14%;text-align: center;}
 
@@ -627,7 +628,7 @@ li.pc_payrecord{font-size: 16px;color: #dbdde9;line-height: 20px;padding: 0;curs
 .pc_exchangewithdraw{ width:90%; height: 400px ; padding:10px 10px 10px;color: #606174; }
 .pc_withdrawbalance{position: center;width: 95%;height: 20px;padding:5px 10px 5px ;margin:10px 10px 5px; background-color: #2b2c39;color: #606174}
 .pc_withdrawbalance .withspan{margin-left: 10px;color: #cac7c7 ;font-size:5px ; margin-right:50px;}
-.pc_withdrawbalance .withcnlabel{border-right:30px;color: #cac7c7  ;font-size:5px;float: center;padding-left: 10%;text-align: center;}
+.pc_withdrawbalance .withcnlabel{border-right:30px;color: #cac7c7  ;font-size:5px;float: center;text-align: center;}
 .pc_withdrawbalance .withcenterlabel{border-right:30px;color: #cac7c7 ;font-size:5px;float: center;padding-left: 20%;text-align:center;}
 
 
